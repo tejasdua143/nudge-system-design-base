@@ -98,6 +98,19 @@ function DialogContent({
           {/* Outer inner-shadow overlay */}
           <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0_0_0_1.5px_var(--shadow-inner-1)]" />
 
+          {/* Dismiss button (inside container, top right) */}
+          {showCloseButton && (
+            <DialogPrimitive.Close
+              data-slot="dialog-close"
+              className="absolute right-0 top-0 z-20 mr-3 mt-3 flex size-6 items-center justify-center border-none text-text-secondary transition-colors hover:text-text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-border-brand"
+            >
+              {/* Inner shadow on dismiss button */}
+              <div className="pointer-events-none absolute inset-0" />
+              <XIcon className="size-5" />
+              <span className="sr-only">Close</span>
+            </DialogPrimitive.Close>
+          )}
+
           {/* Header (in outer shell) */}
           {headerElement}
 
@@ -111,19 +124,6 @@ function DialogContent({
             {bodyChildren}
           </div>
         </div>
-
-        {/* Dismiss button (floating outside) */}
-        {showCloseButton && (
-          <DialogPrimitive.Close
-            data-slot="dialog-close"
-            className="absolute flex size-7 items-center justify-center rounded-full bg-bg-secondary text-text-secondary shadow-[0_0_0_1px_var(--shadow-drop-2),0_1px_2px_0_var(--shadow-drop-2)] transition-colors hover:text-text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-border-brand max-sm:right-2 max-sm:-top-9 sm:-right-[38px] sm:top-0"
-          >
-            {/* Inner shadow on dismiss button */}
-            <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
-            <XIcon className="size-5" />
-            <span className="sr-only">Close</span>
-          </DialogPrimitive.Close>
-        )}
       </DialogPrimitive.Content>
     </DialogPortal>
   )
@@ -159,7 +159,7 @@ function DialogFooter({
       {children}
       {showCloseButton && (
         <DialogPrimitive.Close asChild>
-          <Button variant="secondary">Close</Button>
+          <Button variant="tertiary">Close</Button>
         </DialogPrimitive.Close>
       )}
     </div>
