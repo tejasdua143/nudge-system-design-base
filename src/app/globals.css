@@ -501,8 +501,36 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  *:hover {
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+  }
+  .dark *:hover {
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
   }
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Overlay scrollbars — thin, non-layout-affecting */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 3px;
+}
+*:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.dark *:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15);
 }

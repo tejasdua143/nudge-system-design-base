@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import {
   HouseSimple,
   Star,
@@ -16,6 +16,7 @@ import {
   Trash,
   MagnifyingGlass,
   CaretDown,
+  CaretLeft,
   Question,
   Bell,
   Plus,
@@ -23,9 +24,13 @@ import {
   CreditCard,
   Check,
   GearIcon,
+  Users,
+  UsersFour,
+  UserCircle,
 } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import {
   Popover,
@@ -68,6 +73,17 @@ const BOTTOM_NAV = [
   { id: "hire-an-expert", label: "Hire an expert", icon: PencilRuler },
   { id: "downloads", label: "Downloads", icon: DownloadSimple },
   { id: "recently-deleted", label: "Recently deleted", icon: Trash },
+]
+
+const SETTINGS_MAIN_NAV = [
+  { id: "general", label: "General", icon: Gear },
+  { id: "members", label: "Members", icon: Users },
+  { id: "group", label: "Group", icon: UsersFour },
+  { id: "billing", label: "Billing", icon: CreditCard },
+]
+
+const SETTINGS_BOTTOM_NAV = [
+  { id: "profile", label: "Profile", icon: UserCircle },
 ]
 
 const RECENT_DOCS = [
@@ -235,12 +251,143 @@ function BlankPage({ title }: { title: string }) {
 }
 
 /* -------------------------------------------------------------------------- */
+/*  Settings: General content                                                 */
+/* -------------------------------------------------------------------------- */
+
+function GeneralSettingsContent() {
+  return (
+    <>
+      <div className="flex h-16 items-center border-b border-border-secondary px-6">
+        <h1 className="text-2xl leading-[1.3] tracking-[-0.24px] text-text-primary">
+          General
+        </h1>
+      </div>
+      <div className="flex flex-col items-center gap-8 p-6">
+        <div className="flex w-full max-w-[600px] flex-col gap-8">
+          {/* Workspace avatar section */}
+          <div className="flex h-[200px] w-full flex-col items-center justify-center gap-4 rounded-lg bg-gradient-to-t from-pink-400/30 to-pink-50/30 px-6 py-6">
+            <div className="flex size-[100px] items-center justify-center overflow-hidden rounded-full bg-[#f94777]">
+              <span className="text-3xl font-bold text-white">F</span>
+            </div>
+            <Button size="sm" className="h-7">
+              Change
+            </Button>
+          </div>
+
+          {/* Workspace name field */}
+          <div className="flex w-full flex-col gap-1.5">
+            <Label htmlFor="workspace-name" className="text-sm text-text-secondary">
+              Workspace name
+            </Label>
+            <Input
+              id="workspace-name"
+              defaultValue="Foursquare"
+              className="h-11 px-3 text-sm"
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Settings: Sidebar                                                         */
+/* -------------------------------------------------------------------------- */
+
+function SettingsSidebar({
+  activeSettingsPage,
+  onNavigate,
+  onBack,
+}: {
+  activeSettingsPage: string
+  onNavigate: (id: string) => void
+  onBack: () => void
+}) {
+  return (
+    <div className="flex flex-col gap-4">
+      {/* Back to home header */}
+      <div className="flex h-16 items-center border-b border-border-secondary px-4">
+        <button
+          onClick={onBack}
+          className="flex w-full items-center gap-2 rounded-md text-sm text-text-secondary transition-colors hover:text-text-primary"
+        >
+          <CaretLeft weight="bold" className="size-5 shrink-0" />
+          <span className="truncate leading-[1.43]">Back to home</span>
+        </button>
+      </div>
+
+      {/* Settings main nav */}
+      <nav className="flex flex-col gap-0.5 px-2">
+        {SETTINGS_MAIN_NAV.map((item) => (
+          <SideNavItem
+            key={item.id}
+            icon={item.icon}
+            label={item.label}
+            active={activeSettingsPage === item.id}
+            onClick={() => onNavigate(item.id)}
+          />
+        ))}
+      </nav>
+
+      <Separator />
+
+      {/* Settings bottom nav */}
+      <nav className="flex flex-col gap-0.5 px-2">
+        {SETTINGS_BOTTOM_NAV.map((item) => (
+          <SideNavItem
+            key={item.id}
+            icon={item.icon}
+            label={item.label}
+            active={activeSettingsPage === item.id}
+            onClick={() => onNavigate(item.id)}
+          />
+        ))}
+      </nav>
+    </div>
+  )
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Settings: Content router                                                  */
+/* -------------------------------------------------------------------------- */
+
+function SettingsContent({ activeSettingsPage }: { activeSettingsPage: string }) {
+  const allSettingsItems = [...SETTINGS_MAIN_NAV, ...SETTINGS_BOTTOM_NAV]
+  const activeItem = allSettingsItems.find((item) => item.id === activeSettingsPage)
+  const activeLabel = activeItem?.label ?? "General"
+
+  if (activeSettingsPage === "general") {
+    return <GeneralSettingsContent />
+  }
+
+  return <BlankPage title={activeLabel} />
+}
+
+/* -------------------------------------------------------------------------- */
 /*  Shell                                                                     */
 /* -------------------------------------------------------------------------- */
 
 export function DashboardShell() {
   const [activePage, setActivePage] = useState("home")
   const [wsMenuOpen, setWsMenuOpen] = useState(false)
+  const [isSettingsMode, setIsSettingsMode] = useState(false)
+  const [activeSettingsPage, setActiveSettingsPage] = useState("general")
+
+  const contentKey = isSettingsMode ? `settings-${activeSettingsPage}` : activePage
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = contentRef.current
+    if (!el) return
+    el.style.opacity = "0"
+    el.style.transform = "translateY(6px)"
+    const frame = requestAnimationFrame(() => {
+      el.style.opacity = "1"
+      el.style.transform = "translateY(0)"
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [contentKey])
 
   const allNavItems = [...MAIN_NAV, ...PROJECTS_NAV, ...BOTTOM_NAV]
   const activeItem = allNavItems.find((item) => item.id === activePage)
@@ -302,7 +449,14 @@ export function DashboardShell() {
 
               {/* Settings items */}
               <div className="flex px-2 flex-col">
-                <button className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+                <button
+                  onClick={() => {
+                    setIsSettingsMode(true)
+                    setActiveSettingsPage("general")
+                    setWsMenuOpen(false)
+                  }}
+                  className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover"
+                >
                   <GearIcon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
                   <span>Workspace settings</span>
                 </button>
@@ -371,97 +525,127 @@ export function DashboardShell() {
         <div className="pointer-events-none absolute inset-0 z-20 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
 
         {/* ── Sidebar (w-260) ────────────────────────────────────────── */}
-        <aside className="flex w-[260px] shrink-0 flex-col overflow-y-auto rounded-2xl">
-          <div className="flex flex-col gap-4">
-            {/* Search */}
-            <div className="px-4 pt-3">
-              <div className="relative">
-                <MagnifyingGlass className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-tertiary" />
-                <Input placeholder="Search" className="pl-9 text-sm" />
+        <aside className="relative w-[260px] shrink-0 overflow-hidden rounded-2xl">
+          {/* Settings sidebar - slides in from right */}
+          <div
+            className={cn(
+              "absolute inset-0 flex flex-col overflow-y-auto overflow-y-[overlay] transition-transform duration-300 ease-in-out",
+              isSettingsMode ? "translate-x-0" : "translate-x-full"
+            )}
+          >
+            <SettingsSidebar
+              activeSettingsPage={activeSettingsPage}
+              onNavigate={setActiveSettingsPage}
+              onBack={() => setIsSettingsMode(false)}
+            />
+          </div>
+
+          {/* Dashboard sidebar - slides out to left */}
+          <div
+            className={cn(
+              "flex h-full flex-col overflow-y-auto overflow-y-[overlay] transition-transform duration-300 ease-in-out",
+              isSettingsMode ? "-translate-x-full" : "translate-x-0"
+            )}
+          >
+            <div className="flex flex-col gap-4">
+              {/* Search */}
+              <div className="px-4 pt-3">
+                <div className="relative">
+                  <MagnifyingGlass className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-tertiary" />
+                  <Input placeholder="Search" className="pl-9 text-sm" />
+                </div>
               </div>
-            </div>
 
-            {/* Main nav group */}
-            <nav className="flex flex-col gap-0.5 px-2">
-              {MAIN_NAV.map((item) => (
-                <SideNavItem
-                  key={item.id}
-                  icon={item.icon}
-                  label={item.label}
-                  active={activePage === item.id}
-                  onClick={() => setActivePage(item.id)}
-                />
-              ))}
-            </nav>
+              {/* Main nav group */}
+              <nav className="flex flex-col gap-0.5 px-2">
+                {MAIN_NAV.map((item) => (
+                  <SideNavItem
+                    key={item.id}
+                    icon={item.icon}
+                    label={item.label}
+                    active={activePage === item.id}
+                    onClick={() => setActivePage(item.id)}
+                  />
+                ))}
+              </nav>
 
-            <Separator />
+              <Separator />
 
-            {/* Projects group */}
-            <div className="flex flex-col gap-0.5 px-2">
-              <div className="group/projects flex items-center justify-between px-2 pb-1">
-                <p className="text-sm font-normal text-text-secondary">
-                  Projects
-                </p>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <button className="flex size-6 items-center justify-center rounded-md text-text-tertiary opacity-0 transition-all hover:bg-bg-elevated-hover hover:text-text-primary group-hover/projects:opacity-100">
-                      <Plus weight="bold" className="size-3.5" />
-                    </button>
-                  </DialogTrigger>
-                  <DialogContent size="md">
-                    <DialogHeader>
-                      <DialogTitle>New project</DialogTitle>
-                    </DialogHeader>
-                    <div className="p-4">
-                      <Input id="project-name" placeholder="Enter project name" autoFocus />
-                    </div>
-                    <DialogFooter>
-                      <DialogClose asChild>
-                        <Button variant="secondary">Cancel</Button>
-                      </DialogClose>
-                      <Button>Save</Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
+              {/* Projects group */}
+              <div className="flex flex-col gap-0.5 px-2">
+                <div className="group/projects flex items-center justify-between px-2 pb-1">
+                  <p className="text-sm font-normal text-text-secondary">
+                    Projects
+                  </p>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button className="flex size-6 items-center justify-center rounded-md text-text-tertiary opacity-0 transition-all hover:bg-bg-elevated-hover hover:text-text-primary group-hover/projects:opacity-100">
+                        <Plus weight="bold" className="size-3.5" />
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent size="md">
+                      <DialogHeader>
+                        <DialogTitle>New project</DialogTitle>
+                      </DialogHeader>
+                      <div className="p-4">
+                        <Input id="project-name" placeholder="Enter project name" autoFocus />
+                      </div>
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button variant="secondary">Cancel</Button>
+                        </DialogClose>
+                        <Button>Save</Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </div>
+                {PROJECTS_NAV.map((item) => (
+                  <SideNavItem
+                    key={item.id}
+                    icon={item.icon}
+                    label={item.label}
+                    active={activePage === item.id}
+                    onClick={() => setActivePage(item.id)}
+                  />
+                ))}
               </div>
-              {PROJECTS_NAV.map((item) => (
-                <SideNavItem
-                  key={item.id}
-                  icon={item.icon}
-                  label={item.label}
-                  active={activePage === item.id}
-                  onClick={() => setActivePage(item.id)}
-                />
-              ))}
+
+              <Separator />
+
+              {/* Bottom nav group */}
+              <nav className="flex flex-col gap-0.5 px-2">
+                {BOTTOM_NAV.map((item) => (
+                  <SideNavItem
+                    key={item.id}
+                    icon={item.icon}
+                    label={item.label}
+                    active={activePage === item.id}
+                    onClick={() => setActivePage(item.id)}
+                  />
+                ))}
+              </nav>
             </div>
-
-            <Separator />
-
-            {/* Bottom nav group */}
-            <nav className="flex flex-col gap-0.5 px-2">
-              {BOTTOM_NAV.map((item) => (
-                <SideNavItem
-                  key={item.id}
-                  icon={item.icon}
-                  label={item.label}
-                  active={activePage === item.id}
-                  onClick={() => setActivePage(item.id)}
-                />
-              ))}
-            </nav>
           </div>
         </aside>
 
         {/* ── Content Area (elevation-3, bg-primary) ─────────────────── */}
-        <main className="relative flex flex-1 flex-col overflow-y-auto rounded-xl bg-bg-primary shadow-elevation-3">
+        <main className="relative flex flex-1 flex-col overflow-y-auto overflow-y-[overlay] rounded-xl bg-bg-primary shadow-elevation-3">
           {/* Inner shadow on content area */}
           <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
 
-          {activePage === "home" ? (
-            <HomeContent />
-          ) : (
-            <BlankPage title={activeLabel} />
-          )}
+          <div
+            key={contentKey}
+            ref={contentRef}
+            className="flex flex-1 flex-col transition-[opacity,transform] duration-200 ease-in-out"
+          >
+            {isSettingsMode ? (
+              <SettingsContent activeSettingsPage={activeSettingsPage} />
+            ) : activePage === "home" ? (
+              <HomeContent />
+            ) : (
+              <BlankPage title={activeLabel} />
+            )}
+          </div>
         </main>
       </div>
     </div>
