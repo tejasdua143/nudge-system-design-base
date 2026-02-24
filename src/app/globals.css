@@ -194,7 +194,16 @@
   --color-paids-yellow-900: var(--paids-yellow-900);
   --color-paids-yellow-950: var(--paids-yellow-950);
 
-  /* === Shadow Utilities === */
+  /* === Shadow Utilities — Component Effects === */
+  --shadow-button-rest: 0px 0px 0px 1px var(--shadow-drop-2), 0px 1px 2px 1px var(--shadow-drop-1), inset 0px 0px 0px 1px var(--shadow-inner-1);
+  --shadow-button-selected: 0px 0px 0px 0.75px var(--border-brand), 0px 0px 0px 2px var(--border-brand-secondary), 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  --shadow-button-focused: 0px 0px 0px 1px var(--shadow-drop-2), 0px 0px 0px 1px var(--paids-alpha-light-0), 0px 0px 0px 3px var(--border-brand-secondary);
+  --shadow-text-field-rest: 0px 1px 4px -1px var(--shadow-drop-2), inset 0px 0px 0px 1px var(--border-secondary);
+  --shadow-text-field-focused: 0px 0px 0px 2px var(--border-brand-secondary), 0px 1px 2px 0px var(--shadow-drop-2), inset 0px 0px 0px 1px var(--border-brand);
+  --shadow-text-field-danger: 0px 0px 0px 1.5px rgba(248, 113, 113, 0.4), 0px 0px 0px 0.75px var(--border-danger-secondary), 0px 1px 2px 0px var(--shadow-drop-2);
+  --shadow-prompt-focused: 0px 0px 0px 0.75px var(--border-brand), 0px 0px 0px 2px var(--border-brand-secondary), 0px 0px 0px 1px var(--shadow-drop-2), 0px 1px 2px 0px var(--shadow-drop-2), 0px 4px 6px 0px var(--shadow-drop-2), 0px 24px 40px -16px var(--shadow-drop-2), inset 0px 0px 0px 1px var(--shadow-inner-1);
+
+  /* === Shadow Utilities — Elevation === */
   --shadow-elevation-1: 0px 0px 0px 1px var(--shadow-drop-1), 0px 1px 2px 0px var(--shadow-drop-2);
   --shadow-elevation-2: 0px 0px 0px 1px var(--shadow-drop-2), 0px 1px 2px 0px var(--shadow-drop-2);
   --shadow-elevation-3: 0px 24px 40px -16px var(--shadow-drop-2), 0px 4px 6px 0px var(--shadow-drop-2), 0px 1px 2px 0px var(--shadow-drop-2), 0px 0px 0px 1px var(--shadow-drop-2);
@@ -431,14 +440,14 @@
    ============================================================================ */
 .dark {
   /* --- Background --- */
-  --bg-primary: var(--paids-bw-black);
+  --bg-primary: rgba(23, 23, 23, 1);
   --bg-primary-inverted: var(--paids-bw-white);
-  --bg-secondary: var(--paids-neutral-950);
+  --bg-secondary: rgba(15, 15, 15, 1);
   --bg-secondary-inverted: var(--paids-neutral-50);
-  --bg-tertiary: var(--paids-neutral-900);
+  --bg-tertiary: rgba(10, 10, 10, 1);
   --bg-tertiary-inverted: var(--paids-neutral-100);
-  --bg-quaternary: var(--paids-neutral-800);
-  --bg-elevated: var(--paids-neutral-900);
+  --bg-quaternary:rgba(0, 0, 0, 1);
+  --bg-elevated: rgba(31, 31, 31, 1);
   --bg-elevated-hover: var(--paids-alpha-dark-50);
   --bg-brand: var(--paids-brand-500);
   --bg-brand-hover: var(--paids-brand-600);
