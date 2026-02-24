@@ -51,28 +51,76 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
+  size = "md",
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean
+  size?: "sm" | "md" | "lg"
 }) {
+  // Split children: extract DialogHeader to place in outer shell
+  let headerElement: React.ReactNode = null
+  const bodyChildren: React.ReactNode[] = []
+
+  React.Children.forEach(children, (child) => {
+    if (React.isValidElement(child) && child.type === DialogHeader) {
+      headerElement = child
+    } else {
+      bodyChildren.push(child)
+    }
+  })
+
+  const hasHeader = headerElement !== null
+
   return (
     <DialogPortal data-slot="dialog-portal">
       <DialogOverlay />
       <DialogPrimitive.Content
         data-slot="dialog-content"
+        data-size={size}
         className={cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 outline-none sm:max-w-lg",
+          "fixed top-[50%] left-[50%] z-50 w-full translate-x-[-50%] translate-y-[-50%] outline-none",
+          "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 duration-200",
+          "max-w-[calc(100%-2rem)]",
+          "data-[size=sm]:sm:max-w-[380px]",
+          "data-[size=md]:sm:max-w-[620px]",
+          "data-[size=lg]:sm:max-w-[980px]",
           className
         )}
         {...props}
       >
-        {children}
+        {/* Outer shell */}
+        <div
+          className={cn(
+            "relative flex flex-col rounded-2xl bg-bg-secondary shadow-elevation-4",
+            hasHeader ? "px-1 pb-1" : ""
+          )}
+        >
+          {/* Outer inner-shadow overlay */}
+          <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0_0_0_1.5px_var(--shadow-inner-1)]" />
+
+          {/* Header (in outer shell) */}
+          {headerElement}
+
+          {/* Inner content card */}
+          <div
+            data-has-header={hasHeader ? "" : undefined}
+            className="relative flex flex-col overflow-hidden rounded-xl bg-bg-elevated shadow-elevation-1"
+          >
+            {/* Inner card inner-shadow overlay */}
+            <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
+            {bodyChildren}
+          </div>
+        </div>
+
+        {/* Dismiss button (floating outside) */}
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="dialog-close"
-            className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+            className="absolute flex size-7 items-center justify-center rounded-full bg-bg-secondary text-text-secondary shadow-[0_0_0_1px_var(--shadow-drop-2),0_1px_2px_0_var(--shadow-drop-2)] transition-colors hover:text-text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-border-brand max-sm:right-2 max-sm:-top-9 sm:-right-[38px] sm:top-0"
           >
-            <XIcon />
+            {/* Inner shadow on dismiss button */}
+            <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
+            <XIcon className="size-5" />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         )}
@@ -85,7 +133,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-header"
-      className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
+      className={cn("flex flex-col gap-2 p-4", className)}
       {...props}
     />
   )
@@ -103,7 +151,7 @@ function DialogFooter({
     <div
       data-slot="dialog-footer"
       className={cn(
-        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        "flex flex-col-reverse gap-2.5 px-4 pb-4 sm:flex-row sm:justify-end",
         className
       )}
       {...props}
@@ -111,7 +159,7 @@ function DialogFooter({
       {children}
       {showCloseButton && (
         <DialogPrimitive.Close asChild>
-          <Button variant="outline">Close</Button>
+          <Button variant="secondary">Close</Button>
         </DialogPrimitive.Close>
       )}
     </div>
@@ -125,7 +173,7 @@ function DialogTitle({
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cn("text-lg leading-none font-semibold", className)}
+      className={cn("text-base font-medium text-text-primary", className)}
       {...props}
     />
   )
@@ -138,7 +186,7 @@ function DialogDescription({
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn("text-text-secondary text-sm", className)}
       {...props}
     />
   )
