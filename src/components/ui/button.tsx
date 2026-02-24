@@ -5,43 +5,113 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-border-brand focus-visible:ring-offset-2 cursor-pointer",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+        primary: "",
+        secondary: "",
+        tertiary: "",
+        link: "underline-offset-4 hover:underline",
+        // shadcn backward compat aliases
+        default: "",
+        destructive: "",
+        outline: "",
+        ghost: "",
+      },
+      tone: {
+        default: "",
+        danger: "",
       },
       size: {
+        lg: "h-11 px-5 py-2.5 text-sm has-[>svg]:px-4",
+        md: "h-9 px-4 py-2 text-sm has-[>svg]:px-3",
+        sm: "h-7 px-3 py-1 text-xs gap-1 has-[>svg]:px-2 [&_svg:not([class*='size-'])]:size-3",
+        // shadcn backward compat aliases
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
         xs: "h-6 gap-1 rounded-md px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
         "icon-xs": "size-6 rounded-md [&_svg:not([class*='size-'])]:size-3",
         "icon-sm": "size-8",
         "icon-lg": "size-10",
       },
     },
+    compoundVariants: [
+      // === PRIMARY + DEFAULT (brand) ===
+      {
+        variant: ["primary", "default"],
+        tone: "default",
+        className:
+          "bg-bg-brand text-text-white shadow-elevation-1 hover:bg-bg-brand-hover active:bg-bg-brand-pressed",
+      },
+      // === PRIMARY + DANGER ===
+      {
+        variant: ["primary", "destructive"],
+        tone: "danger",
+        className:
+          "bg-bg-danger text-text-white shadow-elevation-1 hover:bg-bg-danger-hover active:bg-bg-danger-pressed",
+      },
+      // === SECONDARY + DEFAULT ===
+      {
+        variant: ["secondary", "outline"],
+        tone: "default",
+        className:
+          "bg-bg-elevated text-text-primary shadow-elevation-1 hover:bg-bg-elevated-hover",
+      },
+      // === SECONDARY + DANGER ===
+      {
+        variant: ["secondary"],
+        tone: "danger",
+        className:
+          "bg-bg-elevated text-text-danger-primary shadow-elevation-1 hover:bg-bg-danger-inverted",
+      },
+      // === TERTIARY + DEFAULT ===
+      {
+        variant: ["tertiary", "ghost"],
+        tone: "default",
+        className:
+          "bg-transparent text-text-primary hover:bg-bg-elevated-hover",
+      },
+      // === TERTIARY + DANGER ===
+      {
+        variant: ["tertiary"],
+        tone: "danger",
+        className:
+          "bg-transparent text-text-danger-primary hover:bg-bg-danger-inverted",
+      },
+      // === LINK + DEFAULT ===
+      {
+        variant: "link",
+        tone: "default",
+        className: "text-text-brand hover:text-text-brand-hover",
+      },
+      // === LINK + DANGER ===
+      {
+        variant: "link",
+        tone: "danger",
+        className: "text-text-danger-primary hover:text-text-danger-hover",
+      },
+      // === Legacy: destructive variant auto-maps to danger tone ===
+      {
+        variant: "destructive",
+        tone: "default",
+        className:
+          "bg-bg-danger text-text-white shadow-elevation-1 hover:bg-bg-danger-hover active:bg-bg-danger-pressed",
+      },
+    ],
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: "primary",
+      tone: "default",
+      size: "md",
     },
   }
 )
 
 function Button({
   className,
-  variant = "default",
-  size = "default",
+  variant = "primary",
+  tone = "default",
+  size = "md",
   asChild = false,
   ...props
 }: React.ComponentProps<"button"> &
@@ -54,8 +124,9 @@ function Button({
     <Comp
       data-slot="button"
       data-variant={variant}
+      data-tone={tone}
       data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, tone, size, className }))}
       {...props}
     />
   )

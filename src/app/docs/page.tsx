@@ -2,6 +2,7 @@ import { ComponentSection } from "@/components/docs/component-section"
 
 // Design Tokens
 import { ColorVariablesDemo } from "@/components/docs/demos/color-variables-demo"
+import { ElevationDemo } from "@/components/docs/demos/elevation-demo"
 import { TypographyDemo } from "@/components/docs/demos/typography-demo"
 
 // Forms & Inputs
@@ -96,6 +97,10 @@ export default function DocsPage() {
 
         <ComponentSection id="color-variables" title="Color Variables" description="All CSS custom properties used for theming. Swatches update live with the theme config panel.">
           <ColorVariablesDemo />
+        </ComponentSection>
+
+        <ComponentSection id="elevation" title="Elevation" description="Shadow levels for conveying visual hierarchy and depth.">
+          <ElevationDemo />
         </ComponentSection>
 
         <ComponentSection id="typography" title="Typography" description="Type scale, font weights, letter spacing, line heights, and text colors.">

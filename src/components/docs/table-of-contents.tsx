@@ -8,6 +8,7 @@ const CATEGORIES = [
     name: "Design Tokens",
     items: [
       { id: "color-variables", label: "Color Variables" },
+      { id: "elevation", label: "Elevation" },
       { id: "typography", label: "Typography" },
     ],
   },
