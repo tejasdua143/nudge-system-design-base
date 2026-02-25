@@ -142,10 +142,8 @@ function DocumentCard({
   return (
     <Link
       href={`/dashboard/editor/${id}`}
-      className="relative flex flex-col overflow-hidden rounded-[10px] bg-bg-elevated pt-0.5 px-0.5 shadow-elevation-1 transition-shadow hover:shadow-elevation-3"
+      className="relative flex flex-col overflow-hidden rounded-[10px] bg-bg-elevated pt-0.5 px-0.5 shadow-elevation-2 transition-shadow hover:shadow-elevation-3"
     >
-      {/* Inner shadow overlay */}
-      <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
       {/* Thumbnail */}
       <div
         className={cn(
@@ -489,8 +487,6 @@ export function DashboardShell() {
               sideOffset={4}
               className="flex w-[240px] flex-col gap-2 overflow-hidden rounded-xl border-none bg-bg-elevated px-0 py-2 shadow-elevation-3"
             >
-              <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
-
               {/* User info */}
               <div className="px-2">
                 <div className="flex items-start gap-2 rounded-md p-2">
@@ -532,9 +528,6 @@ export function DashboardShell() {
 
       {/* ── Main Content Shell (elevation-2 outer container) ───────────── */}
       <div className="relative mx-0 flex min-h-0 flex-1 overflow-hidden rounded-xl bg-bg-secondary pt-1 pr-1 pb-1 shadow-elevation-2">
-        {/* Inner shadow on main shell */}
-        <div className="pointer-events-none absolute inset-0 z-20 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
-
         {/* ── Sidebar (w-260) ────────────────────────────────────────── */}
         <aside className="relative w-[52px] lg:w-[260px] shrink-0 overflow-hidden rounded-2xl">
           {/* Settings sidebar - slides in from right */}
@@ -646,9 +639,6 @@ export function DashboardShell() {
 
         {/* ── Content Area (elevation-3, bg-primary) ─────────────────── */}
         <main className="relative flex flex-1 flex-col overflow-y-auto overflow-y-[overlay] rounded-lg bg-bg-primary shadow-elevation-2">
-          {/* Inner shadow on content area */}
-          <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
-
           <div
             key={contentKey}
             ref={contentRef}

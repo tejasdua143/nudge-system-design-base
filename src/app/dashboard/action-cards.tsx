@@ -50,12 +50,10 @@ function ActionCard({
 
   return (
     <button
-      className="group relative flex flex-1 items-start overflow-hidden rounded-lg bg-bg-elevated p-2 shadow-elevation-1 transition-shadow hover:shadow-elevation-3 xl:items-center 2xl:max-w-[430px]"
+      className="group relative flex flex-1 items-start overflow-hidden rounded-lg bg-bg-elevated p-2 shadow-elevation-2 transition-shadow hover:shadow-elevation-3 xl:items-center 2xl:max-w-[430px]"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {/* Inner shadow overlay */}
-      <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
       {/* Rive icon */}
       <RiveComponent className="size-12 shrink-0" />
       {/* Text */}

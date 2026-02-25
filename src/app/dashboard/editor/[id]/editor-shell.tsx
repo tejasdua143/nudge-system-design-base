@@ -66,7 +66,6 @@ function EditorTopBar({ title }: { title: string }) {
     <header className="flex h-12 shrink-0 items-center justify-between px-3">
       {/* Left side */}
       <div className="relative flex h-9 gap-0.5 px-0.5 items-center rounded-lg border-none bg-bg-elevated shadow-elevation-2">
-        <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
          <Button variant="ghost" size="icon-sm" asChild>
           <Link href="/dashboard">
             <HouseSimpleIcon className="size-4" />
@@ -102,7 +101,6 @@ function EditorTopBar({ title }: { title: string }) {
           </Avatar>
         </AvatarGroup>
         <div className="relative flex h-9 items-center gap-1.5 rounded-lg border-none bg-bg-elevated px-1 shadow-elevation-2">
-          <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
         <Button variant="ghost" size="sm" className="rounded-sm text-sm font-normal">
           <Play className="size-4" />
           Present
@@ -139,7 +137,6 @@ function FilmstripPanel({
   return (
     <aside className="flex w-[180px] shrink-0 flex-col overflow-y-auto pt-3 pb-3 px-3 gap-3">
       <div className="relative flex shrink-0 flex-col rounded-lg bg-bg-elevated shadow-elevation-2">
-        <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
         {/* New Slide button */}
         <div className="px-2 py-2">
           <Button variant="tertiary" size="md" className="w-full rounded-sm text-sm font-normal">
@@ -189,9 +186,8 @@ function FilmstripPanel({
 function CanvasArea({ slideGradient }: { slideGradient: string }) {
   return (
     <div className="flex min-h-0 min-w-0 flex-1 items-center justify-center pl-2 pt-3 pb-15 pr-16">
-      {/* Clip container — maintains radius, elevation, inner shadow */}
+      {/* Clip container — maintains radius and elevation */}
       <div className="relative h-full max-h-full w-full max-w-full overflow-hidden rounded-md shadow-elevation-2">
-        <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
         {/* Scrollable inner canvas */}
         <div className="h-full w-full overflow-auto">
           <div
@@ -215,7 +211,6 @@ function RightToolPanel() {
     <div className="absolute right-2 top-0 bottom-0 flex w-10 flex-col items-center justify-between pt-3 pb-3">
       {/* Top tools */}
       <div className="relative flex flex-col items-center rounded-lg bg-bg-elevated shadow-elevation-2">
-        <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
         <button className="flex size-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
           <PaintBrushIcon className="size-4" />
         </button>
@@ -231,7 +226,6 @@ function RightToolPanel() {
 
       {/* Bottom tools */}
       <div className="relative flex flex-col items-center rounded-lg bg-bg-elevated shadow-elevation-2">
-        <div className="pointer-events-none absolute inset-0 z-10 rounded-lg shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
         <button className="flex size-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
           <MagnifyingGlass className="size-5" />
         </button>
@@ -268,7 +262,6 @@ function BottomToolbar() {
       <div className="flex items-center gap-2">
         {/* Text tools */}
         <div className="relative flex h-9 items-center gap-1.5 rounded-lg bg-bg-elevated px-1.5 shadow-elevation-2">
-          <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
           <button className="flex items-center gap-1.5 rounded px-2 py-1 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
             <TextTIcon className="size-4" />
             Title
@@ -289,7 +282,6 @@ function BottomToolbar() {
 
         {/* Layouts */}
         <div className="relative flex h-9 items-center gap-1.5 rounded-lg bg-bg-elevated px-2.5 shadow-elevation-2">
-          <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
           <Layout weight="regular" className="size-4" />
           <span className="text-sm text-text-primary">Layouts</span>
         </div>
@@ -305,7 +297,6 @@ function BottomToolbar() {
 
         {/* More */}
         <div className="relative flex h-9 items-center rounded-lg bg-bg-elevated px-1 shadow-elevation-2">
-          <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
           <button className="flex size-7 items-center justify-center rounded text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
             <DotsThreeIcon weight="regular" className="size-4" />
           </button>

@@ -95,9 +95,6 @@ function DialogContent({
             hasHeader ? "px-1 pb-1" : ""
           )}
         >
-          {/* Outer inner-shadow overlay */}
-          <div className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0_0_0_1.5px_var(--shadow-inner-1)]" />
-
           {/* Dismiss button (inside container, top right) */}
           {showCloseButton && (
             <DialogPrimitive.Close
