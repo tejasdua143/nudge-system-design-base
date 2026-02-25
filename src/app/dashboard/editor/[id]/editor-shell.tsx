@@ -31,6 +31,7 @@ import {
   ArrowUUpLeftIcon,
   ArrowUUpRightIcon,
 } from "@phosphor-icons/react"
+import { Avatar, AvatarFallback, AvatarGroup } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
@@ -73,7 +74,7 @@ function EditorTopBar({ title }: { title: string }) {
         </Button>
         <div className="h-full w-px bg-border-secondary" />
         <div className="flex max-w-[200px] items-center px-3 py-1">
-          <span className="truncate text-base text-text-primary">{title}</span>
+          <span className="truncate text-sm text-text-primary">{title}</span>
         </div>
 
        <div className="h-full w-px bg-border-secondary" />
@@ -92,10 +93,14 @@ function EditorTopBar({ title }: { title: string }) {
       {/* Right side */}
       <div className="flex items-center gap-1.5">
         {/* User avatars */}
-        <div className="flex -space-x-1.5">
-          <div className="size-8 rounded-full border-2 border-bg-secondary bg-paids-neutral-300" />
-          <div className="size-8 rounded-full border-2 border-bg-secondary bg-paids-brand-200" />
-        </div>
+        <AvatarGroup>
+          <Avatar>
+            <AvatarFallback className="bg-paids-neutral-300" />
+          </Avatar>
+          <Avatar>
+            <AvatarFallback className="bg-paids-brand-200" />
+          </Avatar>
+        </AvatarGroup>
         <div className="relative flex h-9 items-center gap-1.5 rounded-lg border-none bg-bg-elevated px-1 shadow-elevation-2">
           <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
         <Button variant="ghost" size="sm" className="rounded-sm text-sm font-normal">
@@ -110,7 +115,6 @@ function EditorTopBar({ title }: { title: string }) {
         <Button variant="primary" size="sm" className="rounded-sm text-sm font-normal">
           <Export className="size-4" />
           Export as PPT
-          <CaretDown weight="bold" className="size-3" />
         </Button>
         </div>
 
@@ -137,12 +141,13 @@ function FilmstripPanel({
       <div className="relative flex shrink-0 flex-col rounded-lg bg-bg-elevated shadow-elevation-2">
         <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />
         {/* New Slide button */}
-        <div className="px-0.5 py-0.5">
-          <Button variant="ghost" size="md" className="w-full">
-            New Slide
+        <div className="px-2 py-2">
+          <Button variant="tertiary" size="md" className="w-full rounded-sm text-sm font-normal">
+            <PlusIcon weight="regular" className="size-4" />
+            Add slide
           </Button>
         </div>
-        <div className="h-px w-full bg-border-secondary" />
+        {/* <div className="h-px w-full bg-border-secondary" /> */}
         {/* Slide thumbnails */}
         <div className="flex flex-col gap-3 px-2 pt-3 pb-2">
           {slides.map((slide, index) => (
