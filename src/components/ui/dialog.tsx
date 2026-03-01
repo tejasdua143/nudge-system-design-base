@@ -114,7 +114,7 @@ function DialogContent({
           {/* Inner content card */}
           <div
             data-has-header={hasHeader ? "" : undefined}
-            className="relative flex flex-col overflow-hidden rounded-xl bg-bg-elevated shadow-elevation-1"
+            className="relative flex flex-col overflow-hidden rounded-xl bg-bg-primary shadow-elevation-1"
           >
             {/* Inner card inner-shadow overlay */}
             <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />

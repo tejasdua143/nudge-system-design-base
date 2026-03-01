@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import {
   Combobox,
   ComboboxContent,
@@ -20,13 +21,15 @@ const frameworks = [
 ]
 
 export function ComboboxDemo() {
+  const triggerRef = React.useRef<HTMLButtonElement>(null)
+
   return (
     <Combobox>
-      <ComboboxTrigger className="w-[200px]">
+      <ComboboxTrigger ref={triggerRef} className="w-[200px]">
         <ComboboxValue placeholder="Select framework..." />
       </ComboboxTrigger>
-      <ComboboxContent>
-        <ComboboxInput placeholder="Search framework..." />
+      <ComboboxContent anchor={triggerRef}>
+        <ComboboxInput placeholder="Search framework..." showTrigger={false} />
         <ComboboxList>
           <ComboboxEmpty>No framework found.</ComboboxEmpty>
           {frameworks.map((fw) => (
