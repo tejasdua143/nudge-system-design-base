@@ -7,8 +7,8 @@ import { ChevronDown } from "lucide-react"
 export function ButtonGroupDemo() {
   return (
     <ButtonGroup>
-      <Button variant="outline">Save</Button>
-      <Button variant="outline" size="icon">
+      <Button variant="tertiary">Save</Button>
+      <Button variant="tertiary" size="icon">
         <ChevronDown />
       </Button>
     </ButtonGroup>
