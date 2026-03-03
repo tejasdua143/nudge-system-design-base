@@ -5,7 +5,7 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-lg text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-[3px] focus-visible:ring-border-brand-secondary focus-visible:ring-offset-1 cursor-pointer",
+  "inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-lg text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-[length:var(--focus-ring-width)] focus-visible:ring-border-brand-secondary focus-visible:ring-offset-1 cursor-pointer",
   {
     variants: {
       variant: {
@@ -57,7 +57,7 @@ const buttonVariants = cva(
         variant: ["primary"],
         tone: "magic",
         className:
-          "bg-gradient-to-r from-[#FF6B35] via-[#E84393] to-[#A855F7] text-text-white shadow-elevation-1 hover:opacity-90 active:opacity-80",
+          "bg-gradient-to-r from-[var(--gradient-brand-start)] via-[var(--gradient-brand-mid)] to-[var(--gradient-brand-end)] text-text-white shadow-elevation-1 hover:opacity-90 active:opacity-80",
       },
       // === SECONDARY + DEFAULT ===
       {

@@ -7,6 +7,9 @@ import { motion } from "motion/react";
 const pages = [
   { href: "/dashboard", label: "dashboard", description: "app overview & analytics" },
   { href: "/docs", label: "docs", description: "component documentation" },
+  { href: "/developer", label: "developer", description: "api dashboard" },
+  { href: "/developer/playground", label: "playground", description: "api playground" },
+  { href: "/login", label: "login", description: "authentication" },
 ];
 
 export default function Home() {

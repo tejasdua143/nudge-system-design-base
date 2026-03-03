@@ -214,7 +214,7 @@ export function ColorVariablesDemo() {
                     className="h-10 rounded-md border border-border-tertiary first:rounded-l-lg last:rounded-r-lg"
                     style={{ backgroundColor: `var(${color.variable})` }}
                   />
-                  <p className="mt-1 text-center text-[9px] text-text-tertiary font-mono">
+                  <p className="mt-1 text-center text-[length:var(--text-2xs)] text-text-tertiary font-mono">
                     {color.variable.split("-").pop()}
                   </p>
                 </div>
@@ -235,7 +235,7 @@ export function ColorVariablesDemo() {
                     <p className="truncate text-xs font-medium text-text-primary">
                       {color.variable}
                     </p>
-                    <p className="truncate text-[10px] text-text-tertiary font-mono">
+                    <p className="truncate text-[length:var(--text-2xs)] text-text-tertiary font-mono">
                       {color.tailwind}
                     </p>
                   </div>

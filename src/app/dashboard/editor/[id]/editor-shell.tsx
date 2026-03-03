@@ -50,11 +50,11 @@ import { DotsThreeIcon } from "@phosphor-icons/react/dist/ssr"
 /* -------------------------------------------------------------------------- */
 
 const MOCK_SLIDES = [
-  { id: 1, gradient: "from-[#1e3a5f] to-[#2d5a87]" },
-  { id: 2, gradient: "from-[#8b4513] to-[#cd853f]" },
-  { id: 3, gradient: "from-[#e8e4df] to-[#d4cfc8]" },
-  { id: 4, gradient: "from-[#2c5f2d] to-[#97bc62]" },
-  { id: 5, gradient: "from-[#4a1942] to-[#c74b50]" },
+  { id: 1, gradient: "from-[var(--gradient-slide-1a)] to-[var(--gradient-slide-1b)]" },
+  { id: 2, gradient: "from-[var(--gradient-slide-2a)] to-[var(--gradient-slide-2b)]" },
+  { id: 3, gradient: "from-[var(--gradient-slide-3a)] to-[var(--gradient-slide-3b)]" },
+  { id: 4, gradient: "from-[var(--gradient-slide-4a)] to-[var(--gradient-slide-4b)]" },
+  { id: 5, gradient: "from-[var(--gradient-slide-5a)] to-[var(--gradient-slide-5b)]" },
 ]
 
 /* -------------------------------------------------------------------------- */
@@ -159,7 +159,7 @@ function FilmstripPanel({
               )}
             >
               {/* Slide number badge */}
-              <div className="absolute left-1 top-1 z-10 flex size-5 items-center justify-center rounded bg-black/40 text-[10px] font-medium text-white backdrop-blur-sm">
+              <div className="absolute left-1 top-1 z-10 flex size-5 items-center justify-center rounded bg-black/40 text-[length:var(--text-2xs)] font-medium text-white backdrop-blur-sm">
                 {index + 1}
               </div>
               {/* Thumbnail */}
