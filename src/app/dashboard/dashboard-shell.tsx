@@ -114,7 +114,7 @@ function SideNavItem({
       onClick={onClick}
       title={label}
       className={cn(
-        "flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-lg p-2 text-sm leading-[1.43] transition-colors",
+        "flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-lg p-2 text-sm leading-[var(--leading-body)] transition-colors",
         active
           ? "bg-bg-brand-selected font-semibold text-text-brand"
           : "font-normal text-text-secondary hover:bg-bg-elevated-hover"
@@ -142,7 +142,7 @@ function DocumentCard({
   return (
     <Link
       href={`/dashboard/editor/${id}`}
-      className="relative flex flex-col overflow-hidden rounded-[10px] bg-bg-elevated pt-0.5 px-0.5 shadow-elevation-2 transition-shadow hover:shadow-elevation-3"
+      className="relative flex flex-col overflow-hidden rounded-[var(--radius-card)] bg-bg-elevated pt-0.5 px-0.5 shadow-elevation-2 transition-shadow hover:shadow-elevation-3"
     >
       {/* Thumbnail */}
       <div
@@ -153,10 +153,10 @@ function DocumentCard({
       />
       {/* Info */}
       <div className="flex flex-col gap-1 px-3 pb-3 pt-2">
-        <p className="truncate text-sm font-medium leading-[1.43] text-text-primary">
+        <p className="truncate text-sm font-medium leading-[var(--leading-body)] text-text-primary">
           {title}
         </p>
-        <p className="text-xs leading-[1.33] text-text-secondary">
+        <p className="text-xs leading-[var(--leading-snug)] text-text-secondary">
           {status} &bull; {author}
         </p>
       </div>
@@ -173,7 +173,7 @@ function HomeContent() {
     <>
       {/* ── Header section ─────────────────────────────────────── */}
       <section className="flex flex-col gap-4 lg:gap-6 border-b border-border-secondary px-4 lg:px-6 pb-4 lg:pb-6 pt-4">
-        <div className="text-xl lg:text-2xl leading-[1.3] tracking-[-0.24px]">
+        <div className="text-xl lg:text-2xl leading-[var(--leading-heading)] tracking-[var(--tracking-tight)]">
           <p className="text-text-primary">
             Starting something new, John?
           </p>
@@ -184,7 +184,7 @@ function HomeContent() {
       {/* ── Recent section ──────────────────────────────────────── */}
       <section className="p-4 lg:p-6">
         <div className="flex flex-col gap-4">
-          <h2 className="text-xl lg:text-2xl leading-[1.3] tracking-[-0.24px] text-text-primary">
+          <h2 className="text-xl lg:text-2xl leading-[var(--leading-heading)] tracking-[var(--tracking-tight)] text-text-primary">
             Recent
           </h2>
           <div className="grid grid-cols-1 gap-3 lg:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -218,7 +218,7 @@ function GeneralSettingsContent() {
   return (
     <>
       <div className="flex h-16 items-center border-b border-border-secondary px-6">
-        <h1 className="text-2xl leading-[1.3] tracking-[-0.24px] text-text-primary">
+        <h1 className="text-2xl leading-[var(--leading-heading)] tracking-[var(--tracking-tight)] text-text-primary">
           General
         </h1>
       </div>
@@ -226,7 +226,7 @@ function GeneralSettingsContent() {
         <div className="flex w-full max-w-[600px] flex-col gap-8">
           {/* Workspace avatar section */}
           <div className="flex h-[200px] w-full flex-col items-center justify-center gap-4 rounded-lg bg-gradient-to-t from-pink-400/30 to-pink-50/30 px-6 py-6">
-            <div className="flex size-[100px] items-center justify-center overflow-hidden rounded-full bg-[#f94777]">
+            <div className="flex size-[100px] items-center justify-center overflow-hidden rounded-full bg-[var(--gradient-accent)]">
               <span className="text-3xl font-bold text-white">F</span>
             </div>
             <Button variant="tertiary" size="sm" className="h-7">
@@ -274,7 +274,7 @@ function SettingsSidebar({
           title="Back to home"
         >
           <CaretLeft weight="bold" className="size-5 shrink-0" />
-          <span className="hidden lg:inline truncate leading-[1.43]">Back to home</span>
+          <span className="hidden lg:inline truncate leading-[var(--leading-body)]">Back to home</span>
         </button>
       </div>
 
@@ -367,24 +367,24 @@ export function DashboardShell() {
               <button className="flex w-full cursor-pointer items-center justify-center lg:justify-start gap-2 rounded-xl py-[3px] pl-1 pr-1.5 transition-colors hover:bg-bg-elevated-hover">
                 {/* Avatar */}
                 <div className="relative size-[34px] shrink-0">
-                  <div className="absolute left-[3px] top-[3px] size-7 overflow-hidden rounded-[5px] border-[1.5px] border-white bg-paids-brand-500">
-                    <span className="flex size-full items-center justify-center text-[10px] font-bold text-white">
+                  <div className="absolute left-[3px] top-[3px] size-7 overflow-hidden rounded-[var(--radius-logo)] border-[1.5px] border-white bg-paids-brand-500">
+                    <span className="flex size-full items-center justify-center text-[length:var(--text-2xs)] font-bold text-white">
                       F
                     </span>
                   </div>
-                  <div className="absolute bottom-px left-1/2 flex h-3 w-[30px] -translate-x-1/2 items-center justify-center rounded-[5px] border-[1.5px] border-white/80 bg-bg-brand px-1 backdrop-blur-sm">
-                    <span className="text-[8px] font-bold leading-none text-white">
+                  <div className="absolute bottom-px left-1/2 flex h-3 w-[30px] -translate-x-1/2 items-center justify-center rounded-[var(--radius-logo)] border-[1.5px] border-white/80 bg-bg-brand px-1 backdrop-blur-sm">
+                    <span className="text-[length:var(--text-2xs)] font-bold leading-none text-white">
                       DEV
                     </span>
                   </div>
                 </div>
                 {/* Text */}
-                <div className="hidden lg:flex flex-1 flex-col gap-0.5 text-xs font-medium leading-[1.33] w-full">
+                <div className="hidden lg:flex flex-1 flex-col gap-0.5 text-xs font-medium leading-[var(--leading-snug)] w-full">
                   <span className="text-text-primary text-left">Foursquare</span>
                   <span className="text-text-brand text-left">Enterprise plan</span>
                 </div>
                 {/* Dropdown caret */}
-                <div className="hidden lg:flex items-center rounded-md bg-[rgba(26,26,26,0.06)] p-1">
+                <div className="hidden lg:flex items-center rounded-md bg-bg-tertiary p-1">
                   <CaretDown
                     weight="bold"
                     className={cn(
@@ -437,7 +437,7 @@ export function DashboardShell() {
               </div>
               <div className="flex px-2 gap-1 flex-col">
                 <button className="flex items-center gap-2 rounded-md p-2 transition-colors hover:bg-bg-elevated-hover">
-                  <div className="flex size-5 shrink-0 items-center justify-center rounded bg-orange-500 text-[10px] font-medium text-white">
+                  <div className="flex size-5 shrink-0 items-center justify-center rounded bg-orange-500 text-[length:var(--text-2xs)] font-medium text-white">
                     J
                   </div>
                   <span className="flex-1 text-left text-sm text-text-primary">
@@ -445,7 +445,7 @@ export function DashboardShell() {
                   </span>
                 </button>
                 <button className="flex items-center gap-2 rounded-md bg-bg-brand-selected p-2">
-                  <div className="flex size-5 shrink-0 items-center justify-center rounded bg-[#f94777] text-[10px] font-medium text-white">
+                  <div className="flex size-5 shrink-0 items-center justify-center rounded bg-[var(--gradient-accent)] text-[length:var(--text-2xs)] font-medium text-white">
                     F
                   </div>
                   <span className="flex-1 text-left text-sm text-text-primary">
@@ -477,7 +477,7 @@ export function DashboardShell() {
           <Popover open={accountMenuOpen} onOpenChange={setAccountMenuOpen}>
             <PopoverTrigger asChild>
               <button className="size-7 overflow-hidden rounded-full border-[1.5px] border-white bg-paids-neutral-300 transition-opacity hover:opacity-80">
-                <span className="flex size-full items-center justify-center text-[10px] font-medium text-text-secondary">
+                <span className="flex size-full items-center justify-center text-[length:var(--text-2xs)] font-medium text-text-secondary">
                   JD
                 </span>
               </button>
@@ -492,8 +492,8 @@ export function DashboardShell() {
                 <div className="flex items-start gap-2 rounded-md p-2">
                   <Gear weight="duotone" className="mt-0.5 size-5 shrink-0 text-text-secondary" />
                   <div className="flex flex-col gap-1">
-                    <span className="text-sm leading-[1.43] text-text-primary">John doe</span>
-                    <span className="text-xs leading-[1.33] text-text-secondary">jd@gmail.com</span>
+                    <span className="text-sm leading-[var(--leading-body)] text-text-primary">John doe</span>
+                    <span className="text-xs leading-[var(--leading-snug)] text-text-secondary">jd@gmail.com</span>
                   </div>
                 </div>
               </div>

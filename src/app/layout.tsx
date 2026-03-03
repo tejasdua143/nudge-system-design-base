@@ -6,6 +6,8 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Agentation } from "agentation";
+import { DialRoot } from "dialkit";
+import "./dialkit.css";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,6 +32,7 @@ export default function RootLayout({
           <TooltipProvider>{children}</TooltipProvider>
           <Toaster />
           {process.env.NODE_ENV === "development" && <Agentation />}
+          {process.env.NODE_ENV === "development" && <DialRoot position="bottom-right" />}
         </ThemeProvider>
       </body>
     </html>

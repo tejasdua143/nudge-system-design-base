@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "./tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -590,4 +591,19 @@
 }
 .dark *:hover::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Card shimmer animation */
+@keyframes card-shimmer {
+  0% {
+    background-position: 300% 0;
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    background-position: -300% 0;
+    opacity: 0;
+  }
 }
