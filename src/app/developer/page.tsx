@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   CheckCircle,
   ArrowRight,
@@ -22,6 +23,18 @@ const STEPS = [
   { label: "Begin creating presentations with the API", done: false, current: true },
   { label: "Upgrade your plan", done: false },
 ];
+
+/* Gradient per hovered step index (null = default) */
+const GRADIENTS: Record<number, string> = {
+  0: "radial-gradient(ellipse at 110% 120%, white, #d0f5e0 6%, #a0e8c0 13%, #60d090 19%, #30b868 26%, #22a55b 49%, #30b868 74%, transparent), linear-gradient(90deg, #fafafa, #fafafa)",
+  1: "radial-gradient(ellipse at 110% 120%, white, #ffecd0 6%, #ffd9a0 13%, #ffc571 19%, #ffb241 26%, #f97330 49%, #ffb241 74%, transparent), linear-gradient(90deg, #fafafa, #fafafa)",
+  2: "radial-gradient(ellipse at 110% 120%, white, #fff4d0 6%, #ffe9a0 13%, #ffd971 19%, #f5c841 26%, #eab308 49%, #f5c841 74%, transparent), linear-gradient(90deg, #fafafa, #fafafa)",
+  3: "radial-gradient(ellipse at 110% 120%, white, #ffecd0 6%, #ffd9a0 13%, #ffc571 19%, #ffb241 26%, #f97330 49%, #ffb241 74%, transparent), linear-gradient(90deg, #fafafa, #fafafa)",
+  4: "radial-gradient(ellipse at 110% 120%, white, #e0d0ff 6%, #c4a0ff 13%, #a871ff 19%, #8c41ff 26%, #7c3aed 49%, #8c41ff 74%, transparent), linear-gradient(90deg, #fafafa, #fafafa)",
+};
+
+const DEFAULT_GRADIENT =
+  "radial-gradient(ellipse at 110% 120%, white, #ffecd0 6%, #ffd9a0 13%, #ffc571 19%, #ffb241 26%, #f97330 49%, #ffb241 74%, transparent), linear-gradient(90deg, #fafafa, #fafafa)";
 
 /* -------------------------------------------------------------------------- */
 /*  Plans                                                                     */
@@ -97,6 +110,8 @@ const QUICKLINKS = [
 /* -------------------------------------------------------------------------- */
 
 export default function DeveloperDashboardPage() {
+  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
+
   return (
       <main className="flex flex-1 flex-col overflow-hidden rounded-xl bg-bg-primary shadow-elevation-3">
         {/* Header */}
@@ -120,10 +135,12 @@ export default function DeveloperDashboardPage() {
                 {/* Gradient image area */}
                 <div className="relative flex-1 overflow-hidden rounded-md border border-border-tertiary">
                   <div
-                    className="absolute inset-0"
+                    className="absolute inset-0 transition-all duration-500"
                     style={{
                       backgroundImage:
-                        "radial-gradient(ellipse at 110% 120%, white, #ffecd0 6%, #ffd9a0 13%, #ffc571 19%, #ffb241 26%, #f97330 49%, #ffb241 74%, transparent), linear-gradient(90deg, #fafafa, #fafafa)",
+                        hoveredStep !== null
+                          ? GRADIENTS[hoveredStep]
+                          : DEFAULT_GRADIENT,
                     }}
                   />
                   {/* Placeholder presentation cards */}
@@ -135,10 +152,14 @@ export default function DeveloperDashboardPage() {
                 </div>
 
                 {/* Steps */}
-                <div className="flex w-[400px] shrink-0 flex-col gap-4 p-6">
+                <div className="flex w-[400px] shrink-0 flex-col gap-1 p-4">
                   {STEPS.map((step, i) => (
                     <div key={i}>
-                      <button className="group/step flex w-full items-center gap-3">
+                      <button
+                        className="group/step flex w-full items-center gap-3 rounded-lg px-2 py-3 transition-colors hover:bg-bg-elevated-hover"
+                        onMouseEnter={() => setHoveredStep(i)}
+                        onMouseLeave={() => setHoveredStep(null)}
+                      >
                         <CheckCircle
                           weight={step.done ? "fill" : "regular"}
                           className={cn(
@@ -151,7 +172,7 @@ export default function DeveloperDashboardPage() {
                         <div className="flex flex-1 items-center justify-between">
                           <span
                             className={cn(
-                              "text-sm",
+                              "text-left text-sm",
                               step.done
                                 ? "text-text-secondary line-through"
                                 : step.current
@@ -162,12 +183,12 @@ export default function DeveloperDashboardPage() {
                             {step.label}
                           </span>
                           {!step.done && (
-                            <ArrowRight className="size-4 text-text-tertiary group-hover/step:text-text-brand" />
+                            <ArrowRight className="size-4 shrink-0 text-text-tertiary group-hover/step:text-text-brand" />
                           )}
                         </div>
                       </button>
                       {i < STEPS.length - 1 && (
-                        <div className="mt-4 h-px bg-border-tertiary" />
+                        <div className="mx-2 h-px bg-border-tertiary" />
                       )}
                     </div>
                   ))}

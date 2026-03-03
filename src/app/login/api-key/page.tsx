@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Key, Copy } from "@phosphor-icons/react";
 
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,7 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
+import { useTransitionParams } from "../transition-context";
 
 const API_KEY = "pai-27912873123-hsai8y212391287-1237";
 
@@ -32,6 +34,8 @@ const CODE_LINES = [
 export default function ApiKeyPage() {
   const [keyCopied, setKeyCopied] = useState(false);
   const [codeCopied, setCodeCopied] = useState(false);
+  const router = useRouter();
+  const { triggerDismiss } = useTransitionParams();
 
   const copyToClipboard = (text: string, type: "key" | "code") => {
     navigator.clipboard.writeText(text);
@@ -129,8 +133,13 @@ export default function ApiKeyPage() {
           </div>
 
           {/* CTA */}
-          <Button variant="primary" size="md" className="w-full" asChild>
-            <Link href="/developer">Continue</Link>
+          <Button
+            variant="primary"
+            size="md"
+            className="w-full"
+            onClick={() => triggerDismiss(() => router.push("/developer"))}
+          >
+            Continue
           </Button>
         </div>
       </div>

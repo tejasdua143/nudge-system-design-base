@@ -25,7 +25,7 @@ Flat card with subtle border and tiny drop shadow.
 ```
 box-shadow: 0 0 0 1px var(--shadow-drop-1), 0 1px 2px 0 var(--shadow-drop-2);
 ```
-**Use for:** Cards, list items, static containers.
+**Use for:** List items, static containers.
 
 ### Level 2 — `shadow-elevation-2`
 Slightly raised with inner highlight.
@@ -33,7 +33,7 @@ Slightly raised with inner highlight.
 box-shadow: 0 0 0 1px var(--shadow-drop-2), 0 1px 2px 0 var(--shadow-drop-2);
 ::after: inset 0 0 0 1px var(--shadow-inner-1);
 ```
-**Use for:** Interactive cards on hover, selected items.
+**Use for:** Cards, selected items.
 
 ### Level 3 — `shadow-elevation-3`
 Floating element with multiple shadow layers.
@@ -41,7 +41,7 @@ Floating element with multiple shadow layers.
 box-shadow: 0 0 0 1px var(--shadow-drop-2), 0 1px 2px 0, 0 4px 6px 0, 0 24px 40px -16px;
 ::after: inset 0 0 0 1px var(--shadow-inner-1);
 ```
-**Use for:** Dropdowns, popovers, tooltips.
+**Use for:** Cards on hover, dropdowns, popovers, tooltips.
 
 ### Level 4 — `shadow-elevation-4`
 Maximum depth with thicker inner border.
