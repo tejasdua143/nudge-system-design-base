@@ -336,7 +336,7 @@ function BottomToolbar() {
           onMouseEnter={() => setRemixHovered(true)}
           onMouseLeave={() => setRemixHovered(false)}
         >
-           <div className="absolute z-10 flex items-center h-9  gap-1 px-2 py-1 text-sm text-text-primary">
+           <div className="absolute z-10 flex items-center h-9  gap-1 px-2 py-1 text-sm text-white">
              <BtnRemixIcon isHovered={remixHovered} />
             <span className="y">Remix</span>
           </div>
