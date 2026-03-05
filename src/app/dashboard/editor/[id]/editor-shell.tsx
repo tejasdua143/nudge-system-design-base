@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import {
   HouseSimple,
@@ -38,6 +38,7 @@ import { cn } from "@/lib/utils"
 import type { Document } from "../../data"
 import {
   useRive,
+  useStateMachineInput,
   useViewModel,
   useViewModelInstance,
   useViewModelInstanceBoolean,
@@ -242,7 +243,35 @@ function RightToolPanel() {
 /*  Bottom toolbar                                                            */
 /* -------------------------------------------------------------------------- */
 
-function BottomToolbar() {
+
+function BtnRemixIcon({ isHovered }: { isHovered: boolean }) {
+  const { rive, RiveComponent } = useRive({
+    src: "/sparkle-icon.riv",
+    stateMachines: "icon",
+    autoplay: true,
+    layout: new RiveLayout({ fit: RiveFit.Cover, alignment: RiveAlignment.Center }),
+  })
+
+  const viewModel = useViewModel(rive, { name: 'ViewModel1' });
+  const viewModelInstance = useViewModelInstance(viewModel, { rive })
+  const { setValue: setHover } = useViewModelInstanceBoolean(
+    "bool",
+    viewModelInstance
+  )
+
+  // Sync the external hover prop to the Rive boolean
+  const prevHovered = React.useRef(false)
+  React.useEffect(() => {
+    if (prevHovered.current !== isHovered) {
+      setHover(isHovered)
+      prevHovered.current = isHovered
+    }
+  }, [isHovered, setHover])
+
+  return <RiveComponent className="h-6 w-6" />
+}
+
+function BtnRemixBg({ isHovered }: { isHovered: boolean }) {
   const { rive, RiveComponent } = useRive({
     src: "/button-remix.riv",
     stateMachines: "hover",
@@ -250,12 +279,27 @@ function BottomToolbar() {
     layout: new RiveLayout({ fit: RiveFit.Cover, alignment: RiveAlignment.Center }),
   })
 
-  const viewModel = useViewModel(rive)
+  const viewModel = useViewModel(rive, { name: 'ViewModel1' });
   const viewModelInstance = useViewModelInstance(viewModel, { rive })
   const { setValue: setHover } = useViewModelInstanceBoolean(
-    "hover",
+    "bool",
     viewModelInstance
   )
+
+  // Sync the external hover prop to the Rive boolean
+  const prevHovered = React.useRef(false)
+  React.useEffect(() => {
+    if (prevHovered.current !== isHovered) {
+      setHover(isHovered)
+      prevHovered.current = isHovered
+    }
+  }, [isHovered, setHover])
+
+  return <RiveComponent className="h-9 w-full" />
+}
+
+function BottomToolbar() {
+  const [remixHovered, setRemixHovered] = useState(false)
 
   return (
     <div className="absolute inset-x-0 bottom-3 flex items-center justify-center">
@@ -288,12 +332,19 @@ function BottomToolbar() {
 
         {/* Remix */}
         <button
-          className="cursor-pointer overflow-hidden rounded-lg bg-bg-elevated shadow-elevation-2 transition-colors hover:bg-bg-elevated-hover"
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
+          className="cursor-pointer overflow-hidden h-9 w-22 rounded-lg bg-bg-elevated shadow-elevation-2 transition-colors hover:bg-bg-elevated-hover"
+          onMouseEnter={() => setRemixHovered(true)}
+          onMouseLeave={() => setRemixHovered(false)}
         >
-          <RiveComponent className="h-9 w-[90px]" />
+           <div className="absolute z-10 flex items-center h-9  gap-1 px-2 py-1 text-sm text-text-primary">
+             <BtnRemixIcon isHovered={remixHovered} />
+            <span className="y">Remix</span>
+          </div>
+          <BtnRemixBg isHovered={remixHovered} />
+
+          
         </button>
+
 
         {/* More */}
         <div className="relative flex h-9 items-center rounded-lg bg-bg-elevated px-1 shadow-elevation-2">
