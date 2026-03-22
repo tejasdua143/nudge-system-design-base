@@ -104,7 +104,7 @@ function SideNavItem({
   active = false,
   onClick,
 }: {
-  icon: React.ComponentType<{ className?: string; weight?: "duotone" }>
+  icon: React.ComponentType<{ className?: string; weight?: "duotone" | "regular" }>
   label: string
   active?: boolean
   onClick?: () => void
@@ -120,7 +120,7 @@ function SideNavItem({
           : "font-normal text-text-secondary hover:bg-bg-elevated-hover"
       )}
     >
-      <Icon weight="duotone" className={cn("size-5 shrink-0", active && "text-text-brand")} />
+      <Icon weight={active ? "duotone" : "regular"} className={cn("size-5 shrink-0", active && "text-text-brand")} />
       <span className={cn("hidden lg:inline truncate", active && "text-text-primary")}>{label}</span>
     </button>
   )

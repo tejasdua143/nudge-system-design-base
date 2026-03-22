@@ -52,7 +52,7 @@ const DEV_NAV = [
 
 const WORKSPACE_MENU = [
   { id: "settings", label: "Settings", icon: Gear },
-  { id: "members", label: "Members", icon: Users },
+  { id: "members", label: "Members", icon: Users, href: "/developer/members" },
   { id: "billing", label: "Billing and subscriptions", icon: CreditCard },
 ];
 
@@ -184,15 +184,24 @@ export default function DeveloperLayout({
               className="w-[244px] rounded-lg border-none p-0 py-2 shadow-elevation-3"
             >
               <div className="flex flex-col gap-2 px-2">
-                {WORKSPACE_MENU.map((item) => (
-                  <button
-                    key={item.id}
-                    className="flex w-full items-center gap-2 rounded-lg p-2 text-sm text-text-primary hover:bg-bg-elevated-hover"
-                  >
-                    <item.icon weight="regular" className="size-5 shrink-0 text-text-secondary" />
-                    {item.label}
-                  </button>
-                ))}
+                {WORKSPACE_MENU.map((item) => {
+                  const classes = "flex w-full items-center gap-2 rounded-lg p-2 text-sm text-text-primary hover:bg-bg-elevated-hover";
+                  const content = (
+                    <>
+                      <item.icon weight="regular" className="size-5 shrink-0 text-text-secondary" />
+                      {item.label}
+                    </>
+                  );
+                  return item.href ? (
+                    <Link key={item.id} href={item.href} className={classes}>
+                      {content}
+                    </Link>
+                  ) : (
+                    <button key={item.id} className={classes}>
+                      {content}
+                    </button>
+                  );
+                })}
               </div>
               <div className="my-2 h-px bg-border-tertiary" />
               <div className="px-2">

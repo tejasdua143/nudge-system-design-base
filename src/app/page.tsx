@@ -10,6 +10,8 @@ const pages = [
   { href: "/developer", label: "developer", description: "api dashboard" },
   { href: "/developer/playground", label: "playground", description: "api playground" },
   { href: "/login", label: "login", description: "authentication" },
+  { href: "/new-editor", label: "new-editor", description: "editor prototype" },
+  { href: "/new-editor-v1", label: "new-editor-v1", description: "editor v1 variant" },
 ];
 
 export default function Home() {

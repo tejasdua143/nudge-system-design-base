@@ -9,6 +9,7 @@ import { Agentation } from "agentation";
 import { DialRoot } from "dialkit";
 import "./dialkit.css";
 import "./globals.css";
+import Script from 'next/script'
 
 const inter = Inter({
   variable: "--font-inter",

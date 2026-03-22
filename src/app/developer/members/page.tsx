@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Plus, DotsThreeVertical } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogTrigger,
@@ -25,18 +27,19 @@ import {
 /*  Data                                                                      */
 /* -------------------------------------------------------------------------- */
 
-const API_KEYS = [
-  { name: "Zapier", key: "sk-presentations-...NlV0", created: "3 days ago" },
-  { name: "N8N", key: "sk-presentations-...NlV0", created: "5 days ago" },
-  { name: "Personal", key: "sk-presentations-...NlV0", created: "8 days ago" },
+const MEMBERS = [
+  { name: "John Doe", email: "johndoe@gmail.com", role: "Owner", initials: "JD" },
+  { name: "Sarah Chen", email: "sarah.chen@foursquare.ai", role: "Admin", initials: "SC" },
+  { name: "Mike Johnson", email: "mike.j@foursquare.ai", role: "Member", initials: "MJ" },
+  { name: "Emily Park", email: "emily.park@foursquare.ai", role: "Member", initials: "EP" },
 ];
 
 /* -------------------------------------------------------------------------- */
 /*  Page                                                                      */
 /* -------------------------------------------------------------------------- */
 
-export default function ApiKeysPage() {
-  const [keyName, setKeyName] = useState("");
+export default function MembersPage() {
+  const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
 
   return (
@@ -44,39 +47,40 @@ export default function ApiKeysPage() {
       {/* Header */}
       <div className="flex h-[63px] items-center justify-between border-b border-border-secondary px-6">
         <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
-          API Keys
+          Members
         </h1>
-        <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) setKeyName(""); }}>
+        <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) setEmail(""); }}>
           <DialogTrigger asChild>
             <Button variant="primary" size="sm">
               <Plus weight="bold" className="size-3" />
-              Create API Key
+              Invite member
             </Button>
           </DialogTrigger>
           <DialogContent size="sm">
             <DialogHeader>
-              <DialogTitle>Create API key</DialogTitle>
+              <DialogTitle>Invite member</DialogTitle>
               <DialogDescription>
-                Enter a name for your new secret API key.
+                Enter the email address of the person you want to invite.
               </DialogDescription>
             </DialogHeader>
             <div className="flex flex-col gap-2 px-4 py-2">
-              <label htmlFor="key-name" className="text-sm font-medium text-text-primary">
-                Secret key name
+              <label htmlFor="invite-email" className="text-sm font-medium text-text-primary">
+                Email address
               </label>
               <Input
-                id="key-name"
-                placeholder="e.g. My API Key"
-                value={keyName}
-                onChange={(e) => setKeyName(e.target.value)}
+                id="invite-email"
+                type="email"
+                placeholder="e.g. name@company.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <DialogFooter>
               <DialogClose asChild>
                 <Button variant="outline" size="sm">Cancel</Button>
               </DialogClose>
-              <Button variant="primary" size="sm" disabled={!keyName.trim()} onClick={() => setOpen(false)}>
-                Create
+              <Button variant="primary" size="sm" disabled={!email.trim()} onClick={() => setOpen(false)}>
+                Send invite
               </Button>
             </DialogFooter>
           </DialogContent>
@@ -88,42 +92,45 @@ export default function ApiKeysPage() {
         <div className="mx-auto flex w-full max-w-[768px] flex-col gap-6 px-6 py-6">
           {/* Description */}
           <p className="text-sm text-text-secondary">
-            Your secret API keys are listed below. Please note that we do not
-            display your secret API keys again after you generate them. Do not
-            share your API key with others, or expose it in the browser or other
-            client-side code. You can learn more in our{" "}
-            <a href="#" className="font-medium text-text-brand hover:underline">
-              API documentation
-            </a>
-            .
+            Manage your workspace members and their roles. Invite new members to
+            collaborate on presentations and API integrations.
           </p>
 
           {/* Table */}
           <div className="overflow-hidden rounded-lg shadow-elevation-1">
             {/* Table header */}
             <div className="flex items-center bg-bg-secondary px-4 py-3 text-xs font-medium text-text-secondary">
-              <span className="flex-1">Name</span>
-              <span className="w-[230px]">API key</span>
+              <span className="flex-1">Member</span>
+              <span className="w-[120px]">Role</span>
               <span className="w-[80px] text-right">Action</span>
             </div>
 
             {/* Table rows */}
             <div className="divide-y divide-border-tertiary bg-bg-elevated">
-              {API_KEYS.map((item) => (
+              {MEMBERS.map((member) => (
                 <div
-                  key={item.name}
+                  key={member.email}
                   className="flex items-center px-4 py-3 text-sm"
                 >
-                  <div className="flex flex-1 flex-col gap-0.5">
-                    <span className="font-medium text-text-primary">
-                      {item.name}
-                    </span>
-                    <span className="text-xs text-text-tertiary">
-                      {item.created}
-                    </span>
+                  <div className="flex flex-1 items-center gap-3">
+                    <Avatar className="size-8">
+                      <AvatarFallback className="bg-bg-secondary text-xs">
+                        {member.initials}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="font-medium text-text-primary">
+                        {member.name}
+                      </span>
+                      <span className="text-xs text-text-tertiary">
+                        {member.email}
+                      </span>
+                    </div>
                   </div>
-                  <span className="w-[230px] font-mono text-sm text-text-secondary">
-                    {item.key}
+                  <span className="w-[120px]">
+                    <Badge variant={member.role === "Owner" ? "default" : "secondary"}>
+                      {member.role}
+                    </Badge>
                   </span>
                   <div className="flex w-[80px] justify-end">
                     <DropdownMenu>
@@ -136,10 +143,9 @@ export default function ApiKeysPage() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem>Copy key</DropdownMenuItem>
-                        <DropdownMenuItem>Rename</DropdownMenuItem>
+                        <DropdownMenuItem>Change role</DropdownMenuItem>
                         <DropdownMenuItem variant="destructive">
-                          Revoke key
+                          Remove member
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>

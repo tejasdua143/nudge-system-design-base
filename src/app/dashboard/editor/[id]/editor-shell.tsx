@@ -44,7 +44,6 @@ import {
   useViewModelInstanceBoolean,
     Layout as RiveLayout, Alignment as RiveAlignment, Fit as RiveFit,
 } from "@rive-app/react-webgl2"
-import { DotsThreeIcon } from "@phosphor-icons/react/dist/ssr"
 
 /* -------------------------------------------------------------------------- */
 /*  Mock slide data                                                           */
@@ -64,9 +63,9 @@ const MOCK_SLIDES = [
 
 function EditorTopBar({ title }: { title: string }) {
   return (
-    <header className="flex h-12 shrink-0 items-center justify-between px-3">
+    <header className="flex h-12 shrink-0 items-center justify-between px-3 pt-2">
       {/* Left side */}
-      <div className="relative flex h-9 gap-0.5 px-0.5 items-center rounded-lg border-none bg-bg-elevated shadow-elevation-2">
+      <div className="relative flex h-10 gap-0.5 px-0.5 items-center rounded-lg border-none bg-bg-elevated shadow-elevation-2">
          <Button variant="ghost" size="icon-sm" asChild>
           <Link href="/dashboard">
             <HouseSimpleIcon className="size-4" />
@@ -101,7 +100,7 @@ function EditorTopBar({ title }: { title: string }) {
             <AvatarFallback className="bg-paids-brand-200" />
           </Avatar>
         </AvatarGroup>
-        <div className="relative flex h-9 items-center gap-1.5 rounded-lg border-none bg-bg-elevated px-1 shadow-elevation-2">
+        <div className="relative flex h-10 items-center gap-1.5 rounded-lg border-none bg-bg-elevated px-1 shadow-elevation-2">
         <Button variant="ghost" size="sm" className="rounded-sm text-sm font-normal">
           <Play className="size-4" />
           Present
@@ -111,8 +110,8 @@ function EditorTopBar({ title }: { title: string }) {
           Share
         </Button>
         <div className="h-full w-px bg-border-secondary" />
-        <Button variant="primary" size="sm" className="rounded-sm text-sm font-normal">
-          <Export className="size-4" />
+        <Button variant="ghost" size="sm" className="rounded-sm text-sm font-normal text-text-brand">
+          <Export className="size-4 text-text-brand" />
           Export as PPT
         </Button>
         </div>
@@ -209,29 +208,29 @@ function CanvasArea({ slideGradient }: { slideGradient: string }) {
 
 function RightToolPanel() {
   return (
-    <div className="absolute right-2 top-0 bottom-0 flex w-10 flex-col items-center justify-between pt-3 pb-3">
+    <div className="absolute right-3 top-0 bottom-0 flex w-10 flex-col items-center justify-between pt-3 pb-3">
       {/* Top tools */}
       <div className="relative flex flex-col items-center rounded-lg bg-bg-elevated shadow-elevation-2">
-        <button className="flex size-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
+        <button className="flex size-10 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
           <PaintBrushIcon className="size-4" />
         </button>
           <div className="w-full h-px bg-border-secondary" />
-        <button className="flex size-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
+        <button className="flex size-10 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
           <ChartBarIcon className="size-4" />
         </button>
         <div className="w-full h-px bg-border-secondary" />
-        <button className="flex size-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
+        <button className="flex size-10 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
           <DotsThreeCircleIcon className="size-5" />
         </button>
       </div>
 
       {/* Bottom tools */}
       <div className="relative flex flex-col items-center rounded-lg bg-bg-elevated shadow-elevation-2">
-        <button className="flex size-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
+        <button className="flex size-10 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
           <MagnifyingGlass className="size-5" />
         </button>
         <div className="w-full h-px bg-border-secondary" />
-        <button className="flex size-9 items-center justify-center rounded text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
+        <button className="flex size-10 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
           <Question className="size-5" />
         </button>
       </div>
@@ -295,7 +294,7 @@ function BtnRemixBg({ isHovered }: { isHovered: boolean }) {
     }
   }, [isHovered, setHover])
 
-  return <RiveComponent className="h-9 w-full" />
+  return <RiveComponent className="h-10 w-full" />
 }
 
 function BottomToolbar() {
@@ -305,7 +304,7 @@ function BottomToolbar() {
     <div className="absolute inset-x-0 bottom-3 flex items-center justify-center">
       <div className="flex items-center gap-2">
         {/* Text tools */}
-        <div className="relative flex h-9 items-center gap-1.5 rounded-lg bg-bg-elevated px-1.5 shadow-elevation-2">
+        <div className="relative flex h-10 items-center gap-1.5 rounded-lg bg-bg-elevated px-1.5 shadow-elevation-2">
           <button className="flex items-center gap-1.5 rounded px-2 py-1 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
             <TextTIcon className="size-4" />
             Title
@@ -318,25 +317,25 @@ function BottomToolbar() {
             <CaretDownIcon weight="bold" className="size-3 text-text-tertiary" />
           </button>
           <div className="h-full w-px bg-border-secondary" />
-          <button className="flex items-center gap-1.5 rounded px-2 py-1 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+          <button className="flex items-center gap-1.5 rounded px-2 py-1.5 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
             <PlusIcon weight="regular" className="size-4" />
             Add object
           </button>
         </div>
 
         {/* Layouts */}
-        <div className="relative flex h-9 items-center gap-1.5 rounded-lg bg-bg-elevated px-2.5 shadow-elevation-2">
+        <div className="relative flex h-10 items-center gap-1.5 rounded-lg bg-bg-elevated px-2.5 shadow-elevation-2">
           <Layout weight="regular" className="size-4" />
           <span className="text-sm text-text-primary">Layouts</span>
         </div>
 
         {/* Remix */}
         <button
-          className="cursor-pointer overflow-hidden h-9 w-22 rounded-lg bg-bg-elevated shadow-elevation-2 transition-colors hover:bg-bg-elevated-hover"
+          className="cursor-pointer overflow-hidden h-10 w-22 rounded-lg bg-bg-elevated shadow-elevation-2 transition-colors hover:bg-bg-elevated-hover"
           onMouseEnter={() => setRemixHovered(true)}
           onMouseLeave={() => setRemixHovered(false)}
         >
-           <div className="absolute z-10 flex items-center h-9  gap-1 px-2 py-1 text-sm text-white">
+           <div className="absolute z-10 flex items-center h-10  gap-1 px-2 py-1 text-sm text-white">
              <BtnRemixIcon isHovered={remixHovered} />
             <span className="y">Remix</span>
           </div>
@@ -346,12 +345,6 @@ function BottomToolbar() {
         </button>
 
 
-        {/* More */}
-        <div className="relative flex h-9 items-center rounded-lg bg-bg-elevated px-1 shadow-elevation-2">
-          <button className="flex size-7 items-center justify-center rounded text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
-            <DotsThreeIcon weight="regular" className="size-4" />
-          </button>
-        </div>
       </div>
     </div>
   )
