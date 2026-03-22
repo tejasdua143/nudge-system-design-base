@@ -921,8 +921,8 @@ function ObjectSelectorModal({
   const MORPH_DURATION = 0.35
   const CONTENT_DURATION = 0.15
   const SLIDE_DISTANCE = 25
-  const easeOut: number[] = [0.19, 1, 0.22, 1] // ease-out-expo
-  const easeInOut: number[] = [0.77, 0, 0.175, 1]
+  const easeOut = [0.19, 1, 0.22, 1] as const // ease-out-expo
+  const easeInOut = [0.77, 0, 0.175, 1] as const
 
   // 1 = forward (push), -1 = back (pop), 0 = initial open (no slide)
   const directionRef = useRef<1 | -1 | 0>(0)
