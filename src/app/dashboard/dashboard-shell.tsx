@@ -32,6 +32,11 @@ import {
   Moon,
   SignOut,
   Translate,
+  SketchLogo,
+  MicrosoftPowerpointLogo,
+  Brain,
+  Sparkle,
+  BookOpenText,
 } from "@phosphor-icons/react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -58,6 +63,7 @@ import { cn } from "@/lib/utils"
 import { ActionCardsRow } from "./action-cards"
 import { RECENT_DOCS } from "./data"
 import { CreditCardIcon } from "@phosphor-icons/react/dist/ssr"
+import ShinyText from "@/components/ShinyText"
 
 /* -------------------------------------------------------------------------- */
 /*  Data                                                                      */
@@ -90,6 +96,11 @@ const SETTINGS_BOTTOM_NAV = [
   { id: "profile", label: "Profile", icon: UserCircle },
 ]
 
+const WORKSPACES = [
+  { id: "foursquare", name: "Foursquare", initial: "F", plan: "PRO" as const, color: "bg-paids-brand-500" },
+  { id: "john", name: "John\u2019s workspace", initial: "J", plan: "FREE" as const, color: "bg-orange-500" },
+]
+
 
 /* -------------------------------------------------------------------------- */
 /*  Sub-components                                                            */
@@ -113,11 +124,11 @@ function SideNavItem({
       className={cn(
         "flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-[var(--radius-sm)] p-2 text-sm leading-[var(--leading-body)] transition-colors",
         active
-          ? "bg-bg-brand-selected font-semibold text-text-brand"
+          ? "bg-bg-elevated-hover font-semibold text-text-primary"
           : "font-normal text-text-secondary hover:bg-bg-elevated-hover"
       )}
     >
-      <Icon weight={active ? "duotone" : "regular"} className={cn("size-5 shrink-0", active && "text-text-brand")} />
+      <Icon weight="regular" className={cn("size-5 shrink-0", active ? "text-text-primary" : "")} />
       <span className={cn("hidden lg:inline truncate", active && "text-text-primary")}>{label}</span>
     </button>
   )
@@ -208,23 +219,78 @@ function BlankPage({ title }: { title: string }) {
 }
 
 /* -------------------------------------------------------------------------- */
+/*  Upgrade button with shimmer + rotating text                               */
+/* -------------------------------------------------------------------------- */
+
+const UPGRADE_ITEMS = [
+  { text: "Upgrade to Pro", icon: SketchLogo },
+  { text: "Export PPT", icon: MicrosoftPowerpointLogo },
+  { text: "Smarter AI", icon: Brain },
+  { text: "More AI credits", icon: Sparkle },
+  { text: "Brand guideline", icon: BookOpenText },
+]
+
+function UpgradeButton() {
+  const [index, setIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true)
+      setTimeout(() => {
+        setIndex((i) => (i + 1) % UPGRADE_ITEMS.length)
+        setIsAnimating(false)
+      }, 200)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const Icon = UPGRADE_ITEMS[index].icon
+
+  return (
+    <button
+      className="flex h-7 w-[140px] items-center justify-center gap-1.5 rounded-full bg-bg-brand px-2.5 transition-colors hover:bg-bg-brand-hover"
+    >
+      <span
+        className={cn(
+          "flex items-center gap-1.5 transition-all duration-200",
+          isAnimating ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100"
+        )}
+      >
+        <Icon weight="duotone" className="size-4 shrink-0 text-text-primary-inverted" />
+        <ShinyText
+          text={UPGRADE_ITEMS[index].text}
+          speed={1}
+          delay={2}
+          spread={100}
+          direction="left"
+          color="var(--text-primary-inverted)"
+          shineColor="var(--text-primary)"
+          className="text-sm"
+        />
+      </span>
+    </button>
+  )
+}
+
+/* -------------------------------------------------------------------------- */
 /*  Settings: General content                                                 */
 /* -------------------------------------------------------------------------- */
 
-function GeneralSettingsContent() {
+function GeneralSettingsContent({ workspace }: { workspace: typeof WORKSPACES[number] }) {
   return (
     <>
-      <div className="flex h-16 items-center border-b border-border-secondary px-6">
+      <div className="mx-auto flex h-16 w-full max-w-[768px] items-center px-6">
         <h1 className="text-2xl leading-[var(--leading-heading)] tracking-[var(--tracking-tight)] text-text-primary">
           General
         </h1>
       </div>
-      <div className="flex flex-col items-center gap-8 p-6">
-        <div className="flex w-full max-w-[600px] flex-col gap-8">
+      <div className="mx-auto flex w-full max-w-[768px] flex-col gap-8 p-6">
+        <div className="flex w-full flex-col gap-8">
           {/* Workspace avatar section */}
-          <div className="flex h-[200px] w-full flex-col items-center justify-center gap-4 rounded-lg bg-gradient-to-t from-pink-400/30 to-pink-50/30 px-6 py-6">
-            <div className="flex size-[100px] items-center justify-center overflow-hidden rounded-full bg-[var(--gradient-accent)]">
-              <span className="text-3xl font-bold text-white">F</span>
+          <div className="flex w-full flex-col items-center justify-center gap-4 rounded-lg bg-gradient-to-t from-pink-400/30 to-pink-50/30 px-6 py-6">
+            <div className={cn("flex size-[100px] items-center justify-center overflow-hidden rounded-full", workspace.color)}>
+              <span className="text-3xl font-bold text-white">{workspace.initial}</span>
             </div>
             <Button variant="tertiary" size="sm" className="h-7">
               Change
@@ -238,7 +304,8 @@ function GeneralSettingsContent() {
             </Label>
             <Input
               id="workspace-name"
-              defaultValue="Foursquare"
+              defaultValue={workspace.name}
+              key={workspace.id}
               className="h-11 px-3 text-sm"
             />
           </div>
@@ -263,15 +330,15 @@ function SettingsSidebar({
 }) {
   return (
     <div className="flex flex-col gap-4">
-      {/* Back to home header */}
-      <div className="flex h-16 items-center border-b border-border-secondary px-2 lg:px-4">
+      {/* Settings header */}
+      <div className="flex h-14 items-center border-b border-border-secondary px-2 lg:px-4">
         <button
           onClick={onBack}
           className="flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-md text-sm text-text-secondary transition-colors hover:text-text-primary"
-          title="Back to home"
+          title="Workspace settings"
         >
           <CaretLeft weight="bold" className="size-5 shrink-0" />
-          <span className="hidden lg:inline truncate leading-[var(--leading-body)]">Back to home</span>
+          <span className="hidden lg:inline truncate leading-[var(--leading-body)]">Workspace settings</span>
         </button>
       </div>
 
@@ -310,13 +377,13 @@ function SettingsSidebar({
 /*  Settings: Content router                                                  */
 /* -------------------------------------------------------------------------- */
 
-function SettingsContent({ activeSettingsPage }: { activeSettingsPage: string }) {
+function SettingsContent({ activeSettingsPage, workspace }: { activeSettingsPage: string; workspace: typeof WORKSPACES[number] }) {
   const allSettingsItems = [...SETTINGS_MAIN_NAV, ...SETTINGS_BOTTOM_NAV]
   const activeItem = allSettingsItems.find((item) => item.id === activeSettingsPage)
   const activeLabel = activeItem?.label ?? "General"
 
   if (activeSettingsPage === "general") {
-    return <GeneralSettingsContent />
+    return <GeneralSettingsContent workspace={workspace} />
   }
 
   return <BlankPage title={activeLabel} />
@@ -332,7 +399,10 @@ export function DashboardShell() {
   const [accountMenuOpen, setAccountMenuOpen] = useState(false)
   const [isSettingsMode, setIsSettingsMode] = useState(false)
   const [activeSettingsPage, setActiveSettingsPage] = useState("general")
+  const [activeWorkspaceId, setActiveWorkspaceId] = useState("foursquare")
   const { theme, setTheme } = useTheme()
+
+  const activeWorkspace = WORKSPACES.find((ws) => ws.id === activeWorkspaceId)!
 
   const contentKey = isSettingsMode ? `settings-${activeSettingsPage}` : activePage
   const contentRef = useRef<HTMLDivElement>(null)
@@ -385,15 +455,15 @@ export function DashboardShell() {
                   <PopoverTrigger asChild>
                     <button className="flex w-full cursor-pointer items-center justify-center lg:justify-start gap-2 rounded-[var(--radius-lg)] py-[3px] pl-1 pr-1.5 transition-colors hover:bg-bg-elevated-hover">
                       {/* Avatar */}
-                      <div className="flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius-logo)] bg-paids-brand-500">
+                      <div className={cn("flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius-logo)]", activeWorkspace.color)}>
                         <span className="text-[length:var(--text-2xs)] font-bold text-white">
-                          F
+                          {activeWorkspace.initial}
                         </span>
                       </div>
                       {/* Text */}
-                      <div className="hidden lg:flex flex-1 items-center gap-1.5 text-sm font-medium leading-[var(--leading-body)] w-full">
-                        <span className="text-text-primary text-left">Foursquare</span>
-                        <Badge className="px-1.5 py-0 text-[10px]">PRO</Badge>
+                      <div className="hidden lg:flex flex-1 items-center gap-1.5 text-sm font-medium leading-[var(--leading-body)] w-full min-w-0">
+                        <span className="truncate text-text-primary text-left">{activeWorkspace.name}</span>
+                        <Badge className={cn("px-1.5 py-0 text-[10px]", activeWorkspace.plan === "FREE" ? "bg-bg-brand text-text-primary-inverted" : "")}>{activeWorkspace.plan === "FREE" ? "UPGRADE" : activeWorkspace.plan}</Badge>
                       </div>
                       {/* Dropdown caret */}
                       <div className="hidden lg:flex items-center rounded-sm bg-bg-tertiary p-0.5">
@@ -433,7 +503,7 @@ export function DashboardShell() {
                         className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover"
                       >
                         <GearIcon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
-                        <span>Workspace settings</span>
+                        <span>Settings</span>
                       </button>
                       <button className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
                         <CreditCardIcon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
@@ -448,23 +518,31 @@ export function DashboardShell() {
                       <p className="text-sm text-text-tertiary">Workspace</p>
                     </div>
                     <div className="flex px-2 gap-1 flex-col">
-                      <button className="flex items-center gap-2 rounded-md p-2 transition-colors hover:bg-bg-elevated-hover">
-                        <div className="flex size-5 shrink-0 items-center justify-center rounded bg-orange-500 text-[length:var(--text-2xs)] font-medium text-white">
-                          J
-                        </div>
-                        <span className="flex-1 text-left text-sm text-text-primary">
-                          John&apos;s workspace
-                        </span>
-                      </button>
-                      <button className="flex items-center gap-2 rounded-md bg-bg-brand-selected p-2">
-                        <div className="flex size-5 shrink-0 items-center justify-center rounded bg-[var(--gradient-accent)] text-[length:var(--text-2xs)] font-medium text-white">
-                          F
-                        </div>
-                        <span className="flex-1 text-left text-sm text-text-primary">
-                          Foursquare
-                        </span>
-                        <Check weight="bold" className="size-5 text-text-brand" />
-                      </button>
+                      {WORKSPACES.map((ws) => {
+                        const isActive = ws.id === activeWorkspaceId
+                        return (
+                          <button
+                            key={ws.id}
+                            onClick={() => {
+                              setActiveWorkspaceId(ws.id)
+                              setWsMenuOpen(false)
+                            }}
+                            className={cn(
+                              "flex items-center gap-2 rounded-md p-2",
+                              isActive ? "bg-bg-brand-selected" : "transition-colors hover:bg-bg-elevated-hover"
+                            )}
+                          >
+                            <div className={cn("flex size-5 shrink-0 items-center justify-center rounded text-[length:var(--text-2xs)] font-medium text-white", ws.color)}>
+                              {ws.initial}
+                            </div>
+                            <span className="flex-1 text-left text-sm text-text-primary">
+                              {ws.name}
+                            </span>
+                            <Badge className={cn("px-1.5 py-0 text-[10px]", ws.plan === "FREE" ? "bg-bg-tertiary text-text-secondary" : "")}>{ws.plan}</Badge>
+
+                          </button>
+                        )
+                      })}
                       <button className="flex items-center gap-2 rounded-md p-2 transition-colors hover:bg-bg-elevated-hover">
                         <div className="flex size-5 shrink-0 items-center justify-center rounded bg-bg-tertiary">
                           <Plus weight="bold" className="size-3.5 text-text-secondary" />
@@ -561,7 +639,8 @@ export function DashboardShell() {
         {/* ── Top Nav (h-14 / 56px) ──────────────────────────────────── */}
         <header className="flex h-14 shrink-0 items-center justify-end overflow-hidden border-b border-border-secondary">
           {/* Right: Actions */}
-          <div className="flex items-center gap-3 lg:gap-5 px-4 lg:px-6 py-3">
+          <div className="flex items-center gap-2 lg:gap-3 px-4 lg:px-6 py-3">
+            {activeWorkspace.plan === "FREE" && <UpgradeButton />}
             <button className="rounded-lg p-1 text-text-primary transition-colors hover:text-text-brand">
               <MagnifyingGlass weight="regular" className="size-5" />
             </button>
@@ -628,7 +707,7 @@ export function DashboardShell() {
             className="flex flex-1 flex-col transition-[opacity,transform] duration-200 ease-in-out"
           >
             {isSettingsMode ? (
-              <SettingsContent activeSettingsPage={activeSettingsPage} />
+              <SettingsContent activeSettingsPage={activeSettingsPage} workspace={activeWorkspace} />
             ) : activePage === "home" ? (
               <HomeContent />
             ) : (
