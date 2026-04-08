@@ -333,7 +333,7 @@ function EditorTopBar() {
                 delay={2}
                 spread={100}
                 direction="left"
-                color="var(--text-brand)"
+                color="var(--text-primary)"
                 shineColor="var(--text-primary-inverted)"
                 className="text-sm"
               />
