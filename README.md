@@ -1,75 +1,117 @@
-# @paids/ui
+# PAIDS Design System
 
-A design system built on Tailwind CSS v4, Radix UI, and React. Ships 56 production-ready components with a three-layer token architecture, dark mode, and LLM-readable specs.
+A prototyping base built on Next.js, Tailwind CSS v4, and Radix UI. Ships 56 components, a three-layer token system, dark mode, and LLM-readable specs so AI coding assistants can build with you.
 
-## Installation
+> **Note:** This repo is meant to be cloned and used directly as a starter project — not installed as an npm package.
 
-```bash
-npm install @paids/ui
-```
-
-### Setup
-
-Run the init CLI to configure your project automatically — this sets up AI assistant instructions (CLAUDE.md) and a token audit script:
+## Quick Start
 
 ```bash
-npx @paids/ui init
+git clone <repo-url>
+cd port-louis
+npm install
+npm run dev
 ```
 
-### CSS
+Open [http://localhost:3000](http://localhost:3000) to see the root index — a directory of every prototype page in the project.
 
-Add to your main CSS file:
+## How This Project Is Built
 
-```css
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "@paids/ui/styles.css";
+### Component Specs
 
-@source "../node_modules/@paids/ui/dist";
+Every component has a spec file in `specs/components/` (e.g. `button.md`, `dialog.md`, `table.md`). These specs define:
+
+- **Anatomy** — the parts that make up a component
+- **Tokens** — which design tokens the component uses
+- **States** — interactive states, variants, and tones
+- **Examples** — code snippets showing proper usage
+
+Foundation specs live in `specs/foundations/` covering color, spacing, typography, radius, elevation, and motion. A master token reference lives at `specs/tokens/token-reference.md`.
+
+### Token Architecture
+
+The system uses three layers. Never hardcode colors, spacing, or typography — always use tokens.
+
+| Layer | Location | Prefix | Rule |
+|-------|----------|--------|------|
+| 1 — Palette | `globals.css` `:root` | `--paids-*` | Raw hex values. Never use directly in components. |
+| 2 — Semantic | `globals.css` `:root` / `.dark` | `--bg-*`, `--text-*`, `--border-*`, `--shadow-*` | Meaningful aliases. Switch automatically in dark mode. |
+| 3 — Components | Component files | Tailwind utilities | Reference Layer 2 via `bg-bg-brand`, `text-text-primary`, etc. |
+
+### Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS v4 + CSS custom properties
+- **Components:** shadcn/ui (customized) + Radix UI + Base UI
+- **Animation:** Motion (motion/react) + Rive
+- **Dark mode:** CSS custom properties in `.dark` selector via next-themes
+- **Icons:** Phosphor Icons + Lucide
+
+## How to Use This Repo
+
+### Creating a New Prototype Page
+
+Every prototype lives as a route under `src/app/`. To add a new page:
+
+1. Create a folder in `src/app/` with your page name:
+
+```bash
+mkdir src/app/my-prototype
 ```
 
-The `@source` directive tells Tailwind v4 to scan the package for utility classes.
-
-### Dark Mode
-
-Add `className="dark"` to your `<html>` element, or use [next-themes](https://github.com/pacocoursey/next-themes).
-
-## Usage
+2. Add a `page.tsx` inside it:
 
 ```tsx
-import { Button, Card, CardHeader, CardTitle, CardContent } from "@paids/ui"
+export default function MyPrototypePage() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-bg-primary">
+      <h1 className="text-2xl font-medium text-text-primary">
+        My Prototype
+      </h1>
+    </div>
+  );
+}
+```
 
-export function Example() {
+3. Register it in the root page (`src/app/page.tsx`) so it appears in the index:
+
+```tsx
+const pages = [
+  // ... existing pages
+  { href: "/my-prototype", label: "my-prototype", description: "what it does" },
+];
+```
+
+4. Visit [http://localhost:3000/my-prototype](http://localhost:3000/my-prototype) — or click the link from the root index.
+
+### Using Components
+
+All 56 components live in `src/components/ui/`. Import them directly:
+
+```tsx
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+
+export default function MyPage() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Hello</CardTitle>
       </CardHeader>
       <CardContent>
-        <Button variant="primary" tone="default">
-          Click me
-        </Button>
+        <Button variant="primary" tone="default">Click me</Button>
       </CardContent>
     </Card>
-  )
+  );
 }
 ```
 
-## Components
+Check the component spec in `specs/components/` for available variants, tones, and props.
 
-Accordion, Alert, Alert Dialog, Aspect Ratio, Avatar, Badge, Breadcrumb, Button, Button Group, Calendar, Card, Carousel, Chart, Checkbox, Collapsible, Combobox, Command, Context Menu, Dialog, Direction, Drawer, Dropdown Menu, Empty, Field, Form, Hover Card, Input, Input Group, Input OTP, Item, Kbd, Label, Menubar, Native Select, Navigation Menu, Pagination, Popover, Progress, Radio Group, Resizable, Scroll Area, Select, Separator, Sheet, Sidebar, Skeleton, Slider, Sonner (Toast), Spinner, Switch, Table, Tabs, Textarea, Toggle, Toggle Group, Tooltip
+### Using Tokens
 
-## Token Architecture
-
-The design system uses a three-layer token system. Never hardcode colors, spacing, or typography values — use tokens instead.
-
-| Layer | Prefix | Rule |
-|-------|--------|------|
-| 1 — Palette | `--paids-*` | Raw hex values. Never use directly in components. |
-| 2 — Semantic | `--bg-*`, `--text-*`, `--border-*`, `--shadow-*` | Meaningful aliases. Switch automatically in dark mode. |
-| 3 — Components | Tailwind utilities | Reference Layer 2 via `bg-bg-brand`, `text-text-primary`, etc. |
-
-### Common mappings
+Reference tokens through Tailwind utilities — never hardcode values:
 
 | Instead of | Use |
 |---|---|
@@ -80,42 +122,49 @@ The design system uses a three-layer token system. Never hardcode colors, spacin
 | `border-[1.5px]` | `border-[length:var(--border-width-thick)]` |
 | `leading-[1.43]` | `leading-[var(--leading-body)]` |
 
-## Token Audit
+### Token Audit
 
-Run before committing to enforce token usage:
+Run before committing to catch hardcoded values:
 
 ```bash
-npx paids-audit
+node scripts/token-audit.js
 ```
 
-Zero errors required. The script scans for hardcoded visual values and suggests the correct token.
+Zero errors required.
+
+## Project Structure
+
+```
+src/
+  app/
+    page.tsx         ← Root index (links to all prototype pages)
+    globals.css      ← Layer 1 & 2 tokens, dark mode
+    tokens.css       ← Spacing, typography, radius, z-index, motion tokens
+    dashboard/       ← Dashboard prototype
+    docs/            ← Component documentation
+    developer/       ← API dashboard prototype
+    login/           ← Auth prototype
+    new-editor/      ← Editor prototype
+  components/
+    ui/              ← 56 design system components
+    docs/            ← Documentation components
+specs/
+  foundations/       ← Color, spacing, typography, radius, elevation, motion specs
+  components/        ← Per-component specs (anatomy, tokens, states, examples)
+  tokens/            ← Master token reference
+scripts/
+  token-audit.js     ← Audit script for token compliance
+```
 
 ## AI-Assisted Development
 
-This package ships with LLM-readable specs so AI coding assistants (Claude Code, Cursor, etc.) can reference them automatically.
+This project includes LLM-readable specs so AI assistants (Claude Code, Cursor, etc.) can understand the design system. The `CLAUDE.md` file at the root configures assistants to:
 
-After running `npx @paids/ui init`, your CLAUDE.md is configured to point assistants to:
+- Read the relevant spec before implementing or changing a component
+- Use only tokens from `tokens.css` and `globals.css`
+- Run the token audit before committing
 
-- `node_modules/@paids/ui/specs/foundations/` — color, spacing, typography, radius, elevation, motion
-- `node_modules/@paids/ui/specs/components/` — per-component specs
-- `node_modules/@paids/ui/specs/tokens/token-reference.md` — master map of all CSS variables
-
-## CSS Imports
-
-The package exports CSS at multiple granularity levels:
-
-```css
-@import "@paids/ui/styles.css";   /* Everything (recommended) */
-@import "@paids/ui/globals.css";  /* Theme + tokens only */
-@import "@paids/ui/tokens.css";   /* Spacing, typography, radius, motion only */
-```
-
-## Peer Dependencies
-
-- `react` ^18 or ^19
-- `react-dom` ^18 or ^19
-- `tailwindcss` ^4
-- `next-themes` (optional — only needed for Sonner/toast)
+Point your AI assistant to `specs/` for full context on any component or foundation.
 
 ## License
 
