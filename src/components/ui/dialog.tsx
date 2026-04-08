@@ -91,7 +91,7 @@ function DialogContent({
         {/* Outer shell */}
         <div
           className={cn(
-            "relative flex flex-col rounded-2xl bg-bg-secondary shadow-elevation-4",
+            "relative flex flex-col rounded-[var(--radius-lg)] bg-bg-secondary shadow-elevation-4",
             hasHeader ? "px-1 pb-1" : ""
           )}
         >
@@ -114,7 +114,7 @@ function DialogContent({
           {/* Inner content card */}
           <div
             data-has-header={hasHeader ? "" : undefined}
-            className="relative flex flex-col overflow-hidden rounded-xl bg-bg-primary shadow-elevation-1"
+            className="relative flex flex-col overflow-hidden rounded-[var(--radius-md)] bg-bg-primary shadow-elevation-1"
           >
             {/* Inner card inner-shadow overlay */}
             <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] shadow-[inset_0_0_0_1px_var(--shadow-inner-1)]" />

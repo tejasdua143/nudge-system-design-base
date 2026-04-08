@@ -77,18 +77,18 @@
      ========================================================================== */
   --radius-none: 0px;
   --radius-xs: 2px;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
   --radius-default: var(--radius);
-  --radius-lg: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --radius-2xl: calc(var(--radius) + 6px);
+  --radius-3xl: calc(var(--radius) + 10px);
+  --radius-4xl: calc(var(--radius) + 14px);
   --radius-full: 9999px;
   --radius-checkbox: 4px;
-  --radius-card: 10px;
-  --radius-logo: 5px;
+  --radius-card: 8px;
+  --radius-logo: 4px;
 
   /* ==========================================================================
      Z-INDEX — layering scale

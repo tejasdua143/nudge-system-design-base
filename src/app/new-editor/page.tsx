@@ -51,6 +51,7 @@ import {
   Flag,
   Notepad,
   EyeSlash,
+  CaretRight,
 } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage, AvatarGroup } from "@/components/ui/avatar"
@@ -178,6 +179,8 @@ function ToolbarIconButton({ children, className, ...props }: React.ComponentPro
 }
 
 function EditorTopBar() {
+  const [spotlightedUser, setSpotlightedUser] = useState<string | null>(null)
+
   return (
     <div className="absolute inset-x-0 top-0 flex items-center justify-between px-3 pt-3">
       {/* Left toolbar — Figma: p-[4px] containers, size-[28px] icon inserts = 36px height */}
@@ -213,35 +216,68 @@ function EditorTopBar() {
               <PopoverTrigger asChild>
                 <button className="flex items-center rounded px-1.5 py-1 transition-colors hover:bg-bg-elevated-hover">
                   <AvatarGroup>
-                    {COLLABORATORS.slice(0, 3).map((user) => (
-                      <Avatar key={user.id} className="size-5">
-                        <AvatarImage src={user.avatar} />
-                        <AvatarFallback className="bg-paids-neutral-200 text-[8px]" />
-                      </Avatar>
-                    ))}
-                    {COLLABORATORS.length > 3 && (
-                      <Avatar className="size-5">
-                        <AvatarFallback className="bg-paids-neutral-200 text-[8px] text-text-primary">+{COLLABORATORS.length - 3}</AvatarFallback>
-                      </Avatar>
-                    )}
+                    {(() => {
+                      const visibleUsers = COLLABORATORS.slice(0, 3)
+                      const overflowUsers = COLLABORATORS.slice(3)
+                      const spotlightedInOverflow = spotlightedUser ? overflowUsers.find((u) => u.id === spotlightedUser) : null
+                      const remainingCount = COLLABORATORS.length - 3
+
+                      return (
+                        <>
+                          {visibleUsers.map((user) => (
+                            <Avatar
+                              key={user.id}
+                              className={cn("size-5 transition-shadow", spotlightedUser === user.id && "z-10")}
+                              style={spotlightedUser === user.id ? { '--tw-ring-color': 'var(--paids-brand-500)' } as React.CSSProperties : undefined}
+                            >
+                              <AvatarImage src={user.avatar} />
+                              <AvatarFallback className="bg-paids-neutral-200 text-[8px]" />
+                            </Avatar>
+                          ))}
+                          {remainingCount > 0 && spotlightedInOverflow && (
+                            <Avatar
+                              key={`spotlight-${spotlightedInOverflow.id}`}
+                              className="z-10 size-5 ring-2 transition-shadow"
+                              style={{ '--tw-ring-color': 'var(--paids-brand-500)' } as React.CSSProperties}
+                            >
+                              <AvatarImage src={spotlightedInOverflow.avatar} />
+                              <AvatarFallback className="bg-paids-neutral-200 text-[8px]" />
+                            </Avatar>
+                          )}
+                          {remainingCount > 0 && !spotlightedInOverflow && (
+                            <Avatar key="overflow-count" className="size-5">
+                              <AvatarFallback className="bg-paids-neutral-200 text-[8px] text-text-primary">+{remainingCount}</AvatarFallback>
+                            </Avatar>
+                          )}
+                        </>
+                      )
+                    })()}
                   </AvatarGroup>
                 </button>
               </PopoverTrigger>
-              <PopoverContent side="bottom" sideOffset={12} align="end" className="w-[220px] p-0">
+              <PopoverContent side="bottom" sideOffset={12} alignOffset={-4} align="end" className="w-[220px] p-0">
                 {/* Current user */}
                 <div className="flex flex-col p-1">
                   {COLLABORATORS.filter((u) => u.isYou).map((user) => (
                     <div key={user.id}>
                       <div className="flex items-center gap-3 rounded-lg p-2">
-                        <Avatar className="size-5">
+                        <Avatar
+                          className={cn("size-5 transition-shadow", spotlightedUser === user.id && "ring-2")}
+                          style={spotlightedUser === user.id ? { '--tw-ring-color': 'var(--paids-brand-500)' } as React.CSSProperties : undefined}
+                        >
                           <AvatarImage src={user.avatar} />
                           <AvatarFallback className="bg-paids-neutral-200 text-[8px]" />
                         </Avatar>
                         <span className="text-sm text-text-primary">{user.name} (you)</span>
                       </div>
                       <div className="px-2 py-1">
-                        <Button variant="tertiary" size="sm" className="h-7 w-full rounded-[var(--radius-sm)] text-xs">
-                          Spotlight me
+                        <Button
+                          variant={spotlightedUser === user.id ? "secondary" : "tertiary"}
+                          size="sm"
+                          className="h-7 w-full rounded-[var(--radius-sm)] text-xs"
+                          onClick={() => setSpotlightedUser(spotlightedUser === user.id ? null : user.id)}
+                        >
+                          {spotlightedUser === user.id ? "Remove spotlight" : "Spotlight me"}
                         </Button>
                       </div>
                     </div>
@@ -251,13 +287,23 @@ function EditorTopBar() {
                 {/* Other collaborators */}
                 <div className="flex flex-col p-1">
                   {COLLABORATORS.filter((u) => !u.isYou).map((user) => (
-                    <div key={user.id} className="flex items-center gap-3 rounded-[var(--radius-sm)] p-2 transition-colors hover:bg-bg-elevated-hover">
-                      <Avatar className="size-5">
+                    <button
+                      key={user.id}
+                      onClick={() => setSpotlightedUser(spotlightedUser === user.id ? null : user.id)}
+                      className={cn(
+                        "flex w-full items-center gap-3 rounded-[var(--radius-sm)] p-2 text-left transition-colors hover:bg-bg-elevated-hover",
+                        spotlightedUser === user.id && "bg-bg-brand-selected"
+                      )}
+                    >
+                      <Avatar
+                        className={cn("size-5 transition-shadow", spotlightedUser === user.id && "ring-2")}
+                        style={spotlightedUser === user.id ? { '--tw-ring-color': 'var(--paids-brand-500)' } as React.CSSProperties : undefined}
+                      >
                         <AvatarImage src={user.avatar} />
                         <AvatarFallback className="bg-paids-neutral-200 text-[8px]" />
                       </Avatar>
                       <span className="text-sm text-text-primary">{user.name}</span>
-                    </div>
+                    </button>
                   ))}
                 </div>
               </PopoverContent>
@@ -872,14 +918,212 @@ const OBJECT_VARIANTS: Record<ObjectCategory, { sections: { title: string; items
       },
     ],
   },
-  text: { sections: [{ title: "Text layouts", items: [{ label: "Heading", thumbnail: <BulletsThumbnail /> }, { label: "Body", thumbnail: <VerticalThumbnail /> }] }] },
-  diagram: { sections: [{ title: "Diagram layouts", items: [{ label: "Flow", thumbnail: <HorizontalThumbnail /> }, { label: "Tree", thumbnail: <GridThumbnail /> }] }] },
-  chart: { sections: [{ title: "Chart types", items: [{ label: "Bar", thumbnail: <VerticalThumbnail /> }, { label: "Pie", thumbnail: <GridThumbnail /> }] }] },
-  table: { sections: [{ title: "Table layouts", items: [{ label: "Standard", thumbnail: <GridThumbnail /> }, { label: "Compact", thumbnail: <BulletsThumbnail /> }] }] },
-  concept: { sections: [{ title: "Concept layouts", items: [{ label: "Venn", thumbnail: <GridThumbnail /> }, { label: "Mind map", thumbnail: <HorizontalThumbnail /> }] }] },
-  media: { sections: [{ title: "Media layouts", items: [{ label: "Full", thumbnail: <VerticalThumbnail /> }, { label: "Grid", thumbnail: <GridThumbnail /> }] }] },
-  people: { sections: [{ title: "People layouts", items: [{ label: "Cards", thumbnail: <HorizontalThumbnail /> }, { label: "List", thumbnail: <BulletsThumbnail /> }] }] },
-  quote: { sections: [{ title: "Quote layouts", items: [{ label: "Centered", thumbnail: <VerticalThumbnail /> }, { label: "Side", thumbnail: <HorizontalThumbnail /> }] }] },
+  text: {
+    sections: [
+      {
+        title: "Heading",
+        items: [
+          { label: "Title centered", thumbnail: <BulletsThumbnail /> },
+          { label: "Title left", thumbnail: <VerticalThumbnail /> },
+          { label: "Title with subtitle", thumbnail: <HorizontalThumbnail /> },
+        ],
+      },
+      {
+        title: "Body",
+        items: [
+          { label: "Single column", thumbnail: <VerticalThumbnail /> },
+          { label: "Two column", thumbnail: <GridThumbnail /> },
+          { label: "With caption", thumbnail: <BulletsThumbnail /> },
+        ],
+      },
+      {
+        title: "Callout",
+        items: [
+          { label: "Highlighted", thumbnail: <HorizontalThumbnail /> },
+          { label: "Boxed", thumbnail: <GridThumbnail /> },
+        ],
+      },
+    ],
+  },
+  diagram: {
+    sections: [
+      {
+        title: "Flowchart",
+        items: [
+          { label: "Horizontal", thumbnail: <HorizontalThumbnail /> },
+          { label: "Vertical", thumbnail: <VerticalThumbnail /> },
+          { label: "Branching", thumbnail: <GridThumbnail /> },
+        ],
+      },
+      {
+        title: "Process",
+        items: [
+          { label: "Linear", thumbnail: <BulletsThumbnail /> },
+          { label: "Circular", thumbnail: <GridThumbnail /> },
+          { label: "Steps", thumbnail: <NumberOnTopThumbnail /> },
+        ],
+      },
+      {
+        title: "Hierarchy",
+        items: [
+          { label: "Tree", thumbnail: <GridThumbnail /> },
+          { label: "Org chart", thumbnail: <VerticalThumbnail /> },
+        ],
+      },
+    ],
+  },
+  chart: {
+    sections: [
+      {
+        title: "Bar chart",
+        items: [
+          { label: "Vertical", thumbnail: <VerticalThumbnail /> },
+          { label: "Horizontal", thumbnail: <HorizontalThumbnail /> },
+          { label: "Stacked", thumbnail: <GridThumbnail /> },
+        ],
+      },
+      {
+        title: "Pie chart",
+        items: [
+          { label: "Full", thumbnail: <GridThumbnail /> },
+          { label: "Donut", thumbnail: <BulletsThumbnail /> },
+        ],
+      },
+      {
+        title: "Line chart",
+        items: [
+          { label: "Single", thumbnail: <HorizontalThumbnail /> },
+          { label: "Multi-line", thumbnail: <VerticalThumbnail /> },
+          { label: "Area", thumbnail: <GridThumbnail /> },
+        ],
+      },
+    ],
+  },
+  table: {
+    sections: [
+      {
+        title: "Standard table",
+        items: [
+          { label: "Basic", thumbnail: <GridThumbnail /> },
+          { label: "Striped", thumbnail: <BulletsThumbnail /> },
+          { label: "Bordered", thumbnail: <VerticalThumbnail /> },
+        ],
+      },
+      {
+        title: "Comparison table",
+        items: [
+          { label: "Side by side", thumbnail: <HorizontalThumbnail /> },
+          { label: "Feature matrix", thumbnail: <GridThumbnail /> },
+        ],
+      },
+      {
+        title: "Data table",
+        items: [
+          { label: "Compact", thumbnail: <BulletsThumbnail /> },
+          { label: "Detailed", thumbnail: <VerticalThumbnail /> },
+        ],
+      },
+    ],
+  },
+  concept: {
+    sections: [
+      {
+        title: "Venn diagram",
+        items: [
+          { label: "Two circle", thumbnail: <GridThumbnail /> },
+          { label: "Three circle", thumbnail: <HorizontalThumbnail /> },
+        ],
+      },
+      {
+        title: "Mind map",
+        items: [
+          { label: "Radial", thumbnail: <HorizontalThumbnail /> },
+          { label: "Tree", thumbnail: <VerticalThumbnail /> },
+          { label: "Cluster", thumbnail: <GridThumbnail /> },
+        ],
+      },
+      {
+        title: "Matrix",
+        items: [
+          { label: "2x2", thumbnail: <GridThumbnail /> },
+          { label: "Quadrant", thumbnail: <BulletsThumbnail /> },
+        ],
+      },
+    ],
+  },
+  media: {
+    sections: [
+      {
+        title: "Image",
+        items: [
+          { label: "Full bleed", thumbnail: <VerticalThumbnail /> },
+          { label: "With caption", thumbnail: <HorizontalThumbnail /> },
+          { label: "Side by side", thumbnail: <GridThumbnail /> },
+        ],
+      },
+      {
+        title: "Video",
+        items: [
+          { label: "Embedded", thumbnail: <GridThumbnail /> },
+          { label: "With thumbnail", thumbnail: <BulletsThumbnail /> },
+        ],
+      },
+      {
+        title: "Gallery",
+        items: [
+          { label: "Grid", thumbnail: <GridThumbnail /> },
+          { label: "Carousel", thumbnail: <HorizontalThumbnail /> },
+          { label: "Masonry", thumbnail: <VerticalThumbnail /> },
+        ],
+      },
+    ],
+  },
+  people: {
+    sections: [
+      {
+        title: "Team",
+        items: [
+          { label: "Cards", thumbnail: <HorizontalThumbnail /> },
+          { label: "Grid", thumbnail: <GridThumbnail /> },
+          { label: "List", thumbnail: <BulletsThumbnail /> },
+        ],
+      },
+      {
+        title: "Profile",
+        items: [
+          { label: "Centered", thumbnail: <VerticalThumbnail /> },
+          { label: "Side", thumbnail: <HorizontalThumbnail /> },
+        ],
+      },
+      {
+        title: "Testimonial",
+        items: [
+          { label: "With photo", thumbnail: <GridThumbnail /> },
+          { label: "Quote style", thumbnail: <BulletsThumbnail /> },
+        ],
+      },
+    ],
+  },
+  quote: {
+    sections: [
+      {
+        title: "Single quote",
+        items: [
+          { label: "Centered", thumbnail: <VerticalThumbnail /> },
+          { label: "Left aligned", thumbnail: <HorizontalThumbnail /> },
+          { label: "With background", thumbnail: <GridThumbnail /> },
+        ],
+      },
+      {
+        title: "Multiple quotes",
+        items: [
+          { label: "Carousel", thumbnail: <HorizontalThumbnail /> },
+          { label: "Grid", thumbnail: <GridThumbnail /> },
+          { label: "Stacked", thumbnail: <BulletsThumbnail /> },
+        ],
+      },
+    ],
+  },
 }
 
 function ObjectSelectorModal({
@@ -896,12 +1140,17 @@ function ObjectSelectorModal({
   const [view, setView] = useState<"selector" | "describe">("selector")
   const [selectedThumbnail, setSelectedThumbnail] = useState<React.ReactNode>(null)
   const [description, setDescription] = useState("")
+  const [activeSection, setActiveSection] = useState<string | null>(null)
   const searchRef = useRef<HTMLInputElement>(null)
   const describeRef = useRef<HTMLTextAreaElement>(null)
+  const contentScrollRef = useRef<HTMLDivElement>(null)
+  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
   useEffect(() => {
     if (open) {
       setActiveCategory(initialCategory)
+      const initialSections = OBJECT_VARIANTS[initialCategory].sections
+      setActiveSection(initialSections.length > 1 ? initialSections[0].title : null)
       setSearch("")
       setView("selector")
       setSelectedThumbnail(null)
@@ -928,6 +1177,39 @@ function ObjectSelectorModal({
   const directionRef = useRef<1 | -1 | 0>(0)
   const hasTransitioned = useRef(false)
 
+  const isScrollingRef = useRef(false)
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null)
+
+  const scrollToSection = (sectionTitle: string) => {
+    setActiveSection(sectionTitle)
+    isScrollingRef.current = true
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current)
+    scrollTimeoutRef.current = setTimeout(() => { isScrollingRef.current = false }, 600)
+    const el = sectionRefs.current[sectionTitle]
+    if (el && contentScrollRef.current) {
+      contentScrollRef.current.scrollTo({ top: el.offsetTop - 8, behavior: "smooth" })
+    }
+  }
+
+  const handleContentScroll = () => {
+    if (isScrollingRef.current || !contentScrollRef.current) return
+    const container = contentScrollRef.current
+    const scrollTop = container.scrollTop
+    let closest: string | null = null
+    let closestDist = Infinity
+    for (const [title, el] of Object.entries(sectionRefs.current)) {
+      if (!el) continue
+      const dist = Math.abs(el.offsetTop - scrollTop - 12)
+      if (dist < closestDist) {
+        closestDist = dist
+        closest = title
+      }
+    }
+    if (closest && closest !== activeSection) {
+      setActiveSection(closest)
+    }
+  }
+
   const handleVariantSelect = (thumbnail: React.ReactNode) => {
     hasTransitioned.current = true
     directionRef.current = 1
@@ -943,24 +1225,28 @@ function ObjectSelectorModal({
 
   const variants = OBJECT_VARIANTS[activeCategory]
 
-  const selectorWidth = 780
-  const selectorHeight = 476 // 36px header + 4px gap + 432px content + 4px padding
-  const describeWidth = 600
-  const describeHeight = 280
+  const describeWidth = 800
+  const describeHeight = 400
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogPortal>
-        <div className="fixed inset-0 z-50" onClick={() => onOpenChange(false)} />
-        <div className="fixed inset-x-0 bottom-[52px] z-50 flex justify-center">
+        <motion.div
+          className="fixed inset-0 z-50 bg-black/60"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: CONTENT_DURATION, ease: easeOut }}
+          onClick={() => onOpenChange(false)}
+        />
+        <div className="fixed inset-0 z-50 flex items-end justify-center p-10">
           <motion.div
             initial={{ opacity: 0, y: 6, scale: 0.98 }}
             animate={{
               opacity: 1,
               y: 0,
               scale: 1,
-              width: view === "selector" ? selectorWidth : describeWidth,
-              height: view === "selector" ? selectorHeight : describeHeight,
+              width: view === "selector" ? "100%" : describeWidth,
+              height: view === "selector" ? "100%" : describeHeight,
             }}
             transition={{
               opacity: { duration: CONTENT_DURATION, ease: easeOut },
@@ -969,7 +1255,7 @@ function ObjectSelectorModal({
               width: { duration: hasTransitioned.current ? MORPH_DURATION : 0, ease: easeInOut },
               height: { duration: hasTransitioned.current ? MORPH_DURATION : 0, ease: easeInOut },
             }}
-            className="flex flex-col gap-1 rounded-lg bg-bg-secondary p-1 shadow-elevation-3"
+            className="flex flex-col gap-1 rounded-[var(--radius-xl)] bg-bg-secondary p-1 shadow-elevation-3"
             onClick={(e) => e.stopPropagation()}
           >
             <AnimatePresence mode="wait" initial={false}>
@@ -980,7 +1266,7 @@ function ObjectSelectorModal({
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -SLIDE_DISTANCE }}
                   transition={{ duration: CONTENT_DURATION, ease: easeOut }}
-                  className="flex flex-1 flex-col gap-1"
+                  className="flex min-h-0 flex-1 flex-col gap-1"
                 >
                   {/* Search bar */}
                   <div className="flex items-center gap-2 px-3 pr-2.5">
@@ -1001,25 +1287,64 @@ function ObjectSelectorModal({
                   </div>
 
                   {/* Main content */}
-                  <div className="flex flex-1 overflow-hidden rounded-[var(--radius-md)] bg-bg-elevated shadow-elevation-2">
-                    {/* Left sidebar */}
-                    <div className="flex w-[160px] shrink-0 flex-col gap-2 overflow-y-auto p-2">
+                  <div className="flex min-h-0 flex-1 overflow-hidden rounded-[var(--radius-md)] bg-bg-elevated shadow-elevation-2">
+                    {/* Left sidebar — accordion navigation */}
+                    <div className="flex w-[160px] shrink-0 flex-col overflow-y-auto p-2">
                       {OBJECT_CATEGORIES.map((cat) => {
                         const Icon = cat.icon
+                        const isActive = activeCategory === cat.id
+                        const sections = OBJECT_VARIANTS[cat.id].sections
                         return (
-                          <button
-                            key={cat.id}
-                            onClick={() => setActiveCategory(cat.id)}
-                            className={cn(
-                              "flex items-center gap-2 rounded px-2 py-1.5 text-sm transition-colors",
-                              activeCategory === cat.id
-                                ? "bg-bg-elevated-hover text-text-primary"
-                                : "text-text-primary hover:bg-bg-elevated-hover"
-                            )}
-                          >
-                            <Icon weight="regular" className="size-4 shrink-0 text-text-secondary" />
-                            {cat.label}
-                          </button>
+                          <div key={cat.id} className="flex flex-col">
+                            <button
+                              onClick={() => { setActiveCategory(cat.id); setActiveSection(sections.length > 1 ? sections[0].title : null) }}
+                              className={cn(
+                                "flex items-center gap-2 rounded px-2 py-1.5 text-sm transition-colors",
+                                isActive
+                                  ? "bg-bg-tertiary text-text-primary"
+                                  : "text-text-primary hover:bg-bg-elevated-hover"
+                              )}
+                            >
+                              <Icon weight="regular" className="size-4 shrink-0 text-text-secondary" />
+                              <span className="flex-1 text-left">{cat.label}</span>
+                              <CaretRight
+                                weight="regular"
+                                className={cn(
+                                  "size-4 shrink-0 text-text-tertiary transition-transform duration-200",
+                                  isActive && "rotate-90"
+                                )}
+                              />
+                            </button>
+                            <AnimatePresence initial={false}>
+                              {isActive && sections.length > 1 && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.2, ease: [0.19, 1, 0.22, 1] }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="flex flex-col gap-1 pb-1">
+                                    {sections.map((section) => (
+                                      <button
+                                        key={section.title}
+                                        onClick={() => scrollToSection(section.title)}
+                                        className={cn(
+                                          "flex items-center gap-2 rounded px-2 py-1.5 text-left text-sm transition-colors",
+                                          activeSection === section.title
+                                            ? "text-text-brand"
+                                            : "text-text-primary hover:bg-bg-elevated-hover"
+                                        )}
+                                      >
+                                        <span className="size-4 shrink-0" />
+                                        {section.title}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
                         )
                       })}
                     </div>
@@ -1028,31 +1353,30 @@ function ObjectSelectorModal({
                     <div className="w-px bg-border-secondary" />
 
                     {/* Right content */}
-                    <div className="flex-1 overflow-y-auto p-1">
-                      <div className="flex flex-col gap-2 px-1">
+                    <div ref={contentScrollRef} onScroll={handleContentScroll} className="flex-1 overflow-y-auto px-1 pt-3">
+                      <div className="flex flex-col px-1">
                         {variants.sections.map((section) => (
-                          <div key={section.title} className="flex flex-col">
-                            <div className="px-2 pb-2 pt-3">
+                          <div key={section.title} ref={(el) => { sectionRefs.current[section.title] = el }} className="flex flex-col">
+                            <div className="px-2 pb-2">
                               <span className="text-xs font-medium text-text-tertiary">{section.title}</span>
                             </div>
-                            <div className="flex flex-wrap gap-3 px-2">
+                            <div className="grid grid-cols-3 gap-3 px-2 pb-4">
                               {section.items.map((item) => (
                                 <button
                                   key={item.label}
                                   onClick={() => handleVariantSelect(item.thumbnail)}
-                                  className="flex w-[131px] flex-col items-center gap-2"
+                                  className="relative w-full"
                                 >
                                   <div
                                     className={cn(
-                                      "h-[80px] w-full overflow-hidden rounded-[var(--radius-md)] bg-bg-secondary",
+                                      "aspect-[16/9] w-full overflow-hidden rounded-[var(--radius-sm)] bg-bg-secondary",
                                       item.selected
                                         ? "shadow-[0px_0px_0px_0.75px_var(--border-brand),0px_0px_0px_2px_var(--border-brand-secondary)]"
-                                        : "shadow-elevation-2 hover:shadow-[0px_0px_0px_0.75px_var(--border-brand),0px_0px_0px_2px_var(--border-brand-secondary)]"
+                                        : "shadow-[0px_0px_0px_1px_var(--shadow-drop-2),0px_1px_2px_1px_var(--shadow-drop-1)] hover:shadow-[0px_0px_0px_0.75px_var(--border-brand),0px_0px_0px_2px_var(--border-brand-secondary)]"
                                     )}
                                   >
                                     {item.thumbnail}
                                   </div>
-                                  <span className="text-xs text-text-secondary">{item.label}</span>
                                 </button>
                               ))}
                             </div>
@@ -1093,7 +1417,7 @@ function ObjectSelectorModal({
                   {/* Content area */}
                   <div className="relative flex flex-1 flex-col gap-4 overflow-hidden rounded-[var(--radius-md)] bg-bg-elevated p-3 shadow-elevation-2">
                     {/* Selected variant thumbnail */}
-                    <div className="h-[80px] w-[131px] shrink-0 overflow-hidden rounded-[var(--radius-md)] bg-bg-secondary shadow-elevation-2">
+                    <div className="aspect-[16/9] w-[240px] shrink-0 overflow-hidden rounded-[var(--radius-md)] bg-bg-secondary shadow-elevation-2">
                       {selectedThumbnail}
                     </div>
 
