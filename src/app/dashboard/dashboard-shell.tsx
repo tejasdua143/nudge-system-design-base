@@ -21,6 +21,7 @@ import {
   Question,
   Bell,
   Plus,
+  UserPlus,
   Gear,
   CreditCard,
   Check,
@@ -32,6 +33,7 @@ import {
   SignOut,
   Translate,
 } from "@phosphor-icons/react"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -63,6 +65,7 @@ import { CreditCardIcon } from "@phosphor-icons/react/dist/ssr"
 
 const MAIN_NAV = [
   { id: "home", label: "Home", icon: HouseSimple },
+  { id: "drafts", label: "Drafts", icon: File },
   { id: "starred", label: "Starred", icon: Star },
   { id: "brand-kit", label: "Brand kit", icon: BookOpen },
   { id: "templates", label: "Templates", icon: SquaresFour },
@@ -74,13 +77,7 @@ const PROJECTS_NAV = [
   { id: "design-team", label: "Design team", icon: UsersThree },
 ]
 
-const BOTTOM_NAV = [
-  { id: "drafts", label: "Drafts", icon: File },
-  { id: "shared-with-me", label: "Shared with me", icon: ShareNetwork },
-  { id: "hire-an-expert", label: "Hire an expert", icon: PencilRuler },
-  { id: "downloads", label: "Downloads", icon: DownloadSimple },
-  { id: "recently-deleted", label: "Recently deleted", icon: Trash },
-]
+const BOTTOM_NAV: typeof MAIN_NAV = []
 
 const SETTINGS_MAIN_NAV = [
   { id: "general", label: "General", icon: Gear },
@@ -114,7 +111,7 @@ function SideNavItem({
       onClick={onClick}
       title={label}
       className={cn(
-        "flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-lg p-2 text-sm leading-[var(--leading-body)] transition-colors",
+        "flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-[var(--radius-sm)] p-2 text-sm leading-[var(--leading-body)] transition-colors",
         active
           ? "bg-bg-brand-selected font-semibold text-text-brand"
           : "font-normal text-text-secondary hover:bg-bg-elevated-hover"
@@ -141,13 +138,13 @@ function DocumentCard({
 }) {
   return (
     <Link
-      href={`/dashboard/editor/${id}`}
-      className="relative flex flex-col overflow-hidden rounded-[var(--radius-card)] bg-bg-elevated pt-0.5 px-0.5 shadow-elevation-2 transition-shadow hover:shadow-elevation-3"
+      href="/new-editor"
+      className="relative flex flex-col overflow-hidden rounded-[var(--radius-sm)] bg-bg-elevated shadow-elevation-2 transition-shadow hover:shadow-elevation-3"
     >
       {/* Thumbnail */}
       <div
         className={cn(
-          "aspect-video w-full rounded-lg bg-gradient-to-br",
+          "aspect-video w-full bg-gradient-to-br",
           gradient
         )}
       />
@@ -357,179 +354,9 @@ export function DashboardShell() {
   const activeLabel = activeItem?.label ?? "Home"
 
   return (
-    <div className="flex h-screen flex-col bg-bg-secondary">
-      {/* ── Top Nav (h-14 / 56px) ──────────────────────────────────────── */}
-      <header className="flex h-14 shrink-0 items-center justify-between overflow-hidden">
-        {/* Left: Workspace (w-260) */}
-        <div className="flex w-[52px] lg:w-[260px] flex-col items-center lg:items-start justify-center px-2 lg:px-3 py-2">
-          <Popover open={wsMenuOpen} onOpenChange={setWsMenuOpen}>
-            <PopoverTrigger asChild>
-              <button className="flex w-full cursor-pointer items-center justify-center lg:justify-start gap-2 rounded-xl py-[3px] pl-1 pr-1.5 transition-colors hover:bg-bg-elevated-hover">
-                {/* Avatar */}
-                <div className="relative size-[34px] shrink-0">
-                  <div className="absolute left-[3px] top-[3px] size-7 overflow-hidden rounded-[var(--radius-logo)] border-[1.5px] border-white bg-paids-brand-500">
-                    <span className="flex size-full items-center justify-center text-[length:var(--text-2xs)] font-bold text-white">
-                      F
-                    </span>
-                  </div>
-                  <div className="absolute bottom-px left-1/2 flex h-3 w-[30px] -translate-x-1/2 items-center justify-center rounded-[var(--radius-logo)] border-[1.5px] border-white/80 bg-bg-brand px-1 backdrop-blur-sm">
-                    <span className="text-[length:var(--text-2xs)] font-bold leading-none text-white">
-                      DEV
-                    </span>
-                  </div>
-                </div>
-                {/* Text */}
-                <div className="hidden lg:flex flex-1 flex-col gap-0.5 text-xs font-medium leading-[var(--leading-snug)] w-full">
-                  <span className="text-text-primary text-left">Foursquare</span>
-                  <span className="text-text-brand text-left">Enterprise plan</span>
-                </div>
-                {/* Dropdown caret */}
-                <div className="hidden lg:flex items-center rounded-md bg-bg-tertiary p-1">
-                  <CaretDown
-                    weight="bold"
-                    className={cn(
-                      "size-4 text-text-secondary transition-transform duration-200",
-                      wsMenuOpen && "rotate-180"
-                    )}
-                  />
-                </div>
-              </button>
-            </PopoverTrigger>
-            <PopoverContent
-              align="start"
-              sideOffset={4}
-              className="flex w-59 overflow-hidden px-0 py-2 flex-col gap-2 rounded-xl border-none bg-bg-elevated shadow-elevation-3"
-            >
-              {/* Inner shadow overlay */}
-              <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit]" />
-
-              {/* Invite button */}
-              <div className="px-2 w-full">
-                <Button
-                variant={"secondary"}
-                 className="w-full">Invite new member</Button>
-              </div>
-
-              {/* Settings items */}
-              <div className="flex px-2 gap-1 flex-col">
-                <button
-                  onClick={() => {
-                    setIsSettingsMode(true)
-                    setActiveSettingsPage("general")
-                    setWsMenuOpen(false)
-                  }}
-                  className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover"
-                >
-                  <GearIcon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
-                  <span>Workspace settings</span>
-                </button>
-                <button className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
-                  <CreditCardIcon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
-                  <span>Billing and subscriptions</span>
-                </button>
-              </div>
-
-              <Separator />
-
-              {/* Workspace section */}
-              <div className="px-4 pt-1">
-                <p className="text-sm text-text-tertiary">Workspace</p>
-              </div>
-              <div className="flex px-2 gap-1 flex-col">
-                <button className="flex items-center gap-2 rounded-md p-2 transition-colors hover:bg-bg-elevated-hover">
-                  <div className="flex size-5 shrink-0 items-center justify-center rounded bg-orange-500 text-[length:var(--text-2xs)] font-medium text-white">
-                    J
-                  </div>
-                  <span className="flex-1 text-left text-sm text-text-primary">
-                    John&apos;s workspace
-                  </span>
-                </button>
-                <button className="flex items-center gap-2 rounded-md bg-bg-brand-selected p-2">
-                  <div className="flex size-5 shrink-0 items-center justify-center rounded bg-[var(--gradient-accent)] text-[length:var(--text-2xs)] font-medium text-white">
-                    F
-                  </div>
-                  <span className="flex-1 text-left text-sm text-text-primary">
-                    Foursquare
-                  </span>
-                  <Check weight="bold" className="size-5 text-text-brand" />
-                </button>
-                <button className="flex items-center gap-2 rounded-md p-2 transition-colors hover:bg-bg-elevated-hover">
-                  <div className="flex size-5 shrink-0 items-center justify-center rounded bg-bg-tertiary">
-                    <Plus weight="bold" className="size-3.5 text-text-secondary" />
-                  </div>
-                  <span className="text-sm text-text-primary">
-                    Create or Join workspace
-                  </span>
-                </button>
-              </div>
-            </PopoverContent>
-          </Popover>
-        </div>
-
-        {/* Right: Actions */}
-        <div className="flex items-center gap-3 lg:gap-5 px-4 lg:px-6 py-3">
-          <button className="rounded-lg p-1 text-text-primary transition-colors hover:text-text-brand">
-            <Question weight="duotone" className="size-5" />
-          </button>
-          <button className="rounded-lg p-1 text-text-primary transition-colors hover:text-text-brand">
-            <Bell weight="duotone" className="size-5" />
-          </button>
-          <Popover open={accountMenuOpen} onOpenChange={setAccountMenuOpen}>
-            <PopoverTrigger asChild>
-              <button className="size-7 overflow-hidden rounded-full border-[1.5px] border-white bg-paids-neutral-300 transition-opacity hover:opacity-80">
-                <span className="flex size-full items-center justify-center text-[length:var(--text-2xs)] font-medium text-text-secondary">
-                  JD
-                </span>
-              </button>
-            </PopoverTrigger>
-            <PopoverContent
-              align="end"
-              sideOffset={4}
-              className="flex w-[240px] flex-col gap-2 overflow-hidden rounded-xl border-none bg-bg-elevated px-0 py-2 shadow-elevation-3"
-            >
-              {/* User info */}
-              <div className="px-2">
-                <div className="flex items-start gap-2 rounded-md p-2">
-                  <Gear weight="duotone" className="mt-0.5 size-5 shrink-0 text-text-secondary" />
-                  <div className="flex flex-col gap-1">
-                    <span className="text-sm leading-[var(--leading-body)] text-text-primary">John doe</span>
-                    <span className="text-xs leading-[var(--leading-snug)] text-text-secondary">jd@gmail.com</span>
-                  </div>
-                </div>
-              </div>
-
-              <Separator />
-
-              {/* Menu items */}
-              <div className="flex flex-col gap-2 px-2">
-                <button className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
-                  <Translate weight="duotone" className="size-5 shrink-0 text-text-secondary" />
-                  <span>Language</span>
-                </button>
-                <div className="flex items-center pr-2">
-                  <div className="flex flex-1 items-center gap-2 rounded-md p-2">
-                    <Moon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
-                    <span className="text-sm text-text-primary">Dark mode</span>
-                  </div>
-                  <Switch
-                    checked={theme === "dark"}
-                    onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
-                  />
-                </div>
-                <button className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
-                  <SignOut weight="duotone" className="size-5 shrink-0 text-text-secondary" />
-                  <span>Sign out</span>
-                </button>
-              </div>
-            </PopoverContent>
-          </Popover>
-        </div>
-      </header>
-
-      {/* ── Main Content Shell (elevation-2 outer container) ───────────── */}
-      <div className="relative mx-0 flex min-h-0 flex-1 overflow-hidden rounded-xl bg-bg-secondary pt-1 pr-1 pb-1 shadow-elevation-2">
-        {/* ── Sidebar (w-260) ────────────────────────────────────────── */}
-        <aside className="relative w-[52px] lg:w-[260px] shrink-0 overflow-hidden rounded-2xl">
+    <div className="flex h-screen bg-bg-secondary">
+      {/* ── Sidebar (w-260) ────────────────────────────────────────── */}
+      <aside className="relative w-[52px] lg:w-[220px] shrink-0 overflow-hidden">
           {/* Settings sidebar - slides in from right */}
           <div
             className={cn(
@@ -552,18 +379,104 @@ export function DashboardShell() {
             )}
           >
             <div className="flex flex-col gap-4">
-              {/* Search - icon-only on md, full on lg+ */}
-              <div className="px-2 lg:px-4 pt-3">
-                <div className="relative hidden lg:block">
-                  <MagnifyingGlass className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-tertiary" />
-                  <Input placeholder="Search" className="pl-9 text-sm" />
-                </div>
-                <button className="flex lg:hidden w-full items-center justify-center rounded-lg p-2 text-text-secondary transition-colors hover:bg-bg-elevated-hover" title="Search">
-                  <MagnifyingGlass weight="duotone" className="size-5" />
-                </button>
-              </div>
+              {/* Workspace switcher */}
+              <div className="flex h-14 items-center border-b border-border-secondary px-2">
+                <Popover open={wsMenuOpen} onOpenChange={setWsMenuOpen}>
+                  <PopoverTrigger asChild>
+                    <button className="flex w-full cursor-pointer items-center justify-center lg:justify-start gap-2 rounded-[var(--radius-lg)] py-[3px] pl-1 pr-1.5 transition-colors hover:bg-bg-elevated-hover">
+                      {/* Avatar */}
+                      <div className="flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius-logo)] bg-paids-brand-500">
+                        <span className="text-[length:var(--text-2xs)] font-bold text-white">
+                          F
+                        </span>
+                      </div>
+                      {/* Text */}
+                      <div className="hidden lg:flex flex-1 items-center gap-1.5 text-sm font-medium leading-[var(--leading-body)] w-full">
+                        <span className="text-text-primary text-left">Foursquare</span>
+                        <Badge className="px-1.5 py-0 text-[10px]">PRO</Badge>
+                      </div>
+                      {/* Dropdown caret */}
+                      <div className="hidden lg:flex items-center rounded-sm bg-bg-tertiary p-0.5">
+                        <CaretDown
+                          weight="bold"
+                          className={cn(
+                            "size-3.5 text-text-secondary transition-transform duration-200",
+                            wsMenuOpen && "rotate-180"
+                          )}
+                        />
+                      </div>
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    align="start"
+                    sideOffset={4}
+                    className="flex w-59 overflow-hidden px-0 py-2 flex-col gap-2 rounded-[var(--radius-md)] border-none bg-bg-elevated shadow-elevation-3"
+                  >
+                    {/* Inner shadow overlay */}
+                    <div className="pointer-events-none absolute inset-0 z-10 rounded-[inherit]" />
 
-              <Separator className="lg:hidden" />
+                    {/* Invite button */}
+                    <div className="px-2 w-full">
+                      <Button
+                        variant={"secondary"}
+                        className="w-full">Invite new member</Button>
+                    </div>
+
+                    {/* Settings items */}
+                    <div className="flex px-2 gap-1 flex-col">
+                      <button
+                        onClick={() => {
+                          setIsSettingsMode(true)
+                          setActiveSettingsPage("general")
+                          setWsMenuOpen(false)
+                        }}
+                        className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover"
+                      >
+                        <GearIcon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
+                        <span>Workspace settings</span>
+                      </button>
+                      <button className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+                        <CreditCardIcon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
+                        <span>Billing and subscriptions</span>
+                      </button>
+                    </div>
+
+                    <Separator />
+
+                    {/* Workspace section */}
+                    <div className="px-4 pt-1">
+                      <p className="text-sm text-text-tertiary">Workspace</p>
+                    </div>
+                    <div className="flex px-2 gap-1 flex-col">
+                      <button className="flex items-center gap-2 rounded-md p-2 transition-colors hover:bg-bg-elevated-hover">
+                        <div className="flex size-5 shrink-0 items-center justify-center rounded bg-orange-500 text-[length:var(--text-2xs)] font-medium text-white">
+                          J
+                        </div>
+                        <span className="flex-1 text-left text-sm text-text-primary">
+                          John&apos;s workspace
+                        </span>
+                      </button>
+                      <button className="flex items-center gap-2 rounded-md bg-bg-brand-selected p-2">
+                        <div className="flex size-5 shrink-0 items-center justify-center rounded bg-[var(--gradient-accent)] text-[length:var(--text-2xs)] font-medium text-white">
+                          F
+                        </div>
+                        <span className="flex-1 text-left text-sm text-text-primary">
+                          Foursquare
+                        </span>
+                        <Check weight="bold" className="size-5 text-text-brand" />
+                      </button>
+                      <button className="flex items-center gap-2 rounded-md p-2 transition-colors hover:bg-bg-elevated-hover">
+                        <div className="flex size-5 shrink-0 items-center justify-center rounded bg-bg-tertiary">
+                          <Plus weight="bold" className="size-3.5 text-text-secondary" />
+                        </div>
+                        <span className="text-sm text-text-primary">
+                          Create or Join workspace
+                        </span>
+                      </button>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+              </div>
 
               {/* Main nav group */}
               <nav className="flex flex-col gap-0.5 px-2">
@@ -619,26 +532,96 @@ export function DashboardShell() {
                 ))}
               </div>
 
-              <Separator />
+            </div>
 
-              {/* Bottom nav group */}
-              <nav className="flex flex-col gap-0.5 px-2">
-                {BOTTOM_NAV.map((item) => (
-                  <SideNavItem
-                    key={item.id}
-                    icon={item.icon}
-                    label={item.label}
-                    active={activePage === item.id}
-                    onClick={() => setActivePage(item.id)}
-                  />
-                ))}
-              </nav>
+            {/* Sticky bottom actions */}
+            <div className="mt-auto flex flex-col gap-0.5 border-t border-border-secondary px-2 py-2">
+              <button
+                onClick={() => {
+                  setIsSettingsMode(true)
+                  setActiveSettingsPage("general")
+                }}
+                className="flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-[var(--radius-sm)] p-2 text-sm text-text-secondary transition-colors hover:bg-bg-elevated-hover"
+              >
+                <Gear weight="regular" className="size-5 shrink-0" />
+                <span className="hidden lg:inline truncate">Settings</span>
+              </button>
+              <button
+                className="flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-[var(--radius-sm)] p-2 text-sm text-text-secondary transition-colors hover:bg-bg-elevated-hover"
+              >
+                <UserPlus weight="regular" className="size-5 shrink-0" />
+                <span className="hidden lg:inline truncate">Invite member</span>
+              </button>
             </div>
           </div>
         </aside>
 
+      {/* ── Right container (header + main) ─────────────────────────── */}
+      <div id="right-container" className="flex min-h-0 flex-1 flex-col border-l border-border-secondary bg-bg-secondary">
+        {/* ── Top Nav (h-14 / 56px) ──────────────────────────────────── */}
+        <header className="flex h-14 shrink-0 items-center justify-end overflow-hidden border-b border-border-secondary">
+          {/* Right: Actions */}
+          <div className="flex items-center gap-3 lg:gap-5 px-4 lg:px-6 py-3">
+            <button className="rounded-lg p-1 text-text-primary transition-colors hover:text-text-brand">
+              <MagnifyingGlass weight="regular" className="size-5" />
+            </button>
+            <button className="rounded-lg p-1 text-text-primary transition-colors hover:text-text-brand">
+              <Bell weight="regular" className="size-5" />
+            </button>
+            <Popover open={accountMenuOpen} onOpenChange={setAccountMenuOpen}>
+              <PopoverTrigger asChild>
+                <button className="size-7 overflow-hidden rounded-full border-[1.5px] border-white bg-paids-neutral-300 transition-opacity hover:opacity-80">
+                  <span className="flex size-full items-center justify-center text-[length:var(--text-2xs)] font-medium text-text-secondary">
+                    JD
+                  </span>
+                </button>
+              </PopoverTrigger>
+              <PopoverContent
+                align="end"
+                sideOffset={4}
+                className="flex w-[240px] flex-col gap-2 overflow-hidden rounded-[var(--radius-md)] border-none bg-bg-elevated px-0 py-2 shadow-elevation-3"
+              >
+                {/* User info */}
+                <div className="px-2">
+                  <div className="flex items-start gap-2 rounded-md p-2">
+                    <Gear weight="duotone" className="mt-0.5 size-5 shrink-0 text-text-secondary" />
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm leading-[var(--leading-body)] text-text-primary">John doe</span>
+                      <span className="text-xs leading-[var(--leading-snug)] text-text-secondary">jd@gmail.com</span>
+                    </div>
+                  </div>
+                </div>
+
+                <Separator />
+
+                {/* Menu items */}
+                <div className="flex flex-col gap-2 px-2">
+                  <button className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+                    <Translate weight="duotone" className="size-5 shrink-0 text-text-secondary" />
+                    <span>Language</span>
+                  </button>
+                  <div className="flex items-center pr-2">
+                    <div className="flex flex-1 items-center gap-2 rounded-md p-2">
+                      <Moon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
+                      <span className="text-sm text-text-primary">Dark mode</span>
+                    </div>
+                    <Switch
+                      checked={theme === "dark"}
+                      onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+                    />
+                  </div>
+                  <button className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+                    <SignOut weight="duotone" className="size-5 shrink-0 text-text-secondary" />
+                    <span>Sign out</span>
+                  </button>
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
+        </header>
+
         {/* ── Content Area (elevation-3, bg-primary) ─────────────────── */}
-        <main className="relative flex flex-1 flex-col overflow-y-auto overflow-y-[overlay] rounded-lg bg-bg-primary shadow-elevation-2">
+        <main className="relative flex min-h-0 flex-1 flex-col overflow-y-auto overflow-y-[overlay] bg-bg-primary">
           <div
             key={contentKey}
             ref={contentRef}
