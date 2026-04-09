@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${GeistMono.variable} ${GeistPixelSquare.variable} antialiased`}>
+      <body className={`${inter.variable} ${GeistMono.variable} ${GeistPixelSquare.variable} font-medium antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <TooltipProvider>{children}</TooltipProvider>
           <Toaster />

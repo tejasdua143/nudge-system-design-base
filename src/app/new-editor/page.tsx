@@ -187,7 +187,7 @@ function EditorTopBar() {
       <div className="flex items-center rounded-[var(--radius-md)] bg-bg-elevated shadow-elevation-2">
         <div className="flex items-center p-1">
           <Link href="/dashboard" className="flex size-7 items-center justify-center rounded text-text-secondary transition-colors hover:bg-bg-elevated-hover hover:text-text-primary">
-            <HouseSimple className="size-4" />
+            <HouseSimple weight="bold" className="size-4" />
           </Link>
         </div>
         <div className="self-stretch w-px bg-border-secondary" />
@@ -195,13 +195,13 @@ function EditorTopBar() {
         <div className="self-stretch w-px bg-border-secondary" />
         <div className="flex items-center p-1">
           <ToolbarIconButton>
-            <ArrowUUpLeft className="size-4" />
+            <ArrowUUpLeft weight="bold" className="size-4" />
           </ToolbarIconButton>
         </div>
         <div className="self-stretch w-px bg-border-secondary" />
         <div className="flex items-center p-1">
           <ToolbarIconButton>
-            <ArrowUUpRight className="size-4" />
+            <ArrowUUpRight weight="bold" className="size-4" />
           </ToolbarIconButton>
         </div>
       </div>
@@ -246,7 +246,7 @@ function EditorTopBar() {
                           )}
                           {remainingCount > 0 && !spotlightedInOverflow && (
                             <Avatar key="overflow-count" className="size-5">
-                              <AvatarFallback className="bg-paids-neutral-200 text-[8px] text-text-primary">+{remainingCount}</AvatarFallback>
+                              <AvatarFallback className="bg-paids-neutral-200 text-[8px] font-semibold text-text-primary">+{remainingCount}</AvatarFallback>
                             </Avatar>
                           )}
                         </>
@@ -312,14 +312,14 @@ function EditorTopBar() {
           <div className="self-stretch w-px bg-border-secondary" />
           {/* Share — Figma: p-[4px] container, px-[6px] py-[4px] insert */}
           <div className="flex items-center p-1">
-            <button className="flex items-center rounded px-1.5 py-1 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+            <button className="flex items-center rounded px-1.5 py-1 text-sm font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover">
               Share
             </button>
           </div>
           <div className="self-stretch w-px bg-border-secondary" />
           {/* Present — Figma: p-[4px] container, px-[8px] py-[4px] insert, gap-[8px] */}
           <div className="flex items-center p-1">
-            <button className="flex items-center rounded px-2 py-1 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+            <button className="flex items-center rounded px-2 py-1 text-sm font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover">
               Present
             </button>
           </div>
@@ -335,11 +335,11 @@ function EditorTopBar() {
                 direction="left"
                 color="var(--text-primary)"
                 shineColor="var(--text-primary-inverted)"
-                className="text-sm"
+                className="text-sm font-medium"
               />
             </button>
-            <Button variant="primary" size="sm" className="h-7 gap-1.5 rounded px-2.5 font-normal">
-              <MicrosoftPowerpointLogo weight="regular" className="size-4" />
+            <Button variant="primary" size="sm" className="h-7 gap-1.5 rounded px-2.5 font-medium">
+              <MicrosoftPowerpointLogo weight="bold" className="size-4" />
               Export as PPT
             </Button>
           </div>
@@ -470,7 +470,7 @@ function ListSlideRow({
               transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
             />
           ) : isHovered ? (
-            <DotsSixVertical className="size-4 text-text-secondary" />
+            <DotsSixVertical weight="bold" className="size-4 text-text-secondary" />
           ) : (
             <span
               className={cn(
@@ -623,7 +623,7 @@ function Filmstrip({ activeSlide, onSlideSelect, slides, onNewSlideWithPrompt, g
                 onClick={() => setMode("filmstrip")}
                 className="flex items-center gap-1.5 whitespace-nowrap text-text-primary transition-colors hover:text-text-secondary"
               >
-                <FilmStripIcon className="size-4 -rotate-90" />
+                <FilmStripIcon weight="bold" className="size-4 -rotate-90" />
                 <span className="text-xs leading-none text-text-tertiary">
                   <span className="text-text-brand">{slides.findIndex((s) => s.id === activeSlide) + 1}</span>/{slides.length}
                 </span>
@@ -648,7 +648,7 @@ function Filmstrip({ activeSlide, onSlideSelect, slides, onNewSlideWithPrompt, g
                       mode === "list" ? "text-text-brand" : "text-muted-foreground"
                     )}
                   >
-                    <ListBullets className="size-4" />
+                    <ListBullets weight="bold" className="size-4" />
                   </button>
                   <div className="h-3 w-px bg-border-secondary" />
                   <button
@@ -658,14 +658,14 @@ function Filmstrip({ activeSlide, onSlideSelect, slides, onNewSlideWithPrompt, g
                       mode === "filmstrip" ? "text-text-brand" : "text-muted-foreground"
                     )}
                   >
-                    <FilmStripIcon className="size-4 -rotate-90" />
+                    <FilmStripIcon weight="bold" className="size-4 -rotate-90" />
                   </button>
                 </div>
                 <button
                   onClick={() => setMode("collapsed")}
                   className="flex size-5 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-bg-elevated-hover"
                 >
-                  <ArrowsInSimple className="size-4" />
+                  <ArrowsInSimple weight="bold" className="size-4" />
                 </button>
               </div>
 
@@ -1954,8 +1954,8 @@ function BottomBar({ onObjectSelect, onInsertWithPrompt, onThemeToggle, onRemixT
         <div className="flex items-center p-1">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
-                <Plus weight="regular" className="size-4" />
+              <button className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-sm font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover">
+                <Plus weight="bold" className="size-4" />
                 Insert
               </button>
             </DropdownMenuTrigger>
@@ -2021,9 +2021,9 @@ function BottomBar({ onObjectSelect, onInsertWithPrompt, onThemeToggle, onRemixT
         <div className="flex items-center p-1">
           <button
             onClick={onRemixToggle}
-            className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover"
+            className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-sm font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover"
           >
-            <ArrowsClockwise weight="regular" className="size-4" />
+            <ArrowsClockwise weight="bold" className="size-4" />
             Remix
           </button>
         </div>
@@ -2032,9 +2032,9 @@ function BottomBar({ onObjectSelect, onInsertWithPrompt, onThemeToggle, onRemixT
         <div className="flex items-center p-1">
           <button
             onClick={onThemeToggle}
-            className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover"
+            className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-sm font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover"
           >
-            <Palette weight="regular" className="size-4" />
+            <Palette weight="bold" className="size-4" />
             Theme
           </button>
         </div>
@@ -2116,15 +2116,15 @@ function ZoomPanel() {
     <div className="absolute bottom-3 right-3 flex w-9 flex-col items-center overflow-hidden rounded-[var(--radius-md)] bg-bg-elevated shadow-elevation-2">
       {/* Help */}
       <button className="flex w-full items-center justify-center p-2.5 transition-colors hover:bg-bg-elevated-hover">
-        <Question weight="regular" className="size-4 text-text-primary" />
+        <Question weight="bold" className="size-4 text-text-primary" />
       </button>
       {/* Divider */}
       <div className="h-px w-full bg-border-secondary" />
       {/* Zoom */}
       <button className="flex w-full items-center p-0.5 transition-colors hover:bg-bg-elevated-hover">
         <div className="flex w-full flex-col items-center justify-center gap-1.5 rounded py-1.5">
-          <MagnifyingGlass weight="regular" className="size-4 text-text-primary" />
-          <span className="text-[10px] leading-none text-text-primary">100%</span>
+          <MagnifyingGlass weight="bold" className="size-4 text-text-primary" />
+          <span className="text-[10px] font-medium leading-none text-text-primary">100%</span>
         </div>
       </button>
     </div>
