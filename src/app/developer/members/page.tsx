@@ -46,7 +46,7 @@ export default function MembersPage() {
     <main className="flex flex-1 flex-col overflow-hidden rounded-xl bg-bg-primary shadow-elevation-3">
       {/* Header */}
       <div className="flex h-[63px] items-center justify-between border-b border-border-secondary px-6">
-        <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+        <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
           Members
         </h1>
         <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) setEmail(""); }}>
@@ -64,7 +64,7 @@ export default function MembersPage() {
               </DialogDescription>
             </DialogHeader>
             <div className="flex flex-col gap-2 px-4 py-2">
-              <label htmlFor="invite-email" className="text-sm font-medium text-text-primary">
+              <label htmlFor="invite-email" className="text-[length:var(--text-base)] font-medium text-text-primary">
                 Email address
               </label>
               <Input
@@ -91,7 +91,7 @@ export default function MembersPage() {
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto flex w-full max-w-[768px] flex-col gap-6 px-6 py-6">
           {/* Description */}
-          <p className="text-sm text-text-secondary">
+          <p className="text-[length:var(--text-base)] text-text-secondary">
             Manage your workspace members and their roles. Invite new members to
             collaborate on presentations and API integrations.
           </p>
@@ -99,7 +99,7 @@ export default function MembersPage() {
           {/* Table */}
           <div className="overflow-hidden rounded-lg shadow-elevation-1">
             {/* Table header */}
-            <div className="flex items-center bg-bg-secondary px-4 py-3 text-xs font-medium text-text-secondary">
+            <div className="flex items-center bg-bg-secondary px-4 py-3 text-[length:var(--text-xs)] font-medium text-text-secondary">
               <span className="flex-1">Member</span>
               <span className="w-[120px]">Role</span>
               <span className="w-[80px] text-right">Action</span>
@@ -110,11 +110,11 @@ export default function MembersPage() {
               {MEMBERS.map((member) => (
                 <div
                   key={member.email}
-                  className="flex items-center px-4 py-3 text-sm"
+                  className="flex items-center px-4 py-3 text-[length:var(--text-base)]"
                 >
                   <div className="flex flex-1 items-center gap-3">
                     <Avatar className="size-8">
-                      <AvatarFallback className="bg-bg-secondary text-xs">
+                      <AvatarFallback className="bg-bg-secondary text-[length:var(--text-xs)]">
                         {member.initials}
                       </AvatarFallback>
                     </Avatar>
@@ -122,7 +122,7 @@ export default function MembersPage() {
                       <span className="font-medium text-text-primary">
                         {member.name}
                       </span>
-                      <span className="text-xs text-text-tertiary">
+                      <span className="text-[length:var(--text-xs)] text-text-tertiary">
                         {member.email}
                       </span>
                     </div>

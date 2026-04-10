@@ -41,16 +41,16 @@
   --font-family-mono: var(--font-geist-mono);
 
   /* --- Font sizes --- */
-  --text-2xs: 0.625rem;   /* 10px — micro/caption */
-  --text-xs: 0.75rem;     /* 12px */
-  --text-sm: 0.8rem;      /* 12.8px — calendar/compact */
-  --text-base: 0.875rem;  /* 14px */
-  --text-md: 1rem;        /* 16px */
-  --text-lg: 1.125rem;    /* 18px */
-  --text-xl: 1.25rem;     /* 20px */
-  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xs: 0.5rem;     /* 8px — body-xxs */
+  --text-2xs: 0.625rem;   /* 10px — body-xs */
+  --text-xs: 0.75rem;     /* 12px — body-sm */
+  --text-base: 0.875rem;  /* 14px — body-base */
+  --text-md: 1rem;        /* 16px — body-lg */
+  --text-lg: 1.125rem;    /* 18px — body-xl / heading-lg */
+  --text-xl: 1.25rem;     /* 20px — heading-xl */
+  --text-2xl: 1.5rem;     /* 24px — heading-2xl */
   --text-3xl: 1.875rem;   /* 30px */
-  --text-4xl: 2.25rem;    /* 36px */
+  --text-4xl: 2.25rem;    /* 36px — heading-4xl */
 
   /* --- Font weights --- */
   --font-weight-regular: 400;

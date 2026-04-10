@@ -54,10 +54,10 @@ export default function ApiKeyPage() {
         {/* Header */}
         <div className="flex flex-col items-center gap-2.5 text-center">
           <Key className="size-8 text-text-brand" weight="duotone" />
-          <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+          <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
             Make your first API call
           </h1>
-          <p className="max-w-[280px] text-sm leading-[var(--leading-body)] text-text-secondary">
+          <p className="max-w-[280px] text-[length:var(--text-base)] leading-[var(--leading-body)] text-text-secondary">
             Create a project and generate a key to make your first API call.
           </p>
         </div>
@@ -94,13 +94,13 @@ export default function ApiKeyPage() {
             <div className="relative overflow-hidden rounded-lg border border-border-tertiary bg-bg-secondary p-3">
               <div className="flex gap-3 overflow-x-auto">
                 {/* Line numbers */}
-                <div className="flex flex-col font-mono text-xs leading-[var(--leading-body)] text-text-tertiary select-none">
+                <div className="flex flex-col font-mono text-[length:var(--text-xs)] leading-[var(--leading-body)] text-text-tertiary select-none">
                   {CODE_LINES.map((_, i) => (
                     <span key={i}>{i + 1}</span>
                   ))}
                 </div>
                 {/* Code */}
-                <pre className="font-mono text-xs leading-[var(--leading-body)] text-text-primary">
+                <pre className="font-mono text-[length:var(--text-xs)] leading-[var(--leading-body)] text-text-primary">
                   {CODE_LINES.map((line, i) => {
                     const isString =
                       line.includes('"Authorization') ||

@@ -58,10 +58,10 @@ function ActionCard({
       <RiveComponent className="size-12 shrink-0 rounded-[2px]" />
       {/* Text */}
       <div className="flex flex-1 flex-col gap-1 px-3 text-left">
-        <span className="text-sm font-medium leading-[var(--leading-body)] text-text-primary">
+        <span className="text-[length:var(--text-base)] font-medium leading-[var(--leading-body)] text-text-primary">
           {title}
         </span>
-        <span className="text-sm leading-[var(--leading-body)] text-text-secondary">
+        <span className="text-[length:var(--text-base)] leading-[var(--leading-body)] text-text-secondary">
           {description}
         </span>
       </div>

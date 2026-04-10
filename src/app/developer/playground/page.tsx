@@ -35,7 +35,7 @@ export default function PlaygroundPage() {
       <main className="flex flex-1 flex-col overflow-hidden rounded-xl bg-bg-primary shadow-elevation-3">
         {/* Header */}
         <div className="flex h-[63px] items-center justify-between border-b border-border-secondary px-6">
-          <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+          <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
             Playground
           </h1>
           <Button variant="tertiary" size="sm">
@@ -55,7 +55,7 @@ export default function PlaygroundPage() {
                 <div className="flex items-center gap-2">
                   <div className="flex flex-1 items-center gap-2">
                     <Code weight="duotone" className="size-5 shrink-0 text-text-tertiary" />
-                    <span className="text-sm text-text-secondary">API end points</span>
+                    <span className="text-[length:var(--text-base)] text-text-secondary">API end points</span>
                   </div>
                   <Select defaultValue="topic">
                     <SelectTrigger className="w-[232px]">
@@ -73,7 +73,7 @@ export default function PlaygroundPage() {
                 <div className="flex items-center gap-2">
                   <div className="flex flex-1 items-center gap-2">
                     <Ruler weight="duotone" className="size-5 shrink-0 text-text-tertiary" />
-                    <span className="text-sm text-text-secondary">Slide count</span>
+                    <span className="text-[length:var(--text-base)] text-text-secondary">Slide count</span>
                   </div>
                   <Select defaultValue="medium">
                     <SelectTrigger className="w-[232px]">
@@ -91,7 +91,7 @@ export default function PlaygroundPage() {
                 <div className="flex items-center gap-2">
                   <div className="flex flex-1 items-center gap-2">
                     <Translate weight="duotone" className="size-5 shrink-0 text-text-tertiary" />
-                    <span className="text-sm text-text-secondary">Language</span>
+                    <span className="text-[length:var(--text-base)] text-text-secondary">Language</span>
                   </div>
                   <Select defaultValue="en">
                     <SelectTrigger className="w-[232px]">
@@ -110,7 +110,7 @@ export default function PlaygroundPage() {
                 <div className="flex items-center gap-2">
                   <div className="flex flex-1 items-center gap-2">
                     <ChatDots weight="duotone" className="size-5 shrink-0 text-text-tertiary" />
-                    <span className="text-sm text-text-secondary">Tone</span>
+                    <span className="text-[length:var(--text-base)] text-text-secondary">Tone</span>
                   </div>
                   <Input
                     defaultValue="Professional"
@@ -122,7 +122,7 @@ export default function PlaygroundPage() {
                 <div className="flex items-center gap-2">
                   <div className="flex flex-1 items-center gap-2">
                     <UsersFour weight="duotone" className="size-5 shrink-0 text-text-tertiary" />
-                    <span className="text-sm text-text-secondary">Target audience</span>
+                    <span className="text-[length:var(--text-base)] text-text-secondary">Target audience</span>
                   </div>
                   <Input
                     defaultValue="Students"
@@ -134,7 +134,7 @@ export default function PlaygroundPage() {
                 <div className="flex items-center gap-2">
                   <div className="flex flex-1 items-center gap-2">
                     <Globe weight="duotone" className="size-5 shrink-0 text-text-tertiary" />
-                    <span className="text-sm text-text-secondary">Domain</span>
+                    <span className="text-[length:var(--text-base)] text-text-secondary">Domain</span>
                   </div>
                   <InputGroup className="w-[232px]">
                     <InputGroupAddon align="inline-start">
@@ -178,7 +178,7 @@ export default function PlaygroundPage() {
               />
               <div className="absolute bottom-0 left-0 h-[79px] w-[141px] rounded bg-bg-primary shadow-elevation-1" />
             </div>
-            <p className="max-w-[178px] text-center text-sm text-text-tertiary">
+            <p className="max-w-[178px] text-center text-[length:var(--text-base)] text-text-tertiary">
               Run the test and you&apos;ll see the results here.
             </p>
           </div>

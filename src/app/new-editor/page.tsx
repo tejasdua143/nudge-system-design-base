@@ -144,7 +144,7 @@ function EditableTitle() {
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={handleSave}
-          className="rounded px-2 py-1 text-sm text-text-primary outline-none shadow-[var(--shadow-text-field-focused)]"
+          className="rounded px-2 py-1 text-[length:var(--text-base)] text-text-primary outline-none shadow-[var(--shadow-text-field-focused)]"
         />
       </div>
     )
@@ -154,7 +154,7 @@ function EditableTitle() {
     <div className="flex items-center p-1">
       <button
         onClick={() => { setDraft(title); setIsEditing(true) }}
-        className="cursor-text rounded px-2 py-1 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover"
+        className="cursor-text rounded px-2 py-1 text-[length:var(--text-base)] text-text-primary transition-colors hover:bg-bg-elevated-hover"
       >
         {title}
       </button>
@@ -231,7 +231,7 @@ function EditorTopBar() {
                               style={spotlightedUser === user.id ? { '--tw-ring-color': 'var(--paids-brand-500)' } as React.CSSProperties : undefined}
                             >
                               <AvatarImage src={user.avatar} />
-                              <AvatarFallback className="bg-paids-neutral-200 text-[8px]" />
+                              <AvatarFallback className="bg-paids-neutral-200 text-[length:var(--text-3xs)]" />
                             </Avatar>
                           ))}
                           {remainingCount > 0 && spotlightedInOverflow && (
@@ -241,12 +241,12 @@ function EditorTopBar() {
                               style={{ '--tw-ring-color': 'var(--paids-brand-500)' } as React.CSSProperties}
                             >
                               <AvatarImage src={spotlightedInOverflow.avatar} />
-                              <AvatarFallback className="bg-paids-neutral-200 text-[8px]" />
+                              <AvatarFallback className="bg-paids-neutral-200 text-[length:var(--text-3xs)]" />
                             </Avatar>
                           )}
                           {remainingCount > 0 && !spotlightedInOverflow && (
                             <Avatar key="overflow-count" className="size-5">
-                              <AvatarFallback className="bg-paids-neutral-200 text-[8px] font-semibold text-text-primary">+{remainingCount}</AvatarFallback>
+                              <AvatarFallback className="bg-paids-neutral-200 text-[length:var(--text-3xs)] font-semibold text-text-primary">+{remainingCount}</AvatarFallback>
                             </Avatar>
                           )}
                         </>
@@ -266,15 +266,15 @@ function EditorTopBar() {
                           style={spotlightedUser === user.id ? { '--tw-ring-color': 'var(--paids-brand-500)' } as React.CSSProperties : undefined}
                         >
                           <AvatarImage src={user.avatar} />
-                          <AvatarFallback className="bg-paids-neutral-200 text-[8px]" />
+                          <AvatarFallback className="bg-paids-neutral-200 text-[length:var(--text-3xs)]" />
                         </Avatar>
-                        <span className="text-sm text-text-primary">{user.name} (you)</span>
+                        <span className="text-[length:var(--text-base)] text-text-primary">{user.name} (you)</span>
                       </div>
                       <div className="px-2 py-1">
                         <Button
                           variant={spotlightedUser === user.id ? "secondary" : "tertiary"}
                           size="sm"
-                          className="h-7 w-full rounded-[var(--radius-sm)] text-xs"
+                          className="h-7 w-full rounded-[var(--radius-sm)] text-[length:var(--text-xs)]"
                           onClick={() => setSpotlightedUser(spotlightedUser === user.id ? null : user.id)}
                         >
                           {spotlightedUser === user.id ? "Remove spotlight" : "Spotlight me"}
@@ -300,9 +300,9 @@ function EditorTopBar() {
                         style={spotlightedUser === user.id ? { '--tw-ring-color': 'var(--paids-brand-500)' } as React.CSSProperties : undefined}
                       >
                         <AvatarImage src={user.avatar} />
-                        <AvatarFallback className="bg-paids-neutral-200 text-[8px]" />
+                        <AvatarFallback className="bg-paids-neutral-200 text-[length:var(--text-3xs)]" />
                       </Avatar>
-                      <span className="text-sm text-text-primary">{user.name}</span>
+                      <span className="text-[length:var(--text-base)] text-text-primary">{user.name}</span>
                     </button>
                   ))}
                 </div>
@@ -312,14 +312,14 @@ function EditorTopBar() {
           <div className="self-stretch w-px bg-border-secondary" />
           {/* Share — Figma: p-[4px] container, px-[6px] py-[4px] insert */}
           <div className="flex items-center p-1">
-            <button className="flex items-center rounded px-1.5 py-1 text-sm font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover">
+            <button className="flex items-center rounded px-1.5 py-1 text-[length:var(--text-base)] font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover">
               Share
             </button>
           </div>
           <div className="self-stretch w-px bg-border-secondary" />
           {/* Present — Figma: p-[4px] container, px-[8px] py-[4px] insert, gap-[8px] */}
           <div className="flex items-center p-1">
-            <button className="flex items-center rounded px-2 py-1 text-sm font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover">
+            <button className="flex items-center rounded px-2 py-1 text-[length:var(--text-base)] font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover">
               Present
             </button>
           </div>
@@ -335,10 +335,10 @@ function EditorTopBar() {
                 direction="left"
                 color="var(--text-primary)"
                 shineColor="var(--text-primary-inverted)"
-                className="text-sm font-medium"
+                className="text-[length:var(--text-base)] font-medium"
               />
             </button>
-            <Button variant="primary" size="sm" className="h-7 gap-1.5 rounded px-2.5 font-medium">
+            <Button variant="primary" size="sm" className="h-7 gap-1.5 rounded px-2.5 text-[length:var(--text-base)] font-medium">
               <MicrosoftPowerpointLogo weight="bold" className="size-4" />
               Export as PPT
             </Button>
@@ -358,8 +358,8 @@ function EditorTopBar() {
                     <div className="flex items-center gap-3">
                       <SlidersHorizontal weight="regular" className="size-5 shrink-0 text-text-secondary" />
                       <div className="flex flex-col gap-0.5">
-                        <span className="text-sm text-text-primary">Presentation settings</span>
-                        <span className="text-xs text-text-tertiary">Logo, animations and footer settings</span>
+                        <span className="text-[length:var(--text-base)] text-text-primary">Presentation settings</span>
+                        <span className="text-[length:var(--text-xs)] text-text-tertiary">Logo, animations and footer settings</span>
                       </div>
                     </div>
                   </DropdownMenuItem>
@@ -373,12 +373,12 @@ function EditorTopBar() {
                   <DropdownMenuItem>
                     <ChartLineUp weight="regular" className="size-5 shrink-0 text-text-secondary" />
                     Analytics
-                    <span className="ml-auto rounded-full bg-bg-brand px-1.5 py-0.5 text-xs text-white">Pro</span>
+                    <span className="ml-auto rounded-full bg-bg-brand px-1.5 py-0.5 text-[length:var(--text-xs)] text-white">Pro</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <ChatDots weight="regular" className="size-5 shrink-0 text-text-secondary" />
                     Comments
-                    <span className="ml-auto rounded-full bg-bg-brand px-1.5 py-0.5 text-xs text-white">Pro</span>
+                    <span className="ml-auto rounded-full bg-bg-brand px-1.5 py-0.5 text-[length:var(--text-xs)] text-white">Pro</span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
@@ -474,7 +474,7 @@ function ListSlideRow({
           ) : (
             <span
               className={cn(
-                "text-xs font-medium leading-[1.33]",
+                "text-[length:var(--text-xs)] font-medium leading-[1.33]",
                 isActive ? "text-text-brand" : "text-text-primary"
               )}
             >
@@ -494,12 +494,12 @@ function ListSlideRow({
             direction="left"
             color="var(--text-tertiary)"
             shineColor="var(--text-brand)"
-            className="text-xs"
+            className="text-[length:var(--text-xs)]"
           />
         ) : (
           <span
             className={cn(
-              "truncate text-xs leading-[1.33] text-text-primary",
+              "truncate text-[length:var(--text-xs)] leading-[1.33] text-text-primary",
               isActive ? "font-medium" : "font-normal"
             )}
           >
@@ -624,7 +624,7 @@ function Filmstrip({ activeSlide, onSlideSelect, slides, onNewSlideWithPrompt, g
                 className="flex items-center gap-1.5 whitespace-nowrap text-text-primary transition-colors hover:text-text-secondary"
               >
                 <FilmStripIcon weight="bold" className="size-4 -rotate-90" />
-                <span className="text-xs leading-none text-text-tertiary">
+                <span className="text-[length:var(--text-xs)] leading-none text-text-tertiary">
                   <span className="text-text-brand">{slides.findIndex((s) => s.id === activeSlide) + 1}</span>/{slides.length}
                 </span>
               </button>
@@ -673,8 +673,8 @@ function Filmstrip({ activeSlide, onSlideSelect, slides, onNewSlideWithPrompt, g
               <div className="px-2 pb-2 pt-1.5">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="tertiary" size="xs" className="h-7 w-full text-xs">
-                      New Slide
+                    <Button variant="tertiary" size="xs" className="h-7 w-full text-[length:var(--text-base)] font-medium">
+                      New slide
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent side="right" sideOffset={12} align="start" className="w-[200px]">
@@ -722,11 +722,11 @@ function Filmstrip({ activeSlide, onSlideSelect, slides, onNewSlideWithPrompt, g
                                     <SlideSkeletonLoading />
                                   </div>
                                 ) : (
-                                  <span className="text-[8px] text-text-tertiary">{slide.label}</span>
+                                  <span className="text-[length:var(--text-3xs)] text-text-tertiary">{slide.label}</span>
                                 )}
                               </div>
                               <div className="absolute left-1 top-1 flex size-5 items-center justify-center rounded bg-black/40 backdrop-blur-[2px]">
-                                <span className="text-sm font-medium leading-[1.43] text-white">{slide.id}</span>
+                                <span className="text-[length:var(--text-base)] font-medium leading-[1.43] text-white">{slide.id}</span>
                               </div>
                             </button>
                           </React.Fragment>
@@ -845,7 +845,7 @@ function NumberOnTopThumbnail() {
     <div className="flex flex-wrap items-center justify-center gap-x-[19px] gap-y-2 p-4">
       {["1", "2", "3", "4"].map((n, i) => (
         <div key={i} className="flex w-[46px] flex-col gap-[3px]">
-          <span className="font-mono text-[8px] font-medium text-text-secondary">{n}</span>
+          <span className="font-mono text-[length:var(--text-3xs)] font-medium text-text-secondary">{n}</span>
           <div className="h-[5px] rounded bg-text-tertiary" />
           <div className="h-[5px] w-[38px] rounded bg-text-tertiary opacity-30" />
         </div>
@@ -859,7 +859,7 @@ function NumberHorizontalThumbnail() {
     <div className="flex items-center justify-center gap-2 p-4">
       {["01", "02", "03", "04"].map((n, i) => (
         <div key={i} className="flex flex-1 flex-col gap-[3px]">
-          <span className="font-mono text-[8px] font-medium text-text-secondary">{n}</span>
+          <span className="font-mono text-[length:var(--text-3xs)] font-medium text-text-secondary">{n}</span>
           <div className="h-[5px] rounded bg-text-tertiary" />
           <div className="h-[5px] w-[17px] rounded bg-text-tertiary opacity-30" />
         </div>
@@ -873,7 +873,7 @@ function NumberOnTopShortThumbnail() {
     <div className="flex flex-col items-center justify-center gap-1 p-4">
       {["01", "02", "03"].map((n, i) => (
         <div key={i} className="flex w-[87px] flex-col gap-0.5">
-          <span className="font-mono text-[8px] font-medium text-text-secondary">{n}</span>
+          <span className="font-mono text-[length:var(--text-3xs)] font-medium text-text-secondary">{n}</span>
           <div className="h-[5px] rounded bg-text-tertiary" />
         </div>
       ))}
@@ -886,7 +886,7 @@ function NumberOnLeftThumbnail() {
     <div className="flex flex-col items-center justify-center gap-1 p-4">
       {["1", "2", "3", "4"].map((n, i) => (
         <div key={i} className="flex w-[87px] items-baseline gap-1">
-          <span className="font-mono text-[8px] font-medium text-text-secondary">{n}</span>
+          <span className="font-mono text-[length:var(--text-3xs)] font-medium text-text-secondary">{n}</span>
           <div className="h-[5px] flex-1 rounded bg-text-tertiary" />
         </div>
       ))}
@@ -1276,7 +1276,7 @@ function ObjectSelectorModal({
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                       placeholder="Search object"
-                      className="flex-1 bg-transparent py-2 text-sm text-text-primary outline-none placeholder:text-text-tertiary"
+                      className="flex-1 bg-transparent py-2 text-[length:var(--text-base)] text-text-primary outline-none placeholder:text-text-tertiary"
                     />
                     <button
                       onClick={() => onOpenChange(false)}
@@ -1299,7 +1299,7 @@ function ObjectSelectorModal({
                             <button
                               onClick={() => { setActiveCategory(cat.id); setActiveSection(sections.length > 1 ? sections[0].title : null) }}
                               className={cn(
-                                "flex items-center gap-2 rounded px-2 py-1.5 text-sm transition-colors",
+                                "flex items-center gap-2 rounded px-2 py-1.5 text-[length:var(--text-base)] transition-colors",
                                 isActive
                                   ? "bg-bg-tertiary text-text-primary"
                                   : "text-text-primary hover:bg-bg-elevated-hover"
@@ -1330,7 +1330,7 @@ function ObjectSelectorModal({
                                         key={section.title}
                                         onClick={() => scrollToSection(section.title)}
                                         className={cn(
-                                          "flex items-center gap-2 rounded px-2 py-1.5 text-left text-sm transition-colors",
+                                          "flex items-center gap-2 rounded px-2 py-1.5 text-left text-[length:var(--text-base)] transition-colors",
                                           activeSection === section.title
                                             ? "text-text-brand"
                                             : "text-text-primary hover:bg-bg-elevated-hover"
@@ -1358,7 +1358,7 @@ function ObjectSelectorModal({
                         {variants.sections.map((section) => (
                           <div key={section.title} ref={(el) => { sectionRefs.current[section.title] = el }} className="flex flex-col">
                             <div className="px-2 pb-2">
-                              <span className="text-xs font-medium text-text-tertiary">{section.title}</span>
+                              <span className="text-[length:var(--text-xs)] font-medium text-text-tertiary">{section.title}</span>
                             </div>
                             <div className="grid grid-cols-3 gap-3 px-2 pb-4">
                               {section.items.map((item) => (
@@ -1404,7 +1404,7 @@ function ObjectSelectorModal({
                       >
                         <ArrowLeft weight="regular" className="size-4" />
                       </button>
-                      <span className="text-sm font-medium text-text-primary">Describe object content</span>
+                      <span className="text-[length:var(--text-base)] font-medium text-text-primary">Describe object content</span>
                     </div>
                     <button
                       onClick={() => onOpenChange(false)}
@@ -1427,7 +1427,7 @@ function ObjectSelectorModal({
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
                       placeholder="Describe the purpose of the object, or paste a content"
-                      className="min-h-[40px] flex-1 resize-none bg-transparent text-sm text-text-primary outline-none placeholder:text-text-tertiary"
+                      className="min-h-[40px] flex-1 resize-none bg-transparent text-[length:var(--text-base)] text-text-primary outline-none placeholder:text-text-tertiary"
                     />
 
                     {/* Footer buttons */}
@@ -1491,7 +1491,7 @@ function InsertPromptModal({ open, onOpenChange, onInsertSlide, title = "Insert 
       >
         {/* Title bar */}
         <div className="flex h-9 items-center justify-between pl-3 pr-2.5">
-          <span className="text-sm font-medium text-text-primary">
+          <span className="text-[length:var(--text-base)] font-medium text-text-primary">
             {title}
           </span>
           <button
@@ -1520,7 +1520,7 @@ function InsertPromptModal({ open, onOpenChange, onInsertSlide, title = "Insert 
               el.style.height = `${el.scrollHeight}px`
             }}
             placeholder="Describe the purpose of the slide, or paste a content"
-            className="w-full resize-none bg-transparent text-sm leading-[var(--leading-body)] text-text-primary outline-none placeholder:text-text-tertiary"
+            className="w-full resize-none bg-transparent text-[length:var(--text-base)] leading-[var(--leading-body)] text-text-primary outline-none placeholder:text-text-tertiary"
             rows={1}
           />
 
@@ -1530,7 +1530,7 @@ function InsertPromptModal({ open, onOpenChange, onInsertSlide, title = "Insert 
               <button
                 key={suggestion.label}
                 onClick={() => setPrompt(suggestion.prompt)}
-                className="shrink-0 rounded-[var(--radius-sm)] bg-bg-elevated px-3 py-2 text-left text-sm text-text-primary shadow-elevation-2 transition-colors hover:bg-bg-elevated-hover"
+                className="shrink-0 rounded-[var(--radius-sm)] bg-bg-elevated px-3 py-2 text-left text-[length:var(--text-base)] text-text-primary shadow-elevation-2 transition-colors hover:bg-bg-elevated-hover"
                 style={{ width: 256 }}
               >
                 {suggestion.label}
@@ -1725,11 +1725,11 @@ function ColorPaletteCard({ palette, isCurrent, isSelected, onSelect }: { palett
     >
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-sm text-text-primary">{palette.name}</span>
+          <span className="text-[length:var(--text-base)] text-text-primary">{palette.name}</span>
           {isCurrent && (
             <span className="flex items-center gap-1 rounded-full bg-bg-brand px-1.5 py-0.5 pr-2">
               <CheckCircle weight="fill" className="size-[13px] text-white" />
-              <span className="text-xs text-white">Current</span>
+              <span className="text-[length:var(--text-xs)] text-white">Current</span>
             </span>
           )}
         </div>
@@ -1770,7 +1770,7 @@ function RemixPanel({ open, onClose, onExitComplete }: { open: boolean; onClose:
         >
           {/* Header */}
           <div className="flex items-center justify-between border-b border-border-secondary p-3">
-            <span className="text-sm font-medium text-text-primary">Remix</span>
+            <span className="text-[length:var(--text-base)] font-medium text-text-primary">Remix</span>
             <button onClick={onClose} className="flex size-4 items-center justify-center text-text-tertiary transition-colors hover:text-text-primary">
               <X weight="bold" className="size-3" />
             </button>
@@ -1794,7 +1794,7 @@ function RemixPanel({ open, onClose, onExitComplete }: { open: boolean; onClose:
                 >
                   {/* Slide preview placeholder */}
                   <div className="flex flex-1 items-center justify-center bg-gradient-to-br from-paids-neutral-50 to-paids-neutral-100">
-                    <span className="text-xs text-text-tertiary">{variation.label}</span>
+                    <span className="text-[length:var(--text-xs)] text-text-tertiary">{variation.label}</span>
                   </div>
 
                   {/* Current badge */}
@@ -1802,7 +1802,7 @@ function RemixPanel({ open, onClose, onExitComplete }: { open: boolean; onClose:
                     <div className="absolute left-2 top-2">
                       <div className="flex items-center gap-1 rounded-full bg-bg-brand px-1.5 py-0.5 pr-2">
                         <CheckCircle weight="fill" className="size-[13px] text-white" />
-                        <span className="text-xs text-white">Current</span>
+                        <span className="text-[length:var(--text-xs)] text-white">Current</span>
                       </div>
                     </div>
                   )}
@@ -1835,7 +1835,7 @@ function ThemePanel({ open, onClose, onExitComplete }: { open: boolean; onClose:
         >
           {/* Header */}
           <div className="flex items-center justify-between p-3">
-            <span className="text-sm font-medium text-text-primary">Theme</span>
+            <span className="text-[length:var(--text-base)] font-medium text-text-primary">Theme</span>
             <button onClick={onClose} className="flex size-4 items-center justify-center text-text-tertiary transition-colors hover:text-text-primary">
               <X weight="bold" className="size-3" />
             </button>
@@ -1848,7 +1848,7 @@ function ThemePanel({ open, onClose, onExitComplete }: { open: boolean; onClose:
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={cn(
-                  "flex-1 py-3 text-center text-sm capitalize transition-colors",
+                  "flex-1 py-3 text-center text-[length:var(--text-base)] capitalize transition-colors",
                   activeTab === tab
                     ? "border-b-2 border-border-brand pb-2.5 font-medium text-text-primary"
                     : "text-text-secondary hover:text-text-primary"
@@ -1877,13 +1877,13 @@ function ThemePanel({ open, onClose, onExitComplete }: { open: boolean; onClose:
                   >
                     <div className={cn("flex h-full w-full flex-col items-start justify-end p-4 text-left", theme.bg)}>
                       <span className={cn(
-                        "text-2xl font-semibold",
+                        "text-[length:var(--text-2xl)] font-semibold",
                         theme.id === "graphite" || theme.id === "midnight" ? "text-white" : "text-text-primary"
                       )}>
                         {theme.name}
                       </span>
                       <span className={cn(
-                        "text-left text-xs",
+                        "text-left text-[length:var(--text-xs)]",
                         theme.id === "graphite" || theme.id === "midnight" ? "text-white/60" : "text-text-tertiary"
                       )}>
                         {theme.desc}
@@ -1892,7 +1892,7 @@ function ThemePanel({ open, onClose, onExitComplete }: { open: boolean; onClose:
                     {isCurrent && (
                       <div className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-bg-brand px-1.5 py-0.5 pr-2">
                         <CheckCircle weight="fill" className="size-[13px] text-white" />
-                        <span className="text-xs text-white">Current</span>
+                        <span className="text-[length:var(--text-xs)] text-white">Current</span>
                       </div>
                     )}
                   </button>
@@ -1902,7 +1902,7 @@ function ThemePanel({ open, onClose, onExitComplete }: { open: boolean; onClose:
               <>
                 {/* Workspace section */}
                 <div className="self-start px-3 py-2">
-                  <span className="text-xs font-medium text-text-tertiary">Workspace</span>
+                  <span className="text-[length:var(--text-xs)] font-medium text-text-tertiary">Workspace</span>
                 </div>
                 {COLOR_PALETTES_WORKSPACE.map((p) => (
                   <ColorPaletteCard
@@ -1916,7 +1916,7 @@ function ThemePanel({ open, onClose, onExitComplete }: { open: boolean; onClose:
 
                 {/* All section */}
                 <div className="self-start px-3 py-2">
-                  <span className="text-xs font-medium text-text-tertiary">All</span>
+                  <span className="text-[length:var(--text-xs)] font-medium text-text-tertiary">All</span>
                 </div>
                 {COLOR_PALETTES_ALL.map((p) => (
                   <ColorPaletteCard
@@ -1930,7 +1930,7 @@ function ThemePanel({ open, onClose, onExitComplete }: { open: boolean; onClose:
               </>
             )}
             {activeTab === "font" && (
-              <div className="flex flex-1 items-center justify-center text-sm text-text-tertiary">
+              <div className="flex flex-1 items-center justify-center text-[length:var(--text-base)] text-text-tertiary">
                 Font options coming soon
               </div>
             )}
@@ -1954,7 +1954,7 @@ function BottomBar({ onObjectSelect, onInsertWithPrompt, onThemeToggle, onRemixT
         <div className="flex items-center p-1">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-sm font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover">
+              <button className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-[length:var(--text-base)] font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover">
                 <Plus weight="bold" className="size-4" />
                 Insert
               </button>
@@ -1962,7 +1962,7 @@ function BottomBar({ onObjectSelect, onInsertWithPrompt, onThemeToggle, onRemixT
             <DropdownMenuContent side="top" sideOffset={12} className="w-[200px]">
               {/* Object section */}
               <div className="px-2 py-1">
-                <span className="text-xs font-medium text-text-tertiary">Object</span>
+                <span className="text-[length:var(--text-xs)] font-medium text-text-tertiary">Object</span>
               </div>
               <DropdownMenuItem onSelect={() => onObjectSelect("list")}>
                 <ListBullets weight="regular" className="size-5 shrink-0 text-text-secondary" />
@@ -2003,7 +2003,7 @@ function BottomBar({ onObjectSelect, onInsertWithPrompt, onThemeToggle, onRemixT
               <DropdownMenuSeparator />
               {/* Slide section */}
               <div className="px-2 py-1">
-                <span className="text-xs font-medium text-text-tertiary">Slide</span>
+                <span className="text-[length:var(--text-xs)] font-medium text-text-tertiary">Slide</span>
               </div>
               <DropdownMenuItem onSelect={() => onInsertWithPrompt()}>
                 <MagicWand weight="regular" className="size-5 shrink-0 text-text-secondary" />
@@ -2021,7 +2021,7 @@ function BottomBar({ onObjectSelect, onInsertWithPrompt, onThemeToggle, onRemixT
         <div className="flex items-center p-1">
           <button
             onClick={onRemixToggle}
-            className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-sm font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover"
+            className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-[length:var(--text-base)] font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover"
           >
             <ArrowsClockwise weight="bold" className="size-4" />
             Remix
@@ -2032,7 +2032,7 @@ function BottomBar({ onObjectSelect, onInsertWithPrompt, onThemeToggle, onRemixT
         <div className="flex items-center p-1">
           <button
             onClick={onThemeToggle}
-            className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-sm font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover"
+            className="flex items-center gap-2 rounded pl-2 pr-3 py-1 text-[length:var(--text-base)] font-medium text-text-primary transition-colors hover:bg-bg-elevated-hover"
           >
             <Palette weight="bold" className="size-4" />
             Theme
@@ -2124,7 +2124,7 @@ function ZoomPanel() {
       <button className="flex w-full items-center p-0.5 transition-colors hover:bg-bg-elevated-hover">
         <div className="flex w-full flex-col items-center justify-center gap-1.5 rounded py-1.5">
           <MagnifyingGlass weight="bold" className="size-4 text-text-primary" />
-          <span className="text-[10px] font-medium leading-none text-text-primary">100%</span>
+          <span className="text-[length:var(--text-2xs)] font-medium leading-none text-text-primary">100%</span>
         </div>
       </button>
     </div>
@@ -2277,7 +2277,7 @@ export default function NewEditorPage() {
                   <SlideSkeletonLoading />
                 ) : (
                   <div className="flex h-full items-center justify-center">
-                    <span className="text-lg text-text-tertiary">{slide.label}</span>
+                    <span className="text-[length:var(--text-lg)] text-text-tertiary">{slide.label}</span>
                   </div>
                 )}
               </div>
@@ -2305,7 +2305,7 @@ export default function NewEditorPage() {
           >
             <div className="relative overflow-hidden rounded-[var(--radius-md)] bg-bg-elevated shadow-elevation-3">
               <div className="flex items-center px-3 py-2">
-                <ShinyText text="Generating slides..." speed={1.5} delay={0} className="text-sm" color="var(--text-tertiary)" shineColor="var(--text-primary)" />
+                <ShinyText text="Generating slides..." speed={1.5} delay={0} className="text-[length:var(--text-base)]" color="var(--text-tertiary)" shineColor="var(--text-primary)" />
               </div>
               {/* Animated brand border glow */}
               <motion.div

@@ -122,7 +122,7 @@ function SideNavItem({
       onClick={onClick}
       title={label}
       className={cn(
-        "flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-[var(--radius-sm)] p-2 text-sm leading-[var(--leading-body)] transition-colors",
+        "flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-[var(--radius-sm)] p-2 text-[length:var(--text-base)] leading-[var(--leading-body)] transition-colors",
         active
           ? "bg-bg-elevated-hover font-semibold text-text-primary"
           : "font-normal text-text-secondary hover:bg-bg-elevated-hover"
@@ -161,10 +161,10 @@ function DocumentCard({
       />
       {/* Info */}
       <div className="flex flex-col gap-1 px-3 pb-3 pt-2">
-        <p className="truncate text-sm font-medium leading-[var(--leading-body)] text-text-primary">
+        <p className="truncate text-[length:var(--text-base)] font-medium leading-[var(--leading-body)] text-text-primary">
           {title}
         </p>
-        <p className="text-xs leading-[var(--leading-snug)] text-text-secondary">
+        <p className="text-[length:var(--text-xs)] leading-[var(--leading-snug)] text-text-secondary">
           {status} &bull; {author}
         </p>
       </div>
@@ -181,7 +181,7 @@ function HomeContent() {
     <>
       {/* ── Header section ─────────────────────────────────────── */}
       <section className="flex flex-col gap-4 lg:gap-6 border-b border-border-secondary px-4 lg:px-6 pb-4 lg:pb-6 pt-4">
-        <div className="text-xl lg:text-2xl leading-[var(--leading-heading)] tracking-[var(--tracking-tight)]">
+        <div className="text-[length:var(--text-xl)] lg:text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-[var(--tracking-tight)]">
           <p className="text-text-primary">
             Starting something new, John?
           </p>
@@ -192,7 +192,7 @@ function HomeContent() {
       {/* ── Recent section ──────────────────────────────────────── */}
       <section className="p-4 lg:p-6">
         <div className="flex flex-col gap-4">
-          <h2 className="text-xl lg:text-2xl leading-[var(--leading-heading)] tracking-[var(--tracking-tight)] text-text-primary">
+          <h2 className="text-[length:var(--text-xl)] lg:text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-[var(--tracking-tight)] text-text-primary">
             Recent
           </h2>
           <div className="grid grid-cols-1 gap-3 lg:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -213,7 +213,7 @@ function HomeContent() {
 function BlankPage({ title }: { title: string }) {
   return (
     <div className="flex flex-1 items-center justify-center p-6">
-      <h1 className="text-2xl font-medium text-text-tertiary">{title}</h1>
+      <h1 className="text-[length:var(--text-2xl)] font-medium text-text-tertiary">{title}</h1>
     </div>
   )
 }
@@ -266,7 +266,7 @@ function UpgradeButton() {
           direction="left"
           color="var(--text-primary-inverted)"
           shineColor="var(--text-primary)"
-          className="text-sm"
+          className="text-[length:var(--text-base)]"
         />
       </span>
     </button>
@@ -281,7 +281,7 @@ function GeneralSettingsContent({ workspace }: { workspace: typeof WORKSPACES[nu
   return (
     <>
       <div className="mx-auto flex h-16 w-full max-w-[768px] items-center px-6">
-        <h1 className="text-2xl leading-[var(--leading-heading)] tracking-[var(--tracking-tight)] text-text-primary">
+        <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-[var(--tracking-tight)] text-text-primary">
           General
         </h1>
       </div>
@@ -290,7 +290,7 @@ function GeneralSettingsContent({ workspace }: { workspace: typeof WORKSPACES[nu
           {/* Workspace avatar section */}
           <div className="flex w-full flex-col items-center justify-center gap-4 rounded-lg bg-gradient-to-t from-pink-400/30 to-pink-50/30 px-6 py-6">
             <div className={cn("flex size-[100px] items-center justify-center overflow-hidden rounded-full", workspace.color)}>
-              <span className="text-3xl font-bold text-white">{workspace.initial}</span>
+              <span className="text-[length:var(--text-3xl)] font-bold text-white">{workspace.initial}</span>
             </div>
             <Button variant="tertiary" size="sm" className="h-7">
               Change
@@ -299,14 +299,14 @@ function GeneralSettingsContent({ workspace }: { workspace: typeof WORKSPACES[nu
 
           {/* Workspace name field */}
           <div className="flex w-full flex-col gap-1.5">
-            <Label htmlFor="workspace-name" className="text-sm text-text-secondary">
+            <Label htmlFor="workspace-name" className="text-[length:var(--text-base)] text-text-secondary">
               Workspace name
             </Label>
             <Input
               id="workspace-name"
               defaultValue={workspace.name}
               key={workspace.id}
-              className="h-11 px-3 text-sm"
+              className="h-11 px-3 text-[length:var(--text-base)]"
             />
           </div>
         </div>
@@ -334,7 +334,7 @@ function SettingsSidebar({
       <div className="flex h-14 items-center border-b border-border-secondary px-2 lg:px-4">
         <button
           onClick={onBack}
-          className="flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-md text-sm text-text-secondary transition-colors hover:text-text-primary"
+          className="flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-md text-[length:var(--text-base)] text-text-secondary transition-colors hover:text-text-primary"
           title="Workspace settings"
         >
           <CaretLeft weight="bold" className="size-5 shrink-0" />
@@ -461,9 +461,9 @@ export function DashboardShell() {
                         </span>
                       </div>
                       {/* Text */}
-                      <div className="hidden lg:flex flex-1 items-center gap-1.5 text-sm font-medium leading-[var(--leading-body)] w-full min-w-0">
+                      <div className="hidden lg:flex flex-1 items-center gap-1.5 text-[length:var(--text-base)] font-medium leading-[var(--leading-body)] w-full min-w-0">
                         <span className="truncate text-text-primary text-left">{activeWorkspace.name}</span>
-                        <Badge className={cn("px-1.5 py-0 text-[10px]", activeWorkspace.plan === "FREE" ? "bg-bg-brand text-text-primary-inverted" : "")}>{activeWorkspace.plan === "FREE" ? "UPGRADE" : activeWorkspace.plan}</Badge>
+                        <Badge className={cn("px-1.5 py-0 text-[length:var(--text-2xs)]", activeWorkspace.plan === "FREE" ? "bg-bg-brand text-text-primary-inverted" : "")}>{activeWorkspace.plan === "FREE" ? "UPGRADE" : activeWorkspace.plan}</Badge>
                       </div>
                       {/* Dropdown caret */}
                       <div className="hidden lg:flex items-center rounded-sm bg-bg-tertiary p-0.5">
@@ -500,12 +500,12 @@ export function DashboardShell() {
                           setActiveSettingsPage("general")
                           setWsMenuOpen(false)
                         }}
-                        className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover"
+                        className="flex items-center gap-2 rounded-md p-2 text-[length:var(--text-base)] text-text-primary transition-colors hover:bg-bg-elevated-hover"
                       >
                         <GearIcon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
                         <span>Settings</span>
                       </button>
-                      <button className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+                      <button className="flex items-center gap-2 rounded-md p-2 text-[length:var(--text-base)] text-text-primary transition-colors hover:bg-bg-elevated-hover">
                         <CreditCardIcon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
                         <span>Billing and subscriptions</span>
                       </button>
@@ -515,7 +515,7 @@ export function DashboardShell() {
 
                     {/* Workspace section */}
                     <div className="px-4 pt-1">
-                      <p className="text-sm text-text-tertiary">Workspace</p>
+                      <p className="text-[length:var(--text-base)] text-text-tertiary">Workspace</p>
                     </div>
                     <div className="flex px-2 gap-1 flex-col">
                       {WORKSPACES.map((ws) => {
@@ -535,10 +535,10 @@ export function DashboardShell() {
                             <div className={cn("flex size-5 shrink-0 items-center justify-center rounded text-[length:var(--text-2xs)] font-medium text-white", ws.color)}>
                               {ws.initial}
                             </div>
-                            <span className="flex-1 text-left text-sm text-text-primary">
+                            <span className="flex-1 text-left text-[length:var(--text-base)] text-text-primary">
                               {ws.name}
                             </span>
-                            <Badge className={cn("px-1.5 py-0 text-[10px]", ws.plan === "FREE" ? "bg-bg-tertiary text-text-secondary" : "")}>{ws.plan}</Badge>
+                            <Badge className={cn("px-1.5 py-0 text-[length:var(--text-2xs)]", ws.plan === "FREE" ? "bg-bg-tertiary text-text-secondary" : "")}>{ws.plan}</Badge>
 
                           </button>
                         )
@@ -547,7 +547,7 @@ export function DashboardShell() {
                         <div className="flex size-5 shrink-0 items-center justify-center rounded bg-bg-tertiary">
                           <Plus weight="bold" className="size-3.5 text-text-secondary" />
                         </div>
-                        <span className="text-sm text-text-primary">
+                        <span className="text-[length:var(--text-base)] text-text-primary">
                           Create or Join workspace
                         </span>
                       </button>
@@ -574,7 +574,7 @@ export function DashboardShell() {
               {/* Projects group */}
               <div className="flex flex-col gap-0.5 px-2">
                 <div className="group/projects hidden lg:flex items-center justify-between px-2 pb-1">
-                  <p className="text-sm font-normal text-text-secondary">
+                  <p className="text-[length:var(--text-base)] font-normal text-text-secondary">
                     Projects
                   </p>
                   <Dialog>
@@ -619,13 +619,13 @@ export function DashboardShell() {
                   setIsSettingsMode(true)
                   setActiveSettingsPage("general")
                 }}
-                className="flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-[var(--radius-sm)] p-2 text-sm text-text-secondary transition-colors hover:bg-bg-elevated-hover"
+                className="flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-[var(--radius-sm)] p-2 text-[length:var(--text-base)] text-text-secondary transition-colors hover:bg-bg-elevated-hover"
               >
                 <Gear weight="regular" className="size-5 shrink-0" />
                 <span className="hidden lg:inline truncate">Settings</span>
               </button>
               <button
-                className="flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-[var(--radius-sm)] p-2 text-sm text-text-secondary transition-colors hover:bg-bg-elevated-hover"
+                className="flex w-full items-center justify-center lg:justify-start gap-0 lg:gap-2 rounded-[var(--radius-sm)] p-2 text-[length:var(--text-base)] text-text-secondary transition-colors hover:bg-bg-elevated-hover"
               >
                 <UserPlus weight="regular" className="size-5 shrink-0" />
                 <span className="hidden lg:inline truncate">Invite member</span>
@@ -665,8 +665,8 @@ export function DashboardShell() {
                   <div className="flex items-start gap-2 rounded-md p-2">
                     <Gear weight="duotone" className="mt-0.5 size-5 shrink-0 text-text-secondary" />
                     <div className="flex flex-col gap-1">
-                      <span className="text-sm leading-[var(--leading-body)] text-text-primary">John doe</span>
-                      <span className="text-xs leading-[var(--leading-snug)] text-text-secondary">jd@gmail.com</span>
+                      <span className="text-[length:var(--text-base)] leading-[var(--leading-body)] text-text-primary">John doe</span>
+                      <span className="text-[length:var(--text-xs)] leading-[var(--leading-snug)] text-text-secondary">jd@gmail.com</span>
                     </div>
                   </div>
                 </div>
@@ -675,21 +675,21 @@ export function DashboardShell() {
 
                 {/* Menu items */}
                 <div className="flex flex-col gap-2 px-2">
-                  <button className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+                  <button className="flex items-center gap-2 rounded-md p-2 text-[length:var(--text-base)] text-text-primary transition-colors hover:bg-bg-elevated-hover">
                     <Translate weight="duotone" className="size-5 shrink-0 text-text-secondary" />
                     <span>Language</span>
                   </button>
                   <div className="flex items-center pr-2">
                     <div className="flex flex-1 items-center gap-2 rounded-md p-2">
                       <Moon weight="duotone" className="size-5 shrink-0 text-text-secondary" />
-                      <span className="text-sm text-text-primary">Dark mode</span>
+                      <span className="text-[length:var(--text-base)] text-text-primary">Dark mode</span>
                     </div>
                     <Switch
                       checked={theme === "dark"}
                       onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
                     />
                   </div>
-                  <button className="flex items-center gap-2 rounded-md p-2 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+                  <button className="flex items-center gap-2 rounded-md p-2 text-[length:var(--text-base)] text-text-primary transition-colors hover:bg-bg-elevated-hover">
                     <SignOut weight="duotone" className="size-5 shrink-0 text-text-secondary" />
                     <span>Sign out</span>
                   </button>

@@ -12,10 +12,10 @@ export default function InvitePage() {
         {/* Header */}
         <div className="flex flex-col items-center gap-2.5 text-center">
           <EnvelopeSimple className="size-8 text-text-brand" weight="duotone" />
-          <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+          <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
             Invite your team
           </h1>
-          <p className="text-sm leading-[var(--leading-body)] text-text-secondary">
+          <p className="text-[length:var(--text-base)] leading-[var(--leading-body)] text-text-secondary">
             Member can have access to API and Presentations editor.
           </p>
         </div>

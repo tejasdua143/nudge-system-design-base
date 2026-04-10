@@ -13,18 +13,18 @@
 
 ## Font Sizes
 
-| Token | Value | Tailwind | Usage |
-|-------|-------|----------|-------|
-| `--text-2xs` | `0.625rem` (10px) | `text-[length:var(--text-2xs)]` | Micro labels, badges, captions |
-| `--text-xs` | `0.75rem` (12px) | `text-xs` | Small labels, helper text |
-| `--text-sm` | `0.8rem` (12.8px) | `text-[length:var(--text-sm)]` | Compact UI (calendar cells) |
-| `--text-base` | `0.875rem` (14px) | `text-sm` | Default body text |
-| `--text-md` | `1rem` (16px) | `text-base` | Large body text |
-| `--text-lg` | `1.125rem` (18px) | `text-lg` | Section headings |
-| `--text-xl` | `1.25rem` (20px) | `text-xl` | Page headings |
-| `--text-2xl` | `1.5rem` (24px) | `text-2xl` | Large headings |
-| `--text-3xl` | `1.875rem` (30px) | `text-3xl` | Display headings |
-| `--text-4xl` | `2.25rem` (36px) | `text-4xl` | Hero text |
+| Token | Value | Tailwind | Figma style | Usage |
+|-------|-------|----------|-------------|-------|
+| `--text-3xs` | `0.5rem` (8px) | `text-[length:var(--text-3xs)]` | body-xxs | Micro UI elements |
+| `--text-2xs` | `0.625rem` (10px) | `text-[length:var(--text-2xs)]` | body-xs | Micro labels, badges, captions |
+| `--text-xs` | `0.75rem` (12px) | `text-[length:var(--text-xs)]` | body-sm | Small labels, helper text |
+| `--text-base` | `0.875rem` (14px) | `text-[length:var(--text-base)]` | body-base | Default body text |
+| `--text-md` | `1rem` (16px) | `text-[length:var(--text-md)]` | body-lg | Large body text |
+| `--text-lg` | `1.125rem` (18px) | `text-[length:var(--text-lg)]` | body-xl / heading-lg | Section headings |
+| `--text-xl` | `1.25rem` (20px) | `text-[length:var(--text-xl)]` | heading-xl | Page headings |
+| `--text-2xl` | `1.5rem` (24px) | `text-[length:var(--text-2xl)]` | heading-2xl | Large headings |
+| `--text-3xl` | `1.875rem` (30px) | `text-[length:var(--text-3xl)]` | — | Display headings |
+| `--text-4xl` | `2.25rem` (36px) | `text-[length:var(--text-4xl)]` | heading-4xl | Hero text |
 
 ## Font Weights
 
@@ -57,8 +57,7 @@
 
 ## Usage Rules
 
-1. **Use semantic Tailwind classes** where they match (e.g., `text-sm`, `font-medium`).
-2. **Use token variables** for non-standard sizes like `--text-2xs` and custom line heights.
-3. **Never hardcode** `text-[10px]`, `leading-[1.43]`, or `tracking-[-0.24px]` — use the token.
-4. **Headings** pair `--leading-heading` or `--leading-snug` with `--tracking-tight`.
-5. **Body text** uses `--leading-body` (1.43) for optimal readability.
+1. **Always use token variables** for font sizes — e.g., `text-[length:var(--text-base)]`. Never use bare Tailwind utilities like `text-sm` or `text-base` (they clash with CSS custom property names in `tokens.css`).
+2. **Never hardcode** `text-[10px]`, `leading-[1.43]`, or `tracking-[-0.24px]` — use the token.
+3. **Headings** pair `--leading-heading` or `--leading-snug` with `--tracking-tight`.
+4. **Body text** uses `--leading-body` (1.43) for optimal readability.

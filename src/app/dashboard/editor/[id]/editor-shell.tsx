@@ -73,7 +73,7 @@ function EditorTopBar({ title }: { title: string }) {
         </Button>
         <div className="h-full w-px bg-border-secondary" />
         <div className="flex max-w-[200px] items-center px-3 py-1">
-          <span className="truncate text-sm text-text-primary">{title}</span>
+          <span className="truncate text-[length:var(--text-base)] text-text-primary">{title}</span>
         </div>
 
        <div className="h-full w-px bg-border-secondary" />
@@ -101,16 +101,16 @@ function EditorTopBar({ title }: { title: string }) {
           </Avatar>
         </AvatarGroup>
         <div className="relative flex h-10 items-center gap-1.5 rounded-lg border-none bg-bg-elevated px-1 shadow-elevation-2">
-        <Button variant="ghost" size="sm" className="rounded-sm text-sm font-normal">
+        <Button variant="ghost" size="sm" className="rounded-sm text-[length:var(--text-base)] font-normal">
           <Play className="size-4" />
           Present
         </Button>
         <div className="h-full w-px bg-border-secondary" />
-        <Button variant="ghost" size="sm" className="rounded-sm text-sm font-normal">
+        <Button variant="ghost" size="sm" className="rounded-sm text-[length:var(--text-base)] font-normal">
           Share
         </Button>
         <div className="h-full w-px bg-border-secondary" />
-        <Button variant="ghost" size="sm" className="rounded-sm text-sm font-normal text-text-brand">
+        <Button variant="ghost" size="sm" className="rounded-sm text-[length:var(--text-base)] font-normal text-text-brand">
           <Export className="size-4 text-text-brand" />
           Export as PPT
         </Button>
@@ -139,7 +139,7 @@ function FilmstripPanel({
       <div className="relative flex shrink-0 flex-col rounded-lg bg-bg-elevated shadow-elevation-2">
         {/* New Slide button */}
         <div className="px-2 py-2">
-          <Button variant="tertiary" size="md" className="w-full rounded-sm text-sm font-normal">
+          <Button variant="tertiary" size="md" className="w-full rounded-sm text-[length:var(--text-base)] font-normal">
             <PlusIcon weight="regular" className="size-4" />
             Add slide
           </Button>
@@ -305,19 +305,19 @@ function BottomToolbar() {
       <div className="flex items-center gap-2">
         {/* Text tools */}
         <div className="relative flex h-10 items-center gap-1.5 rounded-lg bg-bg-elevated px-1.5 shadow-elevation-2">
-          <button className="flex items-center gap-1.5 rounded px-2 py-1 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+          <button className="flex items-center gap-1.5 rounded px-2 py-1 text-[length:var(--text-base)] text-text-primary transition-colors hover:bg-bg-elevated-hover">
             <TextTIcon className="size-4" />
             Title
             <CaretDownIcon weight="bold" className="size-3 text-text-tertiary" />
           </button>
           <div className="h-full w-px bg-border-secondary" />
-          <button className="flex items-center gap-1.5 rounded px-2 py-1 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+          <button className="flex items-center gap-1.5 rounded px-2 py-1 text-[length:var(--text-base)] text-text-primary transition-colors hover:bg-bg-elevated-hover">
             <ListBulletsIcon className="size-5" />
             List
             <CaretDownIcon weight="bold" className="size-3 text-text-tertiary" />
           </button>
           <div className="h-full w-px bg-border-secondary" />
-          <button className="flex items-center gap-1.5 rounded px-2 py-1.5 text-sm text-text-primary transition-colors hover:bg-bg-elevated-hover">
+          <button className="flex items-center gap-1.5 rounded px-2 py-1.5 text-[length:var(--text-base)] text-text-primary transition-colors hover:bg-bg-elevated-hover">
             <PlusIcon weight="regular" className="size-4" />
             Add object
           </button>
@@ -326,7 +326,7 @@ function BottomToolbar() {
         {/* Layouts */}
         <div className="relative flex h-10 items-center gap-1.5 rounded-lg bg-bg-elevated px-2.5 shadow-elevation-2">
           <Layout weight="regular" className="size-4" />
-          <span className="text-sm text-text-primary">Layouts</span>
+          <span className="text-[length:var(--text-base)] text-text-primary">Layouts</span>
         </div>
 
         {/* Remix */}
@@ -335,7 +335,7 @@ function BottomToolbar() {
           onMouseEnter={() => setRemixHovered(true)}
           onMouseLeave={() => setRemixHovered(false)}
         >
-           <div className="absolute z-10 flex items-center h-10  gap-1 px-2 py-1 text-sm text-white">
+           <div className="absolute z-10 flex items-center h-10  gap-1 px-2 py-1 text-[length:var(--text-base)] text-white">
              <BtnRemixIcon isHovered={remixHovered} />
             <span className="y">Remix</span>
           </div>

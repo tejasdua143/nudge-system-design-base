@@ -21,7 +21,7 @@ export default function LoginEmailPage() {
     <div className="flex min-h-screen items-center justify-center bg-bg-primary">
       <div className="flex w-full max-w-sm flex-col gap-8">
         {/* Header */}
-        <h1 className="text-center text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+        <h1 className="text-center text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
           Enter your password
         </h1>
 
@@ -56,7 +56,7 @@ export default function LoginEmailPage() {
           </Button>
 
           {/* Legal */}
-          <p className="text-center text-xs leading-[var(--leading-snug)] text-text-tertiary">
+          <p className="text-center text-[length:var(--text-xs)] leading-[var(--leading-snug)] text-text-tertiary">
             By continuing, you agree to Presentations AI{" "}
             <Link href="#" className="underline hover:text-text-primary">
               Commercial Terms

@@ -78,7 +78,7 @@ function SideNavItem({
   href?: string;
 }) {
   const classes = cn(
-    "flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm",
+    "flex w-full items-center gap-2 rounded-lg px-2 py-2 text-[length:var(--text-base)]",
     active
       ? "bg-bg-brand-selected font-semibold text-text-primary"
       : "text-text-secondary hover:bg-bg-elevated-hover"
@@ -155,16 +155,16 @@ export default function DeveloperLayout({
                   {/* Profile picture */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="size-[30px] rounded bg-bg-secondary">
-                      <span className="flex size-full items-center justify-center text-sm font-semibold text-text-primary">
+                      <span className="flex size-full items-center justify-center text-[length:var(--text-base)] font-semibold text-text-primary">
                         JD
                       </span>
                     </div>
                   </div>
                 </div>
                 {/* Text */}
-                <div className="flex flex-1 flex-col text-left text-sm leading-[var(--leading-body)]">
+                <div className="flex flex-1 flex-col text-left text-[length:var(--text-base)] leading-[var(--leading-body)]">
                   <span className="font-normal text-text-primary">John Doe</span>
-                  <span className="text-xs text-text-secondary">
+                  <span className="text-[length:var(--text-xs)] text-text-secondary">
                     Foursquare.ai
                   </span>
                 </div>
@@ -185,7 +185,7 @@ export default function DeveloperLayout({
             >
               <div className="flex flex-col gap-2 px-2">
                 {WORKSPACE_MENU.map((item) => {
-                  const classes = "flex w-full items-center gap-2 rounded-lg p-2 text-sm text-text-primary hover:bg-bg-elevated-hover";
+                  const classes = "flex w-full items-center gap-2 rounded-lg p-2 text-[length:var(--text-base)] text-text-primary hover:bg-bg-elevated-hover";
                   const content = (
                     <>
                       <item.icon weight="regular" className="size-5 shrink-0 text-text-secondary" />
@@ -205,7 +205,7 @@ export default function DeveloperLayout({
               </div>
               <div className="my-2 h-px bg-border-tertiary" />
               <div className="px-2">
-                <button className="flex w-full items-center gap-2 rounded-lg p-2 text-sm text-text-primary hover:bg-bg-elevated-hover">
+                <button className="flex w-full items-center gap-2 rounded-lg p-2 text-[length:var(--text-base)] text-text-primary hover:bg-bg-elevated-hover">
                   <SignOut weight="regular" className="size-5 shrink-0 text-text-secondary" />
                   Logout
                 </button>
@@ -240,7 +240,7 @@ export default function DeveloperLayout({
 
           {/* Presentations section */}
           <div className="flex flex-col gap-0.5 px-2">
-            <span className="px-2 py-2 text-sm text-text-secondary">
+            <span className="px-2 py-2 text-[length:var(--text-base)] text-text-secondary">
               Presentations
             </span>
             {PRESENTATIONS_NAV.map((item) => (
@@ -265,13 +265,13 @@ export default function DeveloperLayout({
         <div className="mx-2 mb-2 flex flex-col items-center gap-3 rounded-lg bg-bg-elevated py-3 shadow-elevation-2">
           <div className="flex items-center gap-2">
             <Fire weight="fill" className="size-5 text-text-brand" />
-            <p className="text-sm">
+            <p className="text-[length:var(--text-base)]">
               <span className="font-medium text-text-primary">200 </span>
               <span className="text-text-tertiary">credits left</span>
             </p>
           </div>
           <div className="h-px w-full bg-border-tertiary" />
-          <span className="text-sm font-semibold text-text-brand">
+          <span className="text-[length:var(--text-base)] font-semibold text-text-brand">
             Upgrade for more AI
           </span>
         </div>

@@ -116,7 +116,7 @@ export default function DeveloperDashboardPage() {
       <main className="flex flex-1 flex-col overflow-hidden rounded-xl bg-bg-primary shadow-elevation-3">
         {/* Header */}
         <div className="flex h-[63px] items-center border-b border-border-secondary px-6">
-          <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+          <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
             Home
           </h1>
         </div>
@@ -126,7 +126,7 @@ export default function DeveloperDashboardPage() {
           {/* Section: Get started */}
           <section className="flex flex-col items-center gap-4 px-6 py-8">
             <div className="w-full max-w-3xl">
-              <h2 className="text-base font-medium text-text-primary">
+              <h2 className="text-[length:var(--text-md)] font-medium text-text-primary">
                 Get started with presentations AI
               </h2>
             </div>
@@ -172,7 +172,7 @@ export default function DeveloperDashboardPage() {
                         <div className="flex flex-1 items-center justify-between">
                           <span
                             className={cn(
-                              "text-left text-sm",
+                              "text-left text-[length:var(--text-base)]",
                               step.done
                                 ? "text-text-secondary line-through"
                                 : step.current
@@ -200,7 +200,7 @@ export default function DeveloperDashboardPage() {
           {/* Section: Upgrade your plan */}
           <section className="flex flex-col items-center px-6 py-6">
             <div className="flex w-full max-w-3xl flex-col gap-3">
-              <h2 className="text-base font-medium text-text-primary">
+              <h2 className="text-[length:var(--text-md)] font-medium text-text-primary">
                 Upgrade your plan
               </h2>
               <div className="flex gap-5">
@@ -214,7 +214,7 @@ export default function DeveloperDashboardPage() {
 
                     <div className="flex flex-col gap-3">
                       {/* Plan info */}
-                      <div className="flex flex-col gap-1 text-sm">
+                      <div className="flex flex-col gap-1 text-[length:var(--text-base)]">
                         <div className="flex items-center gap-1 font-medium">
                           <span className="text-text-primary">{plan.name}</span>
                           <span className="text-text-primary">·</span>
@@ -224,7 +224,7 @@ export default function DeveloperDashboardPage() {
                       </div>
 
                       {/* Credits */}
-                      <p className="text-sm">
+                      <p className="text-[length:var(--text-base)]">
                         <span className="font-medium text-text-primary">
                           {plan.credits}{" "}
                         </span>
@@ -244,7 +244,7 @@ export default function DeveloperDashboardPage() {
           {/* Section: Our end points */}
           <section className="flex flex-col items-center px-6 py-6">
             <div className="flex w-full max-w-3xl flex-col gap-3">
-              <h2 className="text-base font-medium text-text-primary">
+              <h2 className="text-[length:var(--text-md)] font-medium text-text-primary">
                 Our end points
               </h2>
               <div className="flex gap-5">
@@ -254,7 +254,7 @@ export default function DeveloperDashboardPage() {
                     className="flex flex-1 flex-col overflow-hidden rounded-lg bg-bg-elevated shadow-elevation-2 hover:shadow-elevation-3"
                   >
                     <div className="flex items-start gap-1 p-3">
-                      <div className="flex flex-1 flex-col gap-1 text-sm">
+                      <div className="flex flex-1 flex-col gap-1 text-[length:var(--text-base)]">
                         <span className="font-medium text-text-primary">
                           {ep.name}
                         </span>
@@ -275,7 +275,7 @@ export default function DeveloperDashboardPage() {
           {/* Section: Quicklinks */}
           <section className="flex flex-col items-center px-6 py-6 pb-12">
             <div className="flex w-full max-w-3xl flex-col gap-3">
-              <h2 className="text-base font-medium text-text-primary">
+              <h2 className="text-[length:var(--text-md)] font-medium text-text-primary">
                 Quicklinks
               </h2>
               <div className="flex gap-5">
@@ -288,7 +288,7 @@ export default function DeveloperDashboardPage() {
                       weight="duotone"
                       className="size-6 text-text-brand"
                     />
-                    <div className="flex flex-col gap-1 text-sm">
+                    <div className="flex flex-col gap-1 text-[length:var(--text-base)]">
                       <span className="font-medium text-text-primary decoration-border-brand underline-offset-2 group-hover/link:underline">
                         {link.title}
                       </span>

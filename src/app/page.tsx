@@ -22,7 +22,7 @@ export default function Home() {
     <div className="relative flex min-h-screen items-center justify-center bg-bg-primary font-[family-name:var(--font-geist-mono)]">
       <button
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        className="absolute top-6 right-6 text-xs text-text-tertiary transition-colors hover:text-text-primary"
+        className="absolute top-6 right-6 text-[length:var(--text-xs)] text-text-tertiary transition-colors hover:text-text-primary"
       >
         {theme === "dark" ? "light" : "dark"}
       </button>
@@ -37,7 +37,7 @@ export default function Home() {
           <h1 className="text-5xl font-medium tracking-tight text-text-primary">
             PAIDS
           </h1>
-          <p className="text-sm text-text-tertiary">
+          <p className="text-[length:var(--text-base)] text-text-tertiary">
             design system v0.1
           </p>
         </motion.div>
@@ -52,12 +52,12 @@ export default function Home() {
             >
               <Link
                 href={page.href}
-                className="group flex items-baseline justify-between gap-6 rounded-md px-3 py-2 text-sm transition-colors hover:bg-bg-secondary"
+                className="group flex items-baseline justify-between gap-6 rounded-md px-3 py-2 text-[length:var(--text-base)] transition-colors hover:bg-bg-secondary"
               >
                 <span className="text-text-primary group-hover:text-text-brand">
                   ~/{page.label}
                 </span>
-                <span className="text-xs text-text-tertiary">
+                <span className="text-[length:var(--text-xs)] text-text-tertiary">
                   {page.description}
                 </span>
               </Link>
@@ -66,7 +66,7 @@ export default function Home() {
         </nav>
 
         <motion.p
-          className="text-xs text-text-quaternary"
+          className="text-[length:var(--text-xs)] text-text-quaternary"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.7 }}

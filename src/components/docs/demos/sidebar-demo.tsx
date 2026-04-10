@@ -39,7 +39,7 @@ export function SidebarDemo() {
       </Sidebar>
       <main className="p-4">
         <SidebarTrigger />
-        <p className="mt-2 text-sm text-muted-foreground">Click the trigger to toggle the sidebar.</p>
+        <p className="mt-2 text-[length:var(--text-base)] text-muted-foreground">Click the trigger to toggle the sidebar.</p>
       </main>
     </SidebarProvider>
   )

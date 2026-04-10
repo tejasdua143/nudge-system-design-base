@@ -9,10 +9,10 @@ export default function VerifyCodePage() {
       <div className="flex w-full max-w-sm flex-col gap-8">
         {/* Header */}
         <div className="flex flex-col gap-2.5 text-center">
-          <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+          <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
             Check your inbox
           </h1>
-          <p className="text-sm leading-[var(--leading-body)] text-text-secondary">
+          <p className="text-[length:var(--text-base)] leading-[var(--leading-body)] text-text-secondary">
             Enter the code we sent to your email address.
           </p>
         </div>
@@ -26,7 +26,7 @@ export default function VerifyCodePage() {
           </Button>
 
           {/* Legal */}
-          <p className="text-center text-xs leading-[var(--leading-snug)] text-text-tertiary">
+          <p className="text-center text-[length:var(--text-xs)] leading-[var(--leading-snug)] text-text-tertiary">
             By continuing, you agree to Presentations AI{" "}
             <Link href="#" className="underline hover:text-text-primary">
               Commercial Terms

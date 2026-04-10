@@ -89,12 +89,12 @@ export function ComponentPlayground({ controls, render }: ComponentPlaygroundPro
       <div className="flex flex-col gap-4 sm:flex-row">
         {/* Controls */}
         <div className="shrink-0 space-y-3 sm:w-48">
-          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-muted-foreground">
             Controls
           </p>
           {controls.map((control) => (
             <div key={control.name} className="space-y-1.5">
-              <Label className="text-xs">{control.label}</Label>
+              <Label className="text-[length:var(--text-xs)]">{control.label}</Label>
               {control.type === "select" && (
                 <Select
                   value={values[control.name] as string}
@@ -124,7 +124,7 @@ export function ComponentPlayground({ controls, render }: ComponentPlaygroundPro
                 <Input
                   value={values[control.name] as string}
                   onChange={(e) => update(control.name, e.target.value)}
-                  className="h-8 text-xs"
+                  className="h-8 text-[length:var(--text-xs)]"
                 />
               )}
               {control.type === "number" && (
@@ -135,7 +135,7 @@ export function ComponentPlayground({ controls, render }: ComponentPlaygroundPro
                   min={control.min}
                   max={control.max}
                   step={control.step}
-                  className="h-8 text-xs"
+                  className="h-8 text-[length:var(--text-xs)]"
                 />
               )}
             </div>

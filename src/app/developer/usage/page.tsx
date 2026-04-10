@@ -113,7 +113,7 @@ export default function UsagePage() {
     <main className="flex flex-1 flex-col overflow-hidden rounded-xl bg-bg-primary shadow-elevation-3">
       {/* Header */}
       <div className="flex h-[63px] items-center justify-between border-b border-border-secondary px-6">
-        <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+        <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
           Usage &amp; logs
         </h1>
         <div className="flex items-center overflow-hidden rounded-lg bg-bg-elevated shadow-elevation-2">
@@ -136,8 +136,8 @@ export default function UsagePage() {
           {/* Bar chart */}
           <div className="flex flex-col gap-5 border-b border-border-secondary px-6 pb-10 pt-6">
             <div className="flex flex-col gap-1">
-              <span className="text-sm text-text-secondary">Total request</span>
-              <span className="text-lg font-medium text-text-primary">
+              <span className="text-[length:var(--text-base)] text-text-secondary">Total request</span>
+              <span className="text-[length:var(--text-lg)] font-medium text-text-primary">
                 {TOTAL_REQUESTS}
               </span>
             </div>
@@ -173,19 +173,19 @@ export default function UsagePage() {
           <div className="flex flex-col">
             {/* Logs header */}
             <div className="border-b border-border-secondary px-6 pb-4 pt-8">
-              <h2 className="text-base font-medium text-text-primary">Logs</h2>
+              <h2 className="text-[length:var(--text-md)] font-medium text-text-primary">Logs</h2>
             </div>
 
             {/* Table header */}
             <div className="flex border-b border-border-secondary">
               <div className="w-[200px] shrink-0 px-6 pb-3 pt-4">
-                <span className="text-sm font-medium text-text-primary">Date</span>
+                <span className="text-[length:var(--text-base)] font-medium text-text-primary">Date</span>
               </div>
               <div className="flex-1 px-6 pb-3 pt-4">
-                <span className="text-sm font-medium text-text-primary">End points</span>
+                <span className="text-[length:var(--text-base)] font-medium text-text-primary">End points</span>
               </div>
               <div className="w-[185px] shrink-0 px-6 pb-3 pt-4 text-right">
-                <span className="text-sm font-medium text-text-primary">Credit</span>
+                <span className="text-[length:var(--text-base)] font-medium text-text-primary">Credit</span>
               </div>
             </div>
 
@@ -193,13 +193,13 @@ export default function UsagePage() {
             {LOGS.map((log, i) => (
               <div key={i} className="flex border-b border-border-secondary">
                 <div className="w-[200px] shrink-0 px-6 py-4">
-                  <span className="text-sm text-text-primary">{log.date}</span>
+                  <span className="text-[length:var(--text-base)] text-text-primary">{log.date}</span>
                 </div>
                 <div className="flex-1 px-6 py-4">
-                  <span className="text-sm text-text-primary">{log.endpoint}</span>
+                  <span className="text-[length:var(--text-base)] text-text-primary">{log.endpoint}</span>
                 </div>
                 <div className="w-[185px] shrink-0 px-6 py-4 text-right">
-                  <span className="text-sm text-text-primary">{log.credit}</span>
+                  <span className="text-[length:var(--text-base)] text-text-primary">{log.credit}</span>
                 </div>
               </div>
             ))}
@@ -212,7 +212,7 @@ export default function UsagePage() {
                     {i > 0 && <div className="h-9 w-px bg-border-tertiary" />}
                     <button
                       className={cn(
-                        "flex h-9 min-w-9 items-center justify-center px-3.5 text-sm font-medium text-text-primary",
+                        "flex h-9 min-w-9 items-center justify-center px-3.5 text-[length:var(--text-base)] font-medium text-text-primary",
                         page === 1 && "bg-bg-elevated-hover"
                       )}
                     >
@@ -233,7 +233,7 @@ export default function UsagePage() {
         <div className="flex flex-1 flex-col overflow-y-auto border-l border-border-tertiary">
           {/* API Endpoints header */}
           <div className="border-b border-border-secondary px-6 pb-4 pt-8">
-            <h2 className="text-base font-medium text-text-primary">
+            <h2 className="text-[length:var(--text-md)] font-medium text-text-primary">
               API Endpoints
             </h2>
           </div>
@@ -250,10 +250,10 @@ export default function UsagePage() {
               )}
             >
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-text-primary">
+                <span className="text-[length:var(--text-base)] font-medium text-text-primary">
                   {ep.name}
                 </span>
-                <span className="text-sm text-text-secondary">
+                <span className="text-[length:var(--text-base)] text-text-secondary">
                   {ep.requests}
                 </span>
               </div>
@@ -271,7 +271,7 @@ export default function UsagePage() {
 
           {/* API Keys header */}
           <div className="border-b border-border-secondary px-6 pb-4 pt-8">
-            <h2 className="text-base font-medium text-text-primary">
+            <h2 className="text-[length:var(--text-md)] font-medium text-text-primary">
               API Keys
             </h2>
           </div>
@@ -287,8 +287,8 @@ export default function UsagePage() {
                     "border-b border-border-secondary"
                 )}
               >
-                <span className="text-sm text-text-secondary">{item.key}</span>
-                <span className="text-sm font-medium text-text-primary">
+                <span className="text-[length:var(--text-base)] text-text-secondary">{item.key}</span>
+                <span className="text-[length:var(--text-base)] font-medium text-text-primary">
                   {item.credits}
                 </span>
               </div>

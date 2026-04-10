@@ -44,7 +44,7 @@
 | Redo | `ArrowUUpRight` icon | — |
 
 #### EditableTitle
-- **Read mode**: `text-sm text-text-primary`, hover `bg-bg-elevated-hover`, cursor-text
+- **Read mode**: `text-[length:var(--text-base)] text-text-primary`, hover `bg-bg-elevated-hover`, cursor-text
 - **Edit mode**: `<input>` with `shadow-[var(--shadow-text-field-focused)]`, auto-focus + select all
 - **Keyboard**: `Enter` → save, `Escape` → cancel (revert draft)
 
@@ -90,7 +90,7 @@
   2. **Refresh Data**, **Analytics** (Pro badge), **Comments** (Pro badge)
   3. **Publish**, **Meet & present**, **Duplicate**, **Save as template**, **Add to favourites**, **Move to folder**
   4. **Delete presentation** — destructive variant
-- **Pro badge**: `rounded-full bg-bg-brand px-1.5 py-0.5 text-xs text-white`
+- **Pro badge**: `rounded-full bg-bg-brand px-1.5 py-0.5 text-[length:var(--text-xs)] text-white`
 
 ---
 
@@ -127,7 +127,7 @@
 - **Width**: `180px` (same as filmstrip)
 - **Slide rows** (`ListSlideRow`):
   - **Left cell**: Slide number / drag handle / generating spinner
-    - Default: Slide number (`text-xs font-medium`)
+    - Default: Slide number (`text-[length:var(--text-xs)] font-medium`)
     - Hover: `DotsSixVertical` drag handle
     - Generating: Rotating circle (`border-[1.5px] border-border-brand border-t-transparent`, spin `0.8s linear infinite`)
   - **Right cell**: Slide label or `ShinyText "Generating..."` shimmer
@@ -250,7 +250,7 @@ All cells: `p-1` wrapper, separated by `1px` dividers
 - Selected: brand ring; Current badge same as Remix
 
 #### Color tab
-- **Sections**: "Workspace" and "All", each with section label (`text-xs font-medium text-text-tertiary`)
+- **Sections**: "Workspace" and "All", each with section label (`text-[length:var(--text-xs)] font-medium text-text-tertiary`)
 - **ColorPaletteCard**:
   - Uses `<div role="button">` (not `<button>` — buttons collapse empty flex children)
   - `rounded-[var(--radius-sm)]`, `bg-white`, `p-3`
@@ -375,7 +375,7 @@ shadow-[0px_0px_0px_1px_var(--shadow-drop-2),0px_1px_2px_0px_var(--shadow-drop-2
 ```
 rounded-full bg-bg-brand px-1.5 py-0.5 pr-2
 CheckCircle weight="fill" size-[13px] text-white
-text-xs text-white
+text-[length:var(--text-xs)] text-white
 ```
 
 ### Toolbar icon button

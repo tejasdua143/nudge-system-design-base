@@ -47,7 +47,7 @@ export function DialogDemo() {
           <DialogHeader>
             <DialogTitle>Confirm action</DialogTitle>
           </DialogHeader>
-          <p className="p-4 text-sm text-text-secondary">Are you sure you want to proceed?</p>
+          <p className="p-4 text-[length:var(--text-base)] text-text-secondary">Are you sure you want to proceed?</p>
           <DialogFooter>
             <DialogClose asChild>
               <Button variant="secondary">Cancel</Button>
@@ -63,7 +63,7 @@ export function DialogDemo() {
         </DialogTrigger>
         <DialogContent size="sm" aria-describedby={undefined}>
           <DialogTitle className="sr-only">Confirmation</DialogTitle>
-          <p className="p-5 text-sm text-text-secondary">This dialog has no visible header. The inner card fills the entire modal.</p>
+          <p className="p-5 text-[length:var(--text-base)] text-text-secondary">This dialog has no visible header. The inner card fills the entire modal.</p>
           <DialogFooter>
             <DialogClose asChild>
               <Button variant="secondary">Cancel</Button>

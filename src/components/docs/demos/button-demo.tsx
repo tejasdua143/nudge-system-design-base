@@ -76,32 +76,32 @@ export function ButtonDemo() {
 
       {/* ── Variant × Tone matrix ── */}
       <div>
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+        <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-muted-foreground mb-3">
           Variants
         </p>
         <div className="flex flex-col gap-4">
           {/* Primary */}
           <div className="flex flex-wrap items-center gap-3">
-            <span className="w-20 text-xs text-text-secondary">Primary</span>
+            <span className="w-20 text-[length:var(--text-xs)] text-text-secondary">Primary</span>
             <Button variant="primary">Default</Button>
             <Button variant="primary" tone="danger">Danger</Button>
             <Button variant="primary" tone="magic">Magic</Button>
           </div>
           {/* Secondary */}
           <div className="flex flex-wrap items-center gap-3">
-            <span className="w-20 text-xs text-text-secondary">Secondary</span>
+            <span className="w-20 text-[length:var(--text-xs)] text-text-secondary">Secondary</span>
             <Button variant="secondary">Default</Button>
             <Button variant="secondary" tone="danger">Danger</Button>
           </div>
           {/* Tertiary */}
           <div className="flex flex-wrap items-center gap-3">
-            <span className="w-20 text-xs text-text-secondary">Tertiary</span>
+            <span className="w-20 text-[length:var(--text-xs)] text-text-secondary">Tertiary</span>
             <Button variant="tertiary">Default</Button>
             <Button variant="tertiary" tone="danger">Danger</Button>
           </div>
           {/* Link */}
           <div className="flex flex-wrap items-center gap-3">
-            <span className="w-20 text-xs text-text-secondary">Link</span>
+            <span className="w-20 text-[length:var(--text-xs)] text-text-secondary">Link</span>
             <Button variant="link">Default</Button>
             <Button variant="link" tone="danger">Danger</Button>
           </div>
@@ -112,26 +112,26 @@ export function ButtonDemo() {
 
       {/* ── Sizes ── */}
       <div>
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+        <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-muted-foreground mb-3">
           Sizes
         </p>
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="w-20 text-xs text-text-secondary">Primary</span>
+            <span className="w-20 text-[length:var(--text-xs)] text-text-secondary">Primary</span>
             <Button size="sm">Small</Button>
             <Button size="md">Medium</Button>
             <Button size="lg">Large</Button>
             <Button size="icon"><Mail /></Button>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <span className="w-20 text-xs text-text-secondary">Secondary</span>
+            <span className="w-20 text-[length:var(--text-xs)] text-text-secondary">Secondary</span>
             <Button variant="secondary" size="sm">Small</Button>
             <Button variant="secondary" size="md">Medium</Button>
             <Button variant="secondary" size="lg">Large</Button>
             <Button variant="secondary" size="icon"><Mail /></Button>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <span className="w-20 text-xs text-text-secondary">Tertiary</span>
+            <span className="w-20 text-[length:var(--text-xs)] text-text-secondary">Tertiary</span>
             <Button variant="tertiary" size="sm">Small</Button>
             <Button variant="tertiary" size="md">Medium</Button>
             <Button variant="tertiary" size="lg">Large</Button>
@@ -144,24 +144,24 @@ export function ButtonDemo() {
 
       {/* ── States ── */}
       <div>
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+        <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-muted-foreground mb-3">
           States
         </p>
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="w-20 text-xs text-text-secondary">Primary</span>
+            <span className="w-20 text-[length:var(--text-xs)] text-text-secondary">Primary</span>
             <Button>Default</Button>
             <Button disabled>Disabled</Button>
             <Button disabled><Loader2 className="animate-spin" /> Loading</Button>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <span className="w-20 text-xs text-text-secondary">Secondary</span>
+            <span className="w-20 text-[length:var(--text-xs)] text-text-secondary">Secondary</span>
             <Button variant="secondary">Default</Button>
             <Button variant="secondary" disabled>Disabled</Button>
             <Button variant="secondary" disabled><Loader2 className="animate-spin" /> Loading</Button>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <span className="w-20 text-xs text-text-secondary">Tertiary</span>
+            <span className="w-20 text-[length:var(--text-xs)] text-text-secondary">Tertiary</span>
             <Button variant="tertiary">Default</Button>
             <Button variant="tertiary" disabled>Disabled</Button>
             <Button variant="tertiary" disabled><Loader2 className="animate-spin" /> Loading</Button>

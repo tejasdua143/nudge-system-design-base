@@ -377,10 +377,10 @@ export default function ClaimCreditPage() {
         {/* Header */}
         <div className="flex flex-col items-center gap-2.5 text-center">
           <Gift className="size-8 text-text-brand" weight="duotone" />
-          <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+          <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
             Claim free credit
           </h1>
-          <p className="text-sm leading-[var(--leading-body)] text-text-secondary">
+          <p className="text-[length:var(--text-base)] leading-[var(--leading-body)] text-text-secondary">
             You have a free credit waiting for you. Use it to explore the
             API, test endpoints, and build your first integration. This credit
             expires 14 days after claiming.

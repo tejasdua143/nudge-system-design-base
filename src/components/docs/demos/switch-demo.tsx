@@ -27,7 +27,7 @@ export function SwitchDemo() {
       <Separator />
 
       <div>
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+        <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-muted-foreground mb-3">
           Examples
         </p>
         <div className="flex flex-col gap-4">

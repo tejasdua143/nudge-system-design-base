@@ -1,14 +1,14 @@
 import { Separator } from "@/components/ui/separator"
 
 const TYPE_SCALE = [
-  { className: "text-4xl", label: "text-4xl", size: "36px" },
-  { className: "text-3xl", label: "text-3xl", size: "30px" },
-  { className: "text-2xl", label: "text-2xl", size: "24px" },
-  { className: "text-xl", label: "text-xl", size: "20px" },
-  { className: "text-lg", label: "text-lg", size: "18px" },
-  { className: "text-base", label: "text-base", size: "16px" },
-  { className: "text-sm", label: "text-sm", size: "14px" },
-  { className: "text-xs", label: "text-xs", size: "12px" },
+  { className: "text-[length:var(--text-4xl)]", label: "text-[length:var(--text-4xl)]", size: "36px" },
+  { className: "text-[length:var(--text-3xl)]", label: "text-[length:var(--text-3xl)]", size: "30px" },
+  { className: "text-[length:var(--text-2xl)]", label: "text-[length:var(--text-2xl)]", size: "24px" },
+  { className: "text-[length:var(--text-xl)]", label: "text-[length:var(--text-xl)]", size: "20px" },
+  { className: "text-[length:var(--text-lg)]", label: "text-[length:var(--text-lg)]", size: "18px" },
+  { className: "text-[length:var(--text-md)]", label: "text-[length:var(--text-md)]", size: "16px" },
+  { className: "text-[length:var(--text-base)]", label: "text-[length:var(--text-base)]", size: "14px" },
+  { className: "text-[length:var(--text-xs)]", label: "text-[length:var(--text-xs)]", size: "12px" },
 ]
 
 const FONT_WEIGHTS = [
@@ -48,7 +48,7 @@ export function TypographyDemo() {
     <div className="space-y-6">
       {/* Type Scale */}
       <div>
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+        <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-muted-foreground mb-3">
           Type Scale
         </p>
         <div className="space-y-3">
@@ -57,7 +57,7 @@ export function TypographyDemo() {
               <p className={item.className}>
                 The quick brown fox
               </p>
-              <span className="shrink-0 text-xs text-muted-foreground font-mono">
+              <span className="shrink-0 text-[length:var(--text-xs)] text-muted-foreground font-mono">
                 {item.label} ({item.size})
               </span>
             </div>
@@ -69,16 +69,16 @@ export function TypographyDemo() {
 
       {/* Font Weights */}
       <div>
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+        <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-muted-foreground mb-3">
           Font Weights
         </p>
         <div className="space-y-2">
           {FONT_WEIGHTS.map((item) => (
             <div key={item.label} className="flex items-baseline justify-between gap-4">
-              <p className={`text-lg ${item.className}`}>
+              <p className={`text-[length:var(--text-lg)] ${item.className}`}>
                 The quick brown fox jumps over the lazy dog
               </p>
-              <span className="shrink-0 text-xs text-muted-foreground font-mono">
+              <span className="shrink-0 text-[length:var(--text-xs)] text-muted-foreground font-mono">
                 {item.label} ({item.weight})
               </span>
             </div>
@@ -90,16 +90,16 @@ export function TypographyDemo() {
 
       {/* Tracking */}
       <div>
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+        <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-muted-foreground mb-3">
           Letter Spacing
         </p>
         <div className="space-y-2">
           {TRACKING.map((item) => (
             <div key={item.label} className="flex items-baseline justify-between gap-4">
-              <p className={`text-base ${item.className}`}>
+              <p className={`text-[length:var(--text-md)] ${item.className}`}>
                 The quick brown fox jumps over the lazy dog
               </p>
-              <span className="shrink-0 text-xs text-muted-foreground font-mono">
+              <span className="shrink-0 text-[length:var(--text-xs)] text-muted-foreground font-mono">
                 {item.label} ({item.value})
               </span>
             </div>
@@ -111,16 +111,16 @@ export function TypographyDemo() {
 
       {/* Leading */}
       <div>
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+        <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-muted-foreground mb-3">
           Line Height
         </p>
         <div className="space-y-4">
           {LEADING.map((item) => (
             <div key={item.label} className="flex items-start justify-between gap-4">
-              <p className={`text-sm max-w-md border-l-2 border-border pl-3 ${item.className}`}>
+              <p className={`text-[length:var(--text-base)] max-w-md border-l-2 border-border pl-3 ${item.className}`}>
                 The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.
               </p>
-              <span className="shrink-0 text-xs text-muted-foreground font-mono">
+              <span className="shrink-0 text-[length:var(--text-xs)] text-muted-foreground font-mono">
                 {item.label} ({item.value})
               </span>
             </div>
@@ -132,16 +132,16 @@ export function TypographyDemo() {
 
       {/* Text Colors */}
       <div>
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+        <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-muted-foreground mb-3">
           Text Colors
         </p>
         <div className="space-y-2">
           {TEXT_COLORS.map((item) => (
             <div key={item.label} className="flex items-baseline justify-between gap-4">
-              <p className={`text-lg font-medium ${item.className}`}>
+              <p className={`text-[length:var(--text-lg)] font-medium ${item.className}`}>
                 The quick brown fox
               </p>
-              <span className="shrink-0 text-xs text-muted-foreground font-mono">
+              <span className="shrink-0 text-[length:var(--text-xs)] text-muted-foreground font-mono">
                 {item.label}
               </span>
             </div>

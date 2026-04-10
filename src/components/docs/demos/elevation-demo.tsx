@@ -30,13 +30,13 @@ export function ElevationDemo() {
             className={`${elevation.className} h-24 w-full rounded-lg bg-bg-elevated`}
           />
           <div className="text-center">
-            <p className="text-sm font-medium text-text-primary">
+            <p className="text-[length:var(--text-base)] font-medium text-text-primary">
               {elevation.level}
             </p>
-            <p className="text-xs text-text-tertiary font-mono">
+            <p className="text-[length:var(--text-xs)] text-text-tertiary font-mono">
               {elevation.className}
             </p>
-            <p className="mt-1 text-xs text-text-secondary">
+            <p className="mt-1 text-[length:var(--text-xs)] text-text-secondary">
               {elevation.description}
             </p>
           </div>

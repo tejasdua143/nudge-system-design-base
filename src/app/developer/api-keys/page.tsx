@@ -43,7 +43,7 @@ export default function ApiKeysPage() {
     <main className="flex flex-1 flex-col overflow-hidden rounded-xl bg-bg-primary shadow-elevation-3">
       {/* Header */}
       <div className="flex h-[63px] items-center justify-between border-b border-border-secondary px-6">
-        <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+        <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
           API Keys
         </h1>
         <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) setKeyName(""); }}>
@@ -61,7 +61,7 @@ export default function ApiKeysPage() {
               </DialogDescription>
             </DialogHeader>
             <div className="flex flex-col gap-2 px-4 py-2">
-              <label htmlFor="key-name" className="text-sm font-medium text-text-primary">
+              <label htmlFor="key-name" className="text-[length:var(--text-base)] font-medium text-text-primary">
                 Secret key name
               </label>
               <Input
@@ -87,7 +87,7 @@ export default function ApiKeysPage() {
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto flex w-full max-w-[768px] flex-col gap-6 px-6 py-6">
           {/* Description */}
-          <p className="text-sm text-text-secondary">
+          <p className="text-[length:var(--text-base)] text-text-secondary">
             Your secret API keys are listed below. Please note that we do not
             display your secret API keys again after you generate them. Do not
             share your API key with others, or expose it in the browser or other
@@ -101,7 +101,7 @@ export default function ApiKeysPage() {
           {/* Table */}
           <div className="overflow-hidden rounded-lg shadow-elevation-1">
             {/* Table header */}
-            <div className="flex items-center bg-bg-secondary px-4 py-3 text-xs font-medium text-text-secondary">
+            <div className="flex items-center bg-bg-secondary px-4 py-3 text-[length:var(--text-xs)] font-medium text-text-secondary">
               <span className="flex-1">Name</span>
               <span className="w-[230px]">API key</span>
               <span className="w-[80px] text-right">Action</span>
@@ -112,17 +112,17 @@ export default function ApiKeysPage() {
               {API_KEYS.map((item) => (
                 <div
                   key={item.name}
-                  className="flex items-center px-4 py-3 text-sm"
+                  className="flex items-center px-4 py-3 text-[length:var(--text-base)]"
                 >
                   <div className="flex flex-1 flex-col gap-0.5">
                     <span className="font-medium text-text-primary">
                       {item.name}
                     </span>
-                    <span className="text-xs text-text-tertiary">
+                    <span className="text-[length:var(--text-xs)] text-text-tertiary">
                       {item.created}
                     </span>
                   </div>
-                  <span className="w-[230px] font-mono text-sm text-text-secondary">
+                  <span className="w-[230px] font-mono text-[length:var(--text-base)] text-text-secondary">
                     {item.key}
                   </span>
                   <div className="flex w-[80px] justify-end">

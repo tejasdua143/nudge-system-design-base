@@ -170,7 +170,7 @@ function DialogTitle({
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cn("text-base font-medium text-text-primary", className)}
+      className={cn("text-[length:var(--text-md)] font-medium text-text-primary", className)}
       {...props}
     />
   )
@@ -183,7 +183,7 @@ function DialogDescription({
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
-      className={cn("text-text-secondary text-sm", className)}
+      className={cn("text-text-secondary text-[length:var(--text-base)]", className)}
       {...props}
     />
   )

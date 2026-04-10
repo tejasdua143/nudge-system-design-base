@@ -9,7 +9,7 @@ export function CardDemo() {
         <CardDescription>Card description with supporting text.</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-sm">Card content goes here. This is the main body of the card.</p>
+        <p className="text-[length:var(--text-base)]">Card content goes here. This is the main body of the card.</p>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">Cancel</Button>

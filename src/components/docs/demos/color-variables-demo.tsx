@@ -203,7 +203,7 @@ export function ColorVariablesDemo() {
     <div className="space-y-6">
       {COLOR_GROUPS.map((group) => (
         <div key={group.label}>
-          <p className="text-xs font-medium uppercase tracking-wider text-text-secondary mb-3">
+          <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-text-secondary mb-3">
             {group.label}
           </p>
           {group.label.startsWith("Source") ? (
@@ -232,7 +232,7 @@ export function ColorVariablesDemo() {
                     style={{ backgroundColor: `var(${color.variable})` }}
                   />
                   <div className="min-w-0">
-                    <p className="truncate text-xs font-medium text-text-primary">
+                    <p className="truncate text-[length:var(--text-xs)] font-medium text-text-primary">
                       {color.variable}
                     </p>
                     <p className="truncate text-[length:var(--text-2xs)] text-text-tertiary font-mono">

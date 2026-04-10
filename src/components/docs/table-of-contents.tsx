@@ -126,15 +126,15 @@ export function TableOfContents() {
   return (
     <aside className="sticky top-0 h-screen w-64 shrink-0 overflow-y-auto border-r border-border bg-background p-6 hidden lg:block">
       <div className="mb-4">
-        <a href="/" className="text-sm text-muted-foreground hover:text-foreground">
+        <a href="/" className="text-[length:var(--text-base)] text-muted-foreground hover:text-foreground">
           &larr; Home
         </a>
       </div>
-      <h2 className="text-sm font-semibold mb-4">Components</h2>
+      <h2 className="text-[length:var(--text-base)] font-semibold mb-4">Components</h2>
       <nav className="space-y-4">
         {CATEGORIES.map((category) => (
           <div key={category.name}>
-            <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+            <h3 className="text-[length:var(--text-xs)] font-medium text-muted-foreground uppercase tracking-wider mb-1">
               {category.name}
             </h3>
             <ul className="space-y-0.5">
@@ -147,7 +147,7 @@ export function TableOfContents() {
                       document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" })
                     }}
                     className={cn(
-                      "block text-sm py-0.5 px-2 rounded-sm transition-colors",
+                      "block text-[length:var(--text-base)] py-0.5 px-2 rounded-sm transition-colors",
                       activeId === item.id
                         ? "text-foreground bg-accent font-medium"
                         : "text-muted-foreground hover:text-foreground"

@@ -157,18 +157,18 @@ Red (`--paids-red-50` to `--paids-red-950`), Green (`--paids-green-*`), Blue (`-
 ## Typography
 
 ### Font Sizes
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--text-2xs` | `0.625rem` (10px) | Micro labels, badges |
-| `--text-xs` | `0.75rem` (12px) | Small labels |
-| `--text-sm` | `0.8rem` (12.8px) | Compact UI (calendar) |
-| `--text-base` | `0.875rem` (14px) | Default body |
-| `--text-md` | `1rem` (16px) | Large body |
-| `--text-lg` | `1.125rem` (18px) | Section headings |
-| `--text-xl` | `1.25rem` (20px) | Page headings |
-| `--text-2xl` | `1.5rem` (24px) | Large headings |
-| `--text-3xl` | `1.875rem` (30px) | Display headings |
-| `--text-4xl` | `2.25rem` (36px) | Hero text |
+| Token | Value | Figma style | Usage |
+|-------|-------|-------------|-------|
+| `--text-3xs` | `0.5rem` (8px) | body-xxs | Micro UI elements |
+| `--text-2xs` | `0.625rem` (10px) | body-xs | Micro labels, badges |
+| `--text-xs` | `0.75rem` (12px) | body-sm | Small labels |
+| `--text-base` | `0.875rem` (14px) | body-base | Default body |
+| `--text-md` | `1rem` (16px) | body-lg | Large body |
+| `--text-lg` | `1.125rem` (18px) | body-xl / heading-lg | Section headings |
+| `--text-xl` | `1.25rem` (20px) | heading-xl | Page headings |
+| `--text-2xl` | `1.5rem` (24px) | heading-2xl | Large headings |
+| `--text-3xl` | `1.875rem` (30px) | — | Display headings |
+| `--text-4xl` | `2.25rem` (36px) | heading-4xl | Hero text |
 
 ### Font Weights
 | Token | Value | Tailwind |

@@ -35,7 +35,7 @@ export function ThemeConfigPanel() {
         </PopoverTrigger>
         <PopoverContent side="top" align="end" sideOffset={12} className="w-80">
           <div className="space-y-3">
-            <Label className="text-xs uppercase tracking-wider text-muted-foreground">
+            <Label className="text-[length:var(--text-xs)] uppercase tracking-wider text-muted-foreground">
               Accent Color
             </Label>
             <div className="flex flex-wrap gap-2">
@@ -71,7 +71,7 @@ export function ThemeConfigPanel() {
                 placeholder="#3b82f6"
                 value={customHex}
                 onChange={(e) => changeCustomHex(e.target.value)}
-                className="h-8 font-mono text-xs"
+                className="h-8 font-mono text-[length:var(--text-xs)]"
               />
             </div>
           </div>
@@ -79,7 +79,7 @@ export function ThemeConfigPanel() {
           <Separator className="my-4" />
 
           <div className="space-y-2">
-            <Label className="text-xs uppercase tracking-wider text-muted-foreground">
+            <Label className="text-[length:var(--text-xs)] uppercase tracking-wider text-muted-foreground">
               Corner Radius
             </Label>
             <div className="flex gap-1.5">
@@ -89,7 +89,7 @@ export function ThemeConfigPanel() {
                   type="button"
                   onClick={() => changeRadius(preset.value)}
                   className={cn(
-                    "flex-1 rounded-md border px-2 py-1.5 text-xs font-medium transition-colors",
+                    "flex-1 rounded-md border px-2 py-1.5 text-[length:var(--text-xs)] font-medium transition-colors",
                     radius === preset.value
                       ? "border-primary bg-primary text-primary-foreground"
                       : "border-input bg-background hover:bg-accent hover:text-accent-foreground"
@@ -104,7 +104,7 @@ export function ThemeConfigPanel() {
                 className="size-10 border-2 border-primary bg-primary/10"
                 style={{ borderRadius: radius }}
               />
-              <span className="text-xs text-muted-foreground font-mono">
+              <span className="text-[length:var(--text-xs)] text-muted-foreground font-mono">
                 --radius: {radius}
               </span>
             </div>

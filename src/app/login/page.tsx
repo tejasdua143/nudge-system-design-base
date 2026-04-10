@@ -10,10 +10,10 @@ export default function LoginPage() {
       <div className="flex w-full max-w-sm flex-col gap-10">
         {/* Header */}
         <div className="flex flex-col gap-2.5 text-center">
-          <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+          <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
             Build with Presentations AI
           </h1>
-          <p className="text-sm leading-[var(--leading-body)] text-text-secondary">
+          <p className="text-[length:var(--text-base)] leading-[var(--leading-body)] text-text-secondary">
             Log in to your account or create a new one to get started.
           </p>
         </div>
@@ -32,7 +32,7 @@ export default function LoginPage() {
           {/* Divider */}
           <div className="flex items-center gap-3">
             <div className="h-px flex-1 bg-border-secondary" />
-            <span className="text-xs font-semibold text-text-tertiary">OR</span>
+            <span className="text-[length:var(--text-xs)] font-semibold text-text-tertiary">OR</span>
             <div className="h-px flex-1 bg-border-secondary" />
           </div>
 
@@ -43,7 +43,7 @@ export default function LoginPage() {
           </Button>
 
           {/* Legal */}
-          <p className="text-center text-xs leading-[var(--leading-snug)] text-text-tertiary">
+          <p className="text-center text-[length:var(--text-xs)] leading-[var(--leading-snug)] text-text-tertiary">
             By continuing, you agree to the{" "}
             <Link href="#" className="underline hover:text-text-primary">
               Terms of Service

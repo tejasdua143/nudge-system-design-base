@@ -16,7 +16,7 @@ export function TabsDemo() {
             <CardTitle>Account</CardTitle>
             <CardDescription>Make changes to your account here.</CardDescription>
           </CardHeader>
-          <CardContent className="text-sm">
+          <CardContent className="text-[length:var(--text-base)]">
             Configure your account settings and preferences.
           </CardContent>
         </Card>
@@ -27,7 +27,7 @@ export function TabsDemo() {
             <CardTitle>Password</CardTitle>
             <CardDescription>Change your password here.</CardDescription>
           </CardHeader>
-          <CardContent className="text-sm">
+          <CardContent className="text-[length:var(--text-base)]">
             Update your password to keep your account secure.
           </CardContent>
         </Card>

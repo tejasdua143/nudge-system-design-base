@@ -32,7 +32,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
         },
         classNames: {
           toast: "!p-3",
-          actionButton: "!bg-transparent !text-text-brand !text-xs !font-medium !px-2 !py-1 !rounded-[6px] !h-auto hover:!bg-bg-elevated-hover",
+          actionButton: "!bg-transparent !text-text-brand !text-[length:var(--text-xs)] !font-medium !px-2 !py-1 !rounded-[6px] !h-auto hover:!bg-bg-elevated-hover",
         },
       }}
       style={

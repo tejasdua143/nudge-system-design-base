@@ -32,8 +32,14 @@ Additional tokens in `tokens.css`: spacing, typography, radius, z-index, motion,
 | Instead of... | Use... |
 |---------------|--------|
 | `ring-[3px]` | `ring-[length:var(--focus-ring-width)]` |
-| `text-[10px]` | `text-[length:var(--text-2xs)]` |
-| `text-[0.8rem]` | `text-[length:var(--text-sm)]` |
+| `text-xs` | `text-[length:var(--text-xs)]` (12px — body-sm) |
+| `text-sm` | `text-[length:var(--text-base)]` (14px — body-base) |
+| `text-base` | `text-[length:var(--text-md)]` (16px — body-lg) |
+| `text-lg` | `text-[length:var(--text-lg)]` (18px — body-xl) |
+| `text-xl` | `text-[length:var(--text-xl)]` (20px — heading-xl) |
+| `text-2xl` | `text-[length:var(--text-2xl)]` (24px — heading-2xl) |
+| `text-[8px]` | `text-[length:var(--text-3xs)]` (body-xxs) |
+| `text-[10px]` | `text-[length:var(--text-2xs)]` (body-xs) |
 | `rounded-[2px]` | `rounded-[var(--radius-xs)]` |
 | `rounded-[4px]` | `rounded-[var(--radius-checkbox)]` |
 | `min-w-[8rem]` | `min-w-[var(--popover-min-width)]` |

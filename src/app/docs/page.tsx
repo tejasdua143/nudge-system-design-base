@@ -81,17 +81,17 @@ export default function DocsPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <header className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-2">
+        <h1 className="text-[length:var(--text-4xl)] font-bold tracking-tight mb-2">
           Component Documentation
         </h1>
-        <p className="text-lg text-muted-foreground">
+        <p className="text-[length:var(--text-lg)] text-muted-foreground">
           Interactive examples for all shadcn/ui components.
         </p>
       </header>
 
       {/* Design Tokens */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6" id="design-tokens">
+        <h2 className="text-[length:var(--text-2xl)] font-bold tracking-tight mb-6" id="design-tokens">
           Design Tokens
         </h2>
 
@@ -110,7 +110,7 @@ export default function DocsPage() {
 
       {/* Forms & Inputs */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6" id="forms-inputs">
+        <h2 className="text-[length:var(--text-2xl)] font-bold tracking-tight mb-6" id="forms-inputs">
           Forms & Inputs
         </h2>
 
@@ -189,7 +189,7 @@ export default function DocsPage() {
 
       {/* Layout */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6" id="layout">
+        <h2 className="text-[length:var(--text-2xl)] font-bold tracking-tight mb-6" id="layout">
           Layout
         </h2>
 
@@ -220,7 +220,7 @@ export default function DocsPage() {
 
       {/* Navigation */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6" id="navigation">
+        <h2 className="text-[length:var(--text-2xl)] font-bold tracking-tight mb-6" id="navigation">
           Navigation
         </h2>
 
@@ -259,7 +259,7 @@ export default function DocsPage() {
 
       {/* Display & Data */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6" id="display-data">
+        <h2 className="text-[length:var(--text-2xl)] font-bold tracking-tight mb-6" id="display-data">
           Display & Data
         </h2>
 
@@ -318,7 +318,7 @@ export default function DocsPage() {
 
       {/* Dialogs & Overlays */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6" id="dialogs-overlays">
+        <h2 className="text-[length:var(--text-2xl)] font-bold tracking-tight mb-6" id="dialogs-overlays">
           Dialogs & Overlays
         </h2>
 
@@ -357,7 +357,7 @@ export default function DocsPage() {
 
       {/* Feedback */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6" id="feedback">
+        <h2 className="text-[length:var(--text-2xl)] font-bold tracking-tight mb-6" id="feedback">
           Feedback
         </h2>
 

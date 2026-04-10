@@ -24,10 +24,10 @@ export default function OnboardingPage() {
                 "linear-gradient(180deg, rgb(255, 132, 47) 7%, rgba(255, 132, 47, 0) 72%), linear-gradient(90deg, rgb(234, 82, 0), rgb(234, 82, 0))",
             }}
           />
-          <h1 className="text-2xl leading-[var(--leading-heading)] tracking-tight text-text-primary">
+          <h1 className="text-[length:var(--text-2xl)] leading-[var(--leading-heading)] tracking-tight text-text-primary">
             Welcome to Presentations AI
           </h1>
-          <p className="text-sm leading-[var(--leading-body)] text-text-secondary">
+          <p className="text-[length:var(--text-base)] leading-[var(--leading-body)] text-text-secondary">
             Create a workspace to generate API keys and start building
           </p>
         </div>

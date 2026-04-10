@@ -25,7 +25,7 @@ export function TextareaDemo() {
       <Separator />
 
       <div>
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+        <p className="text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-muted-foreground mb-3">
           Examples
         </p>
         <div className="grid gap-2 max-w-sm">
