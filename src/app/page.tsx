@@ -11,6 +11,9 @@ const pages = [
   { href: "/developer/playground", label: "playground", description: "api playground" },
   { href: "/api-docs", label: "api-docs", description: "api & mcp documentation" },
   { href: "/login", label: "login", description: "authentication" },
+  { href: "/signup", label: "signup", description: "create account" },
+  { href: "/export", label: "export", description: "export modal" },
+  { href: "/create", label: "create", description: "create presentation flow" },
   { href: "/new-editor", label: "new-editor", description: "editor prototype" },
   { href: "/new-editor-v1", label: "new-editor-v1", description: "editor v1 variant" },
 ];
