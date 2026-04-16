@@ -36,6 +36,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 import type { Document } from "../../data"
+import { NudgeCard } from "@/components/ui/nudge-card"
 import {
   useRive,
   useStateMachineInput,
@@ -380,6 +381,13 @@ export function EditorShell({ document }: EditorShellProps) {
 
         <RightToolPanel />
       </div>
+
+      <NudgeCard
+        variant="service"
+        title="You don't have to build this yourself"
+        description="Our team will create a polished deck for your investors — you focus on the message."
+        cta="Talk to Our Team"
+      />
     </div>
   )
 }

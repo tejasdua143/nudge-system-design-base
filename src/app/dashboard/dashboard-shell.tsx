@@ -64,6 +64,7 @@ import { ActionCardsRow } from "./action-cards"
 import { RECENT_DOCS } from "./data"
 import { CreditCardIcon } from "@phosphor-icons/react/dist/ssr"
 import ShinyText from "@/components/ShinyText"
+import { NudgeCard } from "@/components/ui/nudge-card"
 
 /* -------------------------------------------------------------------------- */
 /*  Data                                                                      */
@@ -715,6 +716,13 @@ export function DashboardShell() {
             )}
           </div>
         </main>
+
+        <NudgeCard
+          variant="pro"
+          title="There's a faster way to handle fonts"
+          description="Brand Kit locks in your typeface across every slide, automatically."
+          cta="Get Brand Kit"
+        />
       </div>
     </div>
   )
