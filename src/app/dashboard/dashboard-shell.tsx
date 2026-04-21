@@ -18,6 +18,9 @@ import {
   MagnifyingGlass,
   CaretDown,
   CaretLeft,
+  CaretRight,
+  ShieldCheck,
+  Lock,
   Question,
   Bell,
   Plus,
@@ -64,7 +67,8 @@ import { ActionCardsRow } from "./action-cards"
 import { RECENT_DOCS } from "./data"
 import { CreditCardIcon } from "@phosphor-icons/react/dist/ssr"
 import ShinyText from "@/components/ShinyText"
-import { NudgeCard } from "@/components/ui/nudge-card"
+import { motion } from "motion/react"
+import { BrandKitNudge } from "@/components/ui/brand-kit-nudge"
 
 /* -------------------------------------------------------------------------- */
 /*  Data                                                                      */
@@ -401,6 +405,7 @@ export function DashboardShell() {
   const [isSettingsMode, setIsSettingsMode] = useState(false)
   const [activeSettingsPage, setActiveSettingsPage] = useState("general")
   const [activeWorkspaceId, setActiveWorkspaceId] = useState("foursquare")
+  const [secNudgeVariant, setSecNudgeVariant] = useState<"illustration" | "plain">("illustration")
   const { theme, setTheme } = useTheme()
 
   const activeWorkspace = WORKSPACES.find((ws) => ws.id === activeWorkspaceId)!
@@ -717,12 +722,16 @@ export function DashboardShell() {
           </div>
         </main>
 
-        <NudgeCard
-          variant="pro"
-          title="There's a faster way to handle fonts"
-          description="Brand Kit locks in your typeface across every slide, automatically."
-          cta="Get Brand Kit"
-        />
+        <BrandKitNudge showIllustration={secNudgeVariant === "illustration"} />
+
+        {/* Cycle button — toggles security nudge variant */}
+        <button
+          onClick={() => setSecNudgeVariant(v => v === "illustration" ? "plain" : "illustration")}
+          className="fixed bottom-6 right-[460px] z-[60] flex size-8 cursor-pointer items-center justify-center rounded-full bg-bg-elevated shadow-elevation-2 text-[length:var(--text-xs)] text-text-secondary hover:bg-bg-elevated-hover transition-colors"
+          title="Toggle nudge variant"
+        >
+          ⇄
+        </button>
       </div>
     </div>
   )
