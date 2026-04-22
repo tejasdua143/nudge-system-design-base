@@ -68,7 +68,7 @@ import { RECENT_DOCS } from "./data"
 import { CreditCardIcon } from "@phosphor-icons/react/dist/ssr"
 import ShinyText from "@/components/ShinyText"
 import { motion } from "motion/react"
-import { BrandKitNudge } from "@/components/ui/brand-kit-nudge"
+import { Nudge, NUDGES } from "@/components/ui/brand-kit-nudge"
 
 /* -------------------------------------------------------------------------- */
 /*  Data                                                                      */
@@ -405,7 +405,7 @@ export function DashboardShell() {
   const [isSettingsMode, setIsSettingsMode] = useState(false)
   const [activeSettingsPage, setActiveSettingsPage] = useState("general")
   const [activeWorkspaceId, setActiveWorkspaceId] = useState("foursquare")
-  const [secNudgeVariant, setSecNudgeVariant] = useState<"illustration" | "plain">("illustration")
+  const [nudgeIdx, setNudgeIdx] = useState(0)
   const { theme, setTheme } = useTheme()
 
   const activeWorkspace = WORKSPACES.find((ws) => ws.id === activeWorkspaceId)!
@@ -722,11 +722,11 @@ export function DashboardShell() {
           </div>
         </main>
 
-        <BrandKitNudge showIllustration={secNudgeVariant === "illustration"} />
+        <Nudge nudge={NUDGES[nudgeIdx]} />
 
-        {/* Cycle button — toggles security nudge variant */}
+        {/* Cycle button — rotate through nudges */}
         <button
-          onClick={() => setSecNudgeVariant(v => v === "illustration" ? "plain" : "illustration")}
+          onClick={() => setNudgeIdx(i => (i + 1) % NUDGES.length)}
           className="fixed bottom-6 right-[460px] z-[60] flex size-8 cursor-pointer items-center justify-center rounded-full bg-bg-elevated shadow-elevation-2 text-[length:var(--text-xs)] text-text-secondary hover:bg-bg-elevated-hover transition-colors"
           title="Toggle nudge variant"
         >

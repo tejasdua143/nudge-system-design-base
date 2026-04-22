@@ -13,6 +13,10 @@ const pages = [
   { href: "/login", label: "login", description: "authentication" },
   { href: "/new-editor", label: "new-editor", description: "editor prototype" },
   { href: "/new-editor-v1", label: "new-editor-v1", description: "editor v1 variant" },
+  { href: "/signup", label: "signup", description: "create account" },
+  { href: "/export", label: "export", description: "export modal" },
+  { href: "/create", label: "create", description: "create presentation flow" },
+  { href: "/build", label: "build", description: "presentation builder" },
 ];
 
 export default function Home() {
