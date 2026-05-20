@@ -2,6 +2,10 @@ import { RECENT_DOCS } from "../../data"
 import { EditorShell } from "./editor-shell"
 import { notFound } from "next/navigation"
 
+export function generateStaticParams() {
+  return RECENT_DOCS.map((d) => ({ id: d.id }))
+}
+
 export default async function EditorPage({
   params,
 }: {

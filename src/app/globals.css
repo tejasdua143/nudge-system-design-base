@@ -264,17 +264,17 @@
    ============================================================================ */
 :root {
   /* --- Brand --- */
-  --paids-brand-50: #ffeee5;
-  --paids-brand-100: #ffd1ba;
-  --paids-brand-200: #ffb48f;
-  --paids-brand-300: #ff9766;
-  --paids-brand-400: #ff783b;
-  --paids-brand-500: #ff5500;
-  --paids-brand-600: #cb4609;
-  --paids-brand-700: #9a380d;
-  --paids-brand-800: #6b290d;
-  --paids-brand-900: #401b09;
-  --paids-brand-950: #1a0900;
+  --paids-brand-50: #e6efff;
+  --paids-brand-100: #bfd5ff;
+  --paids-brand-200: #8ab5ff;
+  --paids-brand-300: #5594ff;
+  --paids-brand-400: #2073f5;
+  --paids-brand-500: #0055ED;
+  --paids-brand-600: #0046c4;
+  --paids-brand-700: #003896;
+  --paids-brand-800: #002a6b;
+  --paids-brand-900: #001b45;
+  --paids-brand-950: #000d20;
 
   /* --- Neutral --- */
   --paids-neutral-50: #fafafa;
@@ -392,7 +392,7 @@
   --bg-brand: var(--paids-brand-500);
   --bg-brand-hover: var(--paids-brand-600);
   --bg-brand-pressed: var(--paids-brand-700);
-  --bg-brand-selected: rgba(255, 85, 0, 0.12);
+  --bg-brand-selected: rgba(0, 85, 237, 0.12);
   --bg-brand-inverted: var(--paids-brand-50);
   --bg-danger: var(--paids-red-600);
   --bg-danger-hover: var(--paids-red-700);
@@ -501,7 +501,7 @@
   --bg-brand: var(--paids-brand-500);
   --bg-brand-hover: var(--paids-brand-600);
   --bg-brand-pressed: var(--paids-brand-700);
-  --bg-brand-selected: rgba(255, 85, 0, 0.1);
+  --bg-brand-selected: rgba(0, 85, 237, 0.1);
   --bg-brand-inverted: var(--paids-brand-900);
   --bg-danger: var(--paids-red-500);
   --bg-danger-hover: var(--paids-red-400);

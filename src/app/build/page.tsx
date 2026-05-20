@@ -14,6 +14,8 @@ import {
 } from "@phosphor-icons/react";
 
 import { Button } from "@/components/ui/button";
+import { EndOfDeckModal } from "@/components/ui/end-of-deck-modal";
+import { MockSlide } from "@/components/ui/mock-slide";
 
 const TOPICS = [
   { id: "ops-review", label: "Ops Review", icon: Star, color: "text-amber-500" },
@@ -26,6 +28,7 @@ type TopicId = (typeof TOPICS)[number]["id"] | null;
 export default function BuildPage() {
   const [selectedTopic, setSelectedTopic] = useState<TopicId>(null);
   const [prompt, setPrompt] = useState("");
+  const [endOpen, setEndOpen] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleTopicClick = useCallback(
@@ -136,9 +139,26 @@ export default function BuildPage() {
               <UploadSimple className="size-3.5" />
               Have a document? Upload it instead
             </button>
+            <button
+              type="button"
+              onClick={() => setEndOpen(true)}
+              className="text-[length:var(--text-xs)] text-text-tertiary transition-colors hover:text-text-primary"
+            >
+              Preview end-of-deck state →
+            </button>
           </div>
         </div>
       </div>
+
+      {endOpen && <MockSlide />}
+
+      <EndOfDeckModal
+        open={endOpen}
+        onClose={() => setEndOpen(false)}
+        onRestart={() => console.log("restart")}
+        onExport={() => console.log("export")}
+        onUpgrade={() => console.log("upgrade")}
+      />
     </div>
   );
 }
