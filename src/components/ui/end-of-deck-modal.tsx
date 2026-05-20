@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import {
   X,
-  Crown,
+  PencilSimple,
   ArrowCounterClockwise,
   MicrosoftPowerpointLogo,
 } from "@phosphor-icons/react"
@@ -14,7 +14,7 @@ interface EndOfDeckModalProps {
   onClose: () => void
   onRestart: () => void
   onExport: () => void
-  onUpgrade: () => void
+  onBackToEdit: () => void
   className?: string
 }
 
@@ -23,7 +23,7 @@ export function EndOfDeckModal({
   onClose,
   onRestart,
   onExport,
-  onUpgrade,
+  onBackToEdit,
   className,
 }: EndOfDeckModalProps) {
   useEffect(() => {
@@ -186,14 +186,14 @@ export function EndOfDeckModal({
             {/* Pro — secondary outlined CTA */}
             <button
               type="button"
-              onClick={onUpgrade}
+              onClick={onBackToEdit}
               className="eod-child eod-child-3 eod-press flex items-center gap-3 rounded-[var(--radius-md)] border border-border-secondary bg-bg-primary px-4 py-3 text-left text-text-primary outline-none hover:border-border-primary focus-visible:ring-[length:var(--focus-ring-width)] focus-visible:ring-border-brand-secondary"
             >
               <span className="flex size-8 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-bg-secondary text-text-primary">
-                <Crown className="size-4" weight="fill" />
+                <PencilSimple className="size-4" weight="bold" />
               </span>
               <span className="text-[length:var(--text-base)] font-medium leading-[var(--leading-body)]">
-                Upgrade to Pro
+                Back to editing slides
               </span>
             </button>
 

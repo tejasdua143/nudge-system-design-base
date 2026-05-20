@@ -157,7 +157,7 @@ export default function BuildPage() {
         onClose={() => setEndOpen(false)}
         onRestart={() => console.log("restart")}
         onExport={() => console.log("export")}
-        onUpgrade={() => console.log("upgrade")}
+        onBackToEdit={() => console.log("back-to-edit")}
       />
     </div>
   );
